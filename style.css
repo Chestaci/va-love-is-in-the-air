@@ -792,6 +792,50 @@ img { max-width: 100%; height: auto; display: block; }
 #winMessage { text-align:center; }
 .win-text { font-family:'Marck Script', cursive; font-size:2.5rem; color:#a5676e; }
 
+/* 🔥 Название игры */
+.game-title {
+    font-family: var(--heading);
+    font-size: 1.6rem;
+    color: var(--primary);
+    text-align: center;
+    margin: 10px 0 5px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* Цель и счёт */
+.game-goal {
+    font-family: var(--heading); font-size: 16px; color: var(--primary);
+    text-align: center; margin: 10px 0 8px; font-weight: 600; display: none;
+}
+
+/* 🔥 УМЕНЬШЕНА финальная надпись */
+.win-text {
+    font-family: var(--heading);
+    font-size: 1.4rem; /* Было 2.5rem, теперь аккуратнее */
+    color: var(--primary);
+    text-align: center;
+    margin: 10px auto 15px;
+    max-width: 90%;
+    line-height: 1.4;
+}
+
+/* Кнопка повтора */
+.game-replay-btn {
+    margin-top: 15px; padding: 10px 28px; font-family: var(--heading);
+    font-size: 15px; background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white; border: none; border-radius: 30px; cursor: pointer;
+    transition: all 0.3s; box-shadow: 0 3px 12px rgba(155,126,209,0.25); display: none;
+}
+.game-replay-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 18px rgba(155,126,209,0.35); }
+
+/* Адаптив */
+@media (max-width: 768px) {
+    .game-title { font-size: 1.3rem; }
+    .win-text { font-size: 1.2rem; }
+    .game-replay-btn { font-size: 14px; padding: 8px 22px; }
+}
+
 
 /* ============================================
    RSVP ФОРМА

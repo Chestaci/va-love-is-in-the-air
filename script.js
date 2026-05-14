@@ -178,48 +178,65 @@ document.addEventListener('DOMContentLoaded', function() {
     // ==============================
     // ВИДЕО FADE КАРУСЕЛЬ
     // ==============================
-    const videoContainer = document.getElementById('videoFadeCarousel');
-    const videoPrevBtn   = document.getElementById('videoFadePrev');
-    const videoNextBtn   = document.getElementById('videoFadeNext');
-    const videoDots      = document.getElementById('videoFadeDots');
+// 🎥 ВИДЕО КАРУСЕЛЬ (ТОЛЬКО РУЧНОЕ УПРАВЛЕНИЕ)
+const videoContainer = document.getElementById('videoFadeCarousel');
+const videoPrevBtn   = document.getElementById('videoFadePrev');
+const videoNextBtn   = document.getElementById('videoFadeNext');
+const videoDots      = document.getElementById('videoFadeDots');
 
-    if (videoContainer && videoDots) {
-        const videoSlides = videoContainer.querySelectorAll('.video-fade-slide');
-        let vCurrent      = 0;
-        let vAutoId       = null;
+if (videoContainer && videoDots) {
+    const videoSlides = videoContainer.querySelectorAll('.video-fade-slide');
+    let vCurrent = 0;
 
-        videoSlides.forEach((_, i) => {
-            const dot = document.createElement('div');
-            dot.classList.add('video-fade-dot');
-            if (i === 0) dot.classList.add('active');
-            dot.addEventListener('click', () => goToVideo(i));
-            videoDots.appendChild(dot);
-        });
+    // Создаём точки
+    videoSlides.forEach((_, i) => {
+        const dot = document.createElement('div');
+        dot.classList.add('video-fade-dot');
+        if (i === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => goToVideo(i));
+        videoDots.appendChild(dot);
+    });
+    const vDots = videoDots.querySelectorAll('.video-fade-dot');
 
-        const vDots = videoDots.querySelectorAll('.video-fade-dot');
+    // Переключение слайда
+    function goToVideo(index) {
+        // Останавливаем текущее видео
+        const currentVid = videoSlides[vCurrent]?.querySelector('video');
+        if (currentVid && !currentVid.paused) currentVid.pause();
 
-        function goToVideo(index) {
-            const currentVid = videoSlides[vCurrent].querySelector('video');
-            if (currentVid && !currentVid.paused) currentVid.pause();
-
-            vCurrent = index;
-            videoSlides.forEach((s, i) => s.classList.toggle('active', i === vCurrent));
-            vDots.forEach((d, i) => d.classList.toggle('active', i === vCurrent));
-            resetVideoAuto();
-        }
-
-        function nextVideo() { goToVideo((vCurrent + 1) % videoSlides.length); }
-        function prevVideo() { goToVideo((vCurrent - 1 + videoSlides.length) % videoSlides.length); }
-
-        if (videoNextBtn) videoNextBtn.addEventListener('click', nextVideo);
-        if (videoPrevBtn) videoPrevBtn.addEventListener('click', prevVideo);
-
-        function resetVideoAuto() {
-            clearInterval(vAutoId);
-            vAutoId = setInterval(nextVideo, 10000);
-        }
-        resetVideoAuto();
+        vCurrent = index;
+        videoSlides.forEach((s, i) => s.classList.toggle('active', i === vCurrent));
+        vDots.forEach((d, i) => d.classList.toggle('active', i === vCurrent));
     }
+
+    function nextVideo() { goToVideo((vCurrent + 1) % videoSlides.length); }
+    function prevVideo() { goToVideo((vCurrent - 1 + videoSlides.length) % videoSlides.length); }
+
+    // 🔘 Кнопки
+    if (videoNextBtn) videoNextBtn.addEventListener('click', nextVideo);
+    if (videoPrevBtn) videoPrevBtn.addEventListener('click', prevVideo);
+
+    // ⌨️ Клавиатура
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') nextVideo();
+        if (e.key === 'ArrowLeft') prevVideo();
+    });
+
+    // 📱 Свайпы (мобильные)
+    let touchStartX = 0;
+    videoContainer.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    videoContainer.addEventListener('touchend', e => {
+        const diff = touchStartX - e.changedTouches[0].screenX;
+        if (Math.abs(diff) > 50) {
+            diff > 0 ? nextVideo() : prevVideo();
+        }
+    }, { passive: true });
+
+    console.log('🎥 Видео-карусель: автопрокрутка отключена, только ручное управление');
+}
 
 
     // ==============================
