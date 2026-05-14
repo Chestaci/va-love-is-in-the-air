@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
 <body>
 
@@ -53,8 +54,8 @@
     <!-- ===== ГЛАВНЫЙ ЭКРАН ===== -->
     <section class="hero section" id="home">
         <div class="section-overlay"></div>
-        <img src="./images/wisteria-corner.png" class="wisteria-decoration wisteria-top-left" alt="">
-        <img src="./images/wisteria-corner.png" class="wisteria-decoration wisteria-top-right" alt="">
+        <img src="./images/sumie-corner.png" class="wisteria-decoration wisteria-top-left" alt="">
+        <img src="./images/sumie-corner.png" class="wisteria-decoration wisteria-top-right" alt="">
         
         <div class="hero-content">
             <h1 class="fade-in">Анастасия & Вадим</h1>
@@ -71,11 +72,11 @@
         
         <!-- Дерево глицинии слева -->
         <div class="wisteria-tree-bg">
-            <img src="./images/wisteria-tree-full.png" alt="Дерево глицинии">
+            <img src="./images/sumie-branch-vertical.png" alt="Дерево глицинии">
         </div>
         
-        <img src="./images/wisteria-corner.png" class="wisteria-decoration wisteria-top-left" alt="">
-        <img src="./images/wisteria-corner.png" class="wisteria-decoration wisteria-top-right" alt="">
+        <img src="./images/sumie-corner.png" class="wisteria-decoration wisteria-top-left" alt="">
+        <img src="./images/sumie-corner.png" class="wisteria-decoration wisteria-top-right" alt="">
         
         <div class="section-content">
             <h2 class="section-title">Наша история</h2>
@@ -131,15 +132,15 @@
             </div>
             
             <!-- Разделитель из глицинии -->
-            <img src="./images/wisteria-divider.png" class="wisteria-divider" alt="Разделитель">
+            <img src="./images/sumie-dividers.png" class="wisteria-divider" alt="Разделитель">
         </div>
     </section>
 
     <!-- ===== ПРОГРАММА ДНЯ ===== -->
     <section class="timeline section" id="timeline">
         <div class="section-overlay"></div>
-        <img src="./images/wisteria-corner.png" class="wisteria-decoration wisteria-top-left" alt="">
-        <img src="./images/wisteria-corner.png" class="wisteria-decoration wisteria-top-right" alt="">
+        <img src="./images/sumie-timeline-icons.png" class="wisteria-decoration wisteria-top-left" alt="">
+        <img src="./images/sumie-corner.png" class="wisteria-decoration wisteria-top-right" alt="">
         
         <div class="section-content">
             <h2 class="section-title">Программа вечера</h2>
@@ -189,29 +190,117 @@
     </section>
 
     <!-- ===== ФОТОГАЛЕРЕЯ ===== -->
-    <section class="gallery section" id="gallery">
-        <div class="section-overlay"></div>
-        <img src="./images/wisteria-corner.png" class="wisteria-decoration wisteria-top-left" alt="">
+
+<!--
+  <section id="gallery" class="section">
+  <div class="section-content">
+    <h2 class="section-title">Наши моменты</h2>
+    
+    <div class="carousel-container">
+      <div class="carousel-scene"></div>
+      
+      <!-- Кнопки вынесены ОТДЕЛЬНО, чтобы не перекрывать фото -->
+       <!--
+      <div class="carousel-controls">
+        <button id="carouselPrev" aria-label="Предыдущее фото">←</button>
+        <button id="carouselNext" aria-label="Следующее фото">→</button>
+      </div>
+      
+      <!-- Точки-индикаторы (опционально) -->
+       <!--
+      <div id="carouselDots" class="carousel-dots"></div>
+    </div>
+  </div>
+</section>
+-->
+
+
+<section id="gallery" class="section">
+  <div class="section-content">
+    <h2 class="section-title reveal-on-scroll">Наши моменты</h2>
+    
+    <div class="wedding-slider-wrapper">
+      <div id="weddingSlider" class="wedding-slider">
         
-        <div class="section-content">
-            <h2 class="section-title">Наши фото</h2>
-            
-            <div class="photo-carousel">
-                <button class="carousel-btn prev" id="photoPrev">❮</button>
-                
-                <div class="carousel-container" id="photoCarousel">
-                    <div class="carousel-slide"><img src="./images/photo-1.jpg" alt="Фото 1"></div>
-                    <div class="carousel-slide"><img src="./images/photo-2.jpg" alt="Фото 2"></div>
-                    <div class="carousel-slide"><img src="./images/photo-3.jpg" alt="Фото 3"></div>
-                    <div class="carousel-slide"><img src="./images/photo-4.jpg" alt="Фото 4"></div>
-                    <div class="carousel-slide"><img src="./images/photo-5.jpg" alt="Фото 5"></div>
-                </div>
-                
-                <button class="carousel-btn next" id="photoNext">❯</button>
-                <div class="carousel-dots" id="photoDots"></div>
+        <!-- Слайд 1 -->
+        <div class="slider-item">
+          <div class="slider-image">
+            <img src="img/gallery/1.jpg" alt="Наше фото 1">
+          </div>
+          <div class="slider-content">
+            <div class="content-left">
+              <h3>Первая встреча</h3>
+              <p class="slider-date">2015</p>
+              <p class="slider-desc">Как будто мы знали друг друга всю жизнь</p>
             </div>
+            <div class="content-right">
+              <p>📍 Москва</p>
+              <p>☕ Кофейня на Арбате</p>
+            </div>
+          </div>
         </div>
-    </section>
+
+        <!-- Слайд 2 (активный) -->
+        <div class="slider-item">
+          <div class="slider-image">
+            <img src="img/gallery/2.jpg" alt="Наше фото 2">
+          </div>
+          <div class="slider-content">
+            <div class="content-left">
+              <h3>Путешествия</h3>
+              <p class="slider-date">2018</p>
+              <p class="slider-desc">Париж, Венеция, Прага — вместе везде прекрасно</p>
+            </div>
+            <div class="content-right">
+              <p>✈️ 12 стран</p>
+              <p>🗺️ 50+ городов</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Слайд 3 -->
+        <div class="slider-item">
+          <div class="slider-image">
+            <img src="img/gallery/3.jpg" alt="Наше фото 3">
+          </div>
+          <div class="slider-content">
+            <div class="content-left">
+              <h3>Предложение</h3>
+              <p class="slider-date">11.07.2026</p>
+              <p class="slider-desc">Романтический вечер на крыше и заветное «Да!»</p>
+            </div>
+            <div class="content-right">
+              <p>💍 Санкт-Петербург</p>
+              <p>🌅 Закат над Невой</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Добавьте остальные слайды по аналогии... -->
+
+      </div>
+
+      <!-- Кнопки навигации (отдельный блок) -->
+      <div class="slider-controls">
+        <button id="sliderPrev" class="slider-btn" type="button" aria-label="Предыдущее">❮</button>
+        <button id="sliderNext" class="slider-btn" type="button" aria-label="Следующее">❯</button>
+      </div>
+
+      <!-- Точки-индикаторы -->
+      <div class="slider-dots" id="sliderDots"></div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
 
     <!-- ===== ВИДЕО (FADE КАРУСЕЛЬ) ===== -->
     <section class="video-section section" id="video">
@@ -261,8 +350,8 @@
     <!-- ===== МЕСТО ===== -->
     <section class="location section" id="location">
         <div class="section-overlay"></div>
-        <img src="./images/wisteria-corner.png" class="wisteria-decoration wisteria-top-left" alt="">
-        <img src="./images/wisteria-corner.png" class="wisteria-decoration wisteria-top-right" alt="">
+        <img src="./images/sumie-corner.png" class="wisteria-decoration wisteria-top-left" alt="">
+        <img src="./images/sumie-corner.png" class="wisteria-decoration wisteria-top-right" alt="">
         
         <div class="section-content">
             <h2 class="section-title">Место проведения</h2>
@@ -294,11 +383,27 @@
         </div>
     </section>
 
+      <!-- 🎮 Игра -->
+  <section id="game" class="section">
+    <div class="section-content">
+      <h2 class="section-title reveal-on-scroll">Мини-игра</h2>
+      <div class="game-container">
+        <canvas id="gameCanvas"></canvas>
+        <button id="gameStart">Начать игру</button>
+        <div id="gameScore">Счёт: 0</div>
+        <div id="winMessage" style="display:none;">
+          <p class="win-text">Вы собрали все сердца!</p>
+          <img id="endingImage" src="" alt="Финал" style="max-width:100%; border-radius:12px; margin-top:15px;">
+        </div>
+      </div>
+    </div>
+  </section>
+
     <!-- ===== RSVP ===== -->
     <section class="rsvp section" id="rsvp">
         <div class="section-overlay"></div>
-        <img src="./images/wisteria-branch-left.png" class="wisteria-decoration wisteria-top-left" alt="">
-        <img src="./images/wisteria-branch-right.png" class="wisteria-decoration wisteria-top-right" alt="">
+        <img src="./images/sumie-branch-horizontal.png" class="wisteria-decoration wisteria-top-left" alt="">
+        <img src="./images/divider 2.png" class="wisteria-decoration wisteria-top-right" alt="">
         
         <div class="section-content">
             <h2 class="section-title">Подтверждение присутствия</h2>
@@ -351,5 +456,8 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="game.js"></script>
+  <!--  <script src="carousel.js"></script> -->
+    <script src="slider.js"></script>
 </body>
 </html>
