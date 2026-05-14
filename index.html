@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Анастасия & Вадим — Приглашение на банкет</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ===== КОНВЕРТ ===== -->
+    <div class="envelope-overlay" id="envelopeOverlay">
+        <div class="envelope-wrapper" id="envelopeWrapper">
+            
+            <img src="./images/envelope-closed.png" alt="Закрытый конверт" class="envelope-img" id="envelopeClosed">
+            <img src="./images/envelope-open.png" alt="Открытый конверт" class="envelope-img envelope-open" id="envelopeOpen">
+            
+            <div class="envelope-seal pulse" id="envelopeSeal">
+                <span>А & В</span>
+            </div>
+            
+            <div class="invitation-card" id="invitationCard">
+                <img src="./images/invitation-picture.png" alt="Приглашение" class="invitation-picture">
+                <button type="button" class="btn-continue" id="btnContinue">Узнать подробнее ↓</button>
+            </div>
+            
+            <div class="envelope-hint" id="envelopeHint">Нажмите, чтобы открыть</div>
+        </div>
+    </div>
+
+    <!-- ===== НАВИГАЦИЯ ===== -->
+    <nav class="nav-menu" id="navMenu">
+        <div class="nav-container">
+            <div class="nav-logo">А & В</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Главная</a></li>
+                <li><a href="#about">Наша история</a></li>
+                <li><a href="#timeline">Программа</a></li>
+                <li><a href="#gallery">Фото</a></li>
+                <li><a href="#video">Видео</a></li>
+                <li><a href="#location">Место</a></li>
+                <li><a href="#rsvp">RSVP</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <span class="hamburger"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ===== ГЛАВНЫЙ ЭКРАН ===== -->
+    <section class="hero section" id="home">
+        <div class="section-overlay"></div>
+        <img src="./images/wisteria-corner.png" class="wisteria-decoration wisteria-top-left" alt="">
+        <img src="./images/wisteria-corner.png" class="wisteria-decoration wisteria-top-right" alt="">
+        
+        <div class="hero-content">
+            <h1 class="fade-in">Анастасия & Вадим</h1>
+            <p class="date fade-in">12 сентября 2026</p>
+            <p class="location-subtitle fade-in">Санкт-Петербург • Дача Шаляпина</p>
+            <a href="#about" class="btn btn-primary fade-in">Наша история</a>
+        </div>
+    </section>
+
+    <!-- ===== НАША ИСТОРИЯ ===== -->
+        <!-- ===== НАША ИСТОРИЯ ===== -->
+    <section class="about section story-section" id="about">
+        <div class="section-overlay"></div>
+        
+        <!-- Дерево глицинии слева -->
+        <div class="wisteria-tree-bg">
+            <img src="./images/wisteria-tree-full.png" alt="Дерево глицинии">
+        </div>
+        
+        <img src="./images/wisteria-corner.png" class="wisteria-decoration wisteria-top-left" alt="">
+        <img src="./images/wisteria-corner.png" class="wisteria-decoration wisteria-top-right" alt="">
+        
+        <div class="section-content">
+            <h2 class="section-title">Наша история</h2>
+            
+            <div class="story-timeline">
+                <!-- 1: Фото слева -->
+                <div class="story-item reveal-on-scroll">
+                    <div class="story-image">
+                        <div class="image-wrapper"><img src="./images/story-1.jpg" alt="Знакомство"></div>
+                    </div>
+                    <div class="story-content">
+                        <div class="story-date">2015</div>
+                        <h3>Мы познакомились</h3>
+                        <p>Это было случайное, но судьбоносное знакомство. С тех пор мы не расставались.</p>
+                    </div>
+                </div>
+                
+                <!-- 2: Текст слева (автоматически поменяется местами благодаря CSS) -->
+                <div class="story-item reveal-on-scroll">
+                    <div class="story-image">
+                        <div class="image-wrapper"><img src="./images/story-2.jpg" alt="Вместе"></div>
+                    </div>
+                    <div class="story-content">
+                        <div class="story-date">2015–2025</div>
+                        <h3>Путешествие длиною в 10 лет</h3>
+                        <p>Мы вместе пережили много событий, путешествовали, росли и становились ближе с каждым днём.</p>
+                    </div>
+                </div>
+                
+                <!-- 3: Фото слева -->
+                <div class="story-item reveal-on-scroll">
+                    <div class="story-image">
+                        <div class="image-wrapper"><img src="./images/story-3.jpg" alt="Свадьба"></div>
+                    </div>
+                    <div class="story-content">
+                        <div class="story-date">11 апреля 2026</div>
+                        <h3>Наша свадьба в Черногории</h3>
+                        <p>Мы обменялись кольцами на побережье Бока-Которского залива — в окружении гор и моря.</p>
+                    </div>
+                </div>
+                
+                <!-- 4: Текст слева -->
+                <div class="story-item reveal-on-scroll">
+                    <div class="story-image">
+                        <div class="image-wrapper"><img src="./images/story-4.jpg" alt="Банкет"></div>
+                    </div>
+                    <div class="story-content">
+                        <div class="story-date">12 сентября 2026</div>
+                        <h3>Банкет в Петербурге</h3>
+                        <p>Мы хотим разделить радость этого дня с нашими родными и друзьями. Ждём вас в «Даче Шаляпина»!</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Разделитель из глицинии -->
+            <img src="./images/wisteria-divider.png" class="wisteria-divider" alt="Разделитель">
+        </div>
+    </section>
+
+    <!-- ===== ПРОГРАММА ДНЯ ===== -->
+    <section class="timeline section" id="timeline">
+        <div class="section-overlay"></div>
+        <img src="./images/wisteria-corner.png" class="wisteria-decoration wisteria-top-left" alt="">
+        <img src="./images/wisteria-corner.png" class="wisteria-decoration wisteria-top-right" alt="">
+        
+        <div class="section-content">
+            <h2 class="section-title">Программа вечера</h2>
+            
+            <div class="vertical-timeline">
+                <div class="timeline-item reveal-on-scroll">
+                    <div class="event-wrapper">
+                        <img src="./images/icon-champagne.png" alt="" class="event-icon">
+                        <div class="event-content">
+                            <h3>16:00 — Welcome drink</h3>
+                            <p>Встреча гостей, лёгкие закуски и напитки</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item reveal-on-scroll">
+                    <div class="event-wrapper">
+                        <img src="./images/icon-rings.png" alt="" class="event-icon">
+                        <div class="event-content">
+                            <h3>17:00 — Тосты и поздравления</h3>
+                            <p>Слова от самых близких</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item reveal-on-scroll">
+                    <div class="event-wrapper">
+                        <img src="./images/icon-cake.png" alt="" class="event-icon">
+                        <div class="event-content">
+                            <h3>18:00 — Праздничный ужин</h3>
+                            <p>Банкет с вкусной едой и музыкой</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item reveal-on-scroll">
+                    <div class="event-wrapper">
+                        <img src="./images/icon-dancing.png" alt="" class="event-icon">
+                        <div class="event-content">
+                            <h3>20:00 — Танцы и веселье</h3>
+                            <p>Первый танец, конкурсы, дискотека</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ФОТОГАЛЕРЕЯ ===== -->
+    <section class="gallery section" id="gallery">
+        <div class="section-overlay"></div>
+        <img src="./images/wisteria-corner.png" class="wisteria-decoration wisteria-top-left" alt="">
+        
+        <div class="section-content">
+            <h2 class="section-title">Наши фото</h2>
+            
+            <div class="photo-carousel">
+                <button class="carousel-btn prev" id="photoPrev">❮</button>
+                
+                <div class="carousel-container" id="photoCarousel">
+                    <div class="carousel-slide"><img src="./images/photo-1.jpg" alt="Фото 1"></div>
+                    <div class="carousel-slide"><img src="./images/photo-2.jpg" alt="Фото 2"></div>
+                    <div class="carousel-slide"><img src="./images/photo-3.jpg" alt="Фото 3"></div>
+                    <div class="carousel-slide"><img src="./images/photo-4.jpg" alt="Фото 4"></div>
+                    <div class="carousel-slide"><img src="./images/photo-5.jpg" alt="Фото 5"></div>
+                </div>
+                
+                <button class="carousel-btn next" id="photoNext">❯</button>
+                <div class="carousel-dots" id="photoDots"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ВИДЕО (FADE КАРУСЕЛЬ) ===== -->
+    <section class="video-section section" id="video">
+        <div class="section-overlay"></div>
+        
+        <div class="section-content">
+            <h2 class="section-title">Наши видео</h2>
+            
+            <div class="video-fade-carousel" id="videoFadeCarousel">
+                <div class="video-fade-slide active">
+                    <div class="video-wrapper">
+                        <video controls preload="metadata">
+                            <source src="./videos/video-1.mp4" type="video/mp4">
+                            Ваш браузер не поддерживает видео
+                        </video>
+                    </div>
+                    <p class="video-title">Наша история</p>
+                </div>
+                
+                <div class="video-fade-slide">
+                    <div class="video-wrapper">
+                        <video controls preload="metadata">
+                            <source src="./videos/video-2.mp4" type="video/mp4">
+                            Ваш браузер не поддерживает видео
+                        </video>
+                    </div>
+                    <p class="video-title">Свадьба в Черногории</p>
+                </div>
+                
+                <div class="video-fade-slide">
+                    <div class="video-wrapper">
+                        <video controls preload="metadata">
+                            <source src="./videos/video-3.mp4" type="video/mp4">
+                            Ваш браузер не поддерживает видео
+                        </video>
+                    </div>
+                    <p class="video-title">Наши моменты</p>
+                </div>
+                
+                <button class="video-nav-btn prev" id="videoFadePrev">❮</button>
+                <button class="video-nav-btn next" id="videoFadeNext">❯</button>
+                <div class="video-fade-dots" id="videoFadeDots"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== МЕСТО ===== -->
+    <section class="location section" id="location">
+        <div class="section-overlay"></div>
+        <img src="./images/wisteria-corner.png" class="wisteria-decoration wisteria-top-left" alt="">
+        <img src="./images/wisteria-corner.png" class="wisteria-decoration wisteria-top-right" alt="">
+        
+        <div class="section-content">
+            <h2 class="section-title">Место проведения</h2>
+            
+            <div class="location-container">
+                <div class="location-frame">
+                    <img src="./images/location-map.png" alt="Карта" class="location-image">
+                </div>
+                
+                <div class="location-info">
+                    <h3>Санкт-Петербург</h3>
+                    <p class="location-detail">Банкетное пространство «Дача Шаляпина»</p>
+                    <p class="date">12 сентября 2026</p>
+                    
+                    <div class="location-details">
+                        <div class="detail-item">
+                            <img src="./images/icon-clock.png" alt="" class="detail-icon">
+                            <div><h4>Начало</h4><p>16:00</p></div>
+                        </div>
+                        <div class="detail-item">
+                            <img src="./images/icon-car.png" alt="" class="detail-icon">
+                            <div><h4>Как добраться</h4><p>Дресс-код: нарядный</p></div>
+                        </div>
+                    </div>
+                    
+                    <a href="https://yandex.ru/maps" target="_blank" class="btn btn-primary">Открыть на карте</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== RSVP ===== -->
+    <section class="rsvp section" id="rsvp">
+        <div class="section-overlay"></div>
+        <img src="./images/wisteria-branch-left.png" class="wisteria-decoration wisteria-top-left" alt="">
+        <img src="./images/wisteria-branch-right.png" class="wisteria-decoration wisteria-top-right" alt="">
+        
+        <div class="section-content">
+            <h2 class="section-title">Подтверждение присутствия</h2>
+            <p class="section-subtitle">Пожалуйста, сообщите нам до 1 августа 2026</p>
+            
+            <form class="rsvp-form" id="rsvpForm">
+                <div class="form-card">
+                    <div class="form-group">
+                        <label for="name">Ваше имя *</label>
+                        <input type="text" id="name" name="name" required placeholder="Имя и фамилия">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Присутствие *</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="attendance" value="yes" required> Да, буду!</label>
+                            <label><input type="radio" name="attendance" value="no" required> К сожалению, не смогу</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="meal">Предпочтения по еде</label>
+                        <select id="meal" name="meal">
+                            <option value="">Без предпочтений</option>
+                            <option value="vegetarian">Вегетарианское</option>
+                            <option value="seafood">Морепродукты</option>
+                            <option value="meat">Мясо</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Пожелания</label>
+                        <textarea id="message" name="message" rows="4" placeholder="Ваши пожелания..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-submit">Отправить</button>
+                    <div class="form-success" id="formSuccess">Спасибо! Ваш ответ отправлен 💜</div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- ===== ФУТЕР ===== -->
+    <footer class="footer">
+        <div class="footer-content">
+            <h3>Анастасия & Вадим</h3>
+            <p>12 сентября 2026 • Санкт-Петербург</p>
+            <p class="footer-love">С любовью ждём вас! 💜</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
