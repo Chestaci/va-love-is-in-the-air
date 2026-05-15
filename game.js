@@ -47,10 +47,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 📐 Канвас
     canvas.width = 600; canvas.height = 400;
-    const GROUND_Y = canvas.height; // 🔥 Земля ровно по нижнему краю холста
+    const GROUND_Y = canvas.height - 65; // 🔥 Уровень земли
 
     // 👤 Жених (🔥 ЧЁТКО на земле)
-    let player = { x: 80, y: GROUND_Y - 140, width: 115, height: 150, dy: 0, gravity: 0.45, jumpPower: -14, grounded: true };
+    let player = { x: 80, y: GROUND_Y - 140, width: 115, height: 150, dy: 0, gravity: 0.45, jumpPower: -13, grounded: true };
     let obstacles = [], hearts = [], score = 0, gameSpeed = 3;
     let gameRunning = false, animFrameId, lastObstacleTime = 0;
     const OBSTACLE_COOLDOWN = 1500, MIN_DIST = canvas.width * 0.4;
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const GROOM_IMG_SRC = 'img/groom.png';
     const BRIDE_IMG_SRC = 'img/bride.png';
     const HEART_IMG_SRC = 'img/heart.png';
-    const ENDING_IMG_SRC = 'img/ending.jpg';
+    const ENDING_IMG_SRC = 'img/ending.png';
     let groomImg = null, brideImg = null, heartImg = null;
     if (GROOM_IMG_SRC) { groomImg = new Image(); groomImg.src = GROOM_IMG_SRC; }
     if (BRIDE_IMG_SRC) { brideImg = new Image(); brideImg.src = BRIDE_IMG_SRC; }
@@ -198,9 +198,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function draw() {
         drawBackground();
         // 🔥 Мягкий "пол" без линии
-        const grd = ctx.createLinearGradient(0, GROUND_Y, 0, canvas.height);
-        grd.addColorStop(0, 'rgba(155,126,209,0.15)'); grd.addColorStop(1, 'rgba(155,126,209,0.4)');
-        ctx.fillStyle = grd; ctx.fillRect(0, GROUND_Y, canvas.width, 30);
+       // const grd = ctx.createLinearGradient(0, GROUND_Y, 0, canvas.height);
+       // grd.addColorStop(0, 'rgba(155,126,209,0.15)'); grd.addColorStop(1, 'rgba(155,126,209,0.4)');
+       // ctx.fillStyle = grd; ctx.fillRect(0, GROUND_Y, canvas.width, 30);
 
         hearts.forEach(h => drawHeart(h.x, h.y, h.size));
         obstacles.forEach(o => drawObstacle(o));
