@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 🎨 НАСТРОЙКИ (🔥 МЕНЯЙТЕ ЗДЕСЬ)
-    const GAME_BG_IMG = 'images/game-bg.jpg';
+    const GAME_BG_IMG = 'images/game/game-bg.jpg';
     const GAME_BG_COLOR = '#ffeef2';
     const WIN_SCORE = 11;
     
@@ -101,11 +101,11 @@ document.addEventListener('DOMContentLoaded', () => {
     let ring = { x: 0, y: 0, width: 45, height: 45 };
 
     // 🖼️ Картинки
-    const GROOM_IMG_SRC = 'img/groom.png';
-    const BRIDE_IMG_SRC = 'img/bride.png';
-    const HEART_IMG_SRC = 'img/heart.png';
-    const ENDING_IMG_SRC = 'img/ending.png';
-    const NEW_GROOM_IMG_SRC = 'img/groom-transformed.png';
+    const GROOM_IMG_SRC = 'images/game/groom.png';
+    const BRIDE_IMG_SRC = 'images/game/bride.png';
+    const HEART_IMG_SRC = 'images/game/heart.png';
+    const ENDING_IMG_SRC = 'images/game/ending.png';
+    const NEW_GROOM_IMG_SRC = 'images/game/groom-transformed.png';
     
     let groomImg = null, brideImg = null, heartImg = null, groomNewImg = null;
     if (GROOM_IMG_SRC) { groomImg = new Image(); groomImg.src = GROOM_IMG_SRC; }
