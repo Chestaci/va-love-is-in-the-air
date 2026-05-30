@@ -487,6 +487,43 @@
     </div>
   </section>
 
+
+  <!-- ===== О подарках ===== -->
+<section class="gifts section" id="gifts">
+    <div class="section-overlay"></div>
+    <img src="./images/decor/sumie-corner.png" class="wisteria-decoration wisteria-top-left" alt="">
+    <img src="./images/decor/sumie-corner.png" class="wisteria-decoration wisteria-top-right" alt="">
+    
+    <div class="section-content">
+        <h2 class="section-title">О подарках 💜</h2>
+        
+        <div class="gifts-container">
+            <div class="gifts-text">
+                <p class="gifts-intro">
+                    Дорогие гости! Ваше присутствие — уже самый ценный подарок для нас ✨
+                </p>
+                <p>
+                    Мы будем очень тронуты, если вы разделите с нами этот день. 
+                    Если же вы захотите сделать нам подарок, мы будем рады <strong>конверту</strong> — 
+                    он поможет нам осуществить нашу мечту о путешествии.
+                </p>
+                <p class="no-flowers">
+                    🌸 <strong>Пожалуйста, не приносите букеты</strong> — 
+                    При желании можно ограничиться одним любым цветком из нашей цветовой палитры.
+                    Эти цеты сначала пойдут на создание одной общей композиции,
+                    которая будет радовать нас в течение всего вечера,
+                    а затем для осуществления нашей очередной сумасшедшей идеи,
+                    о которой вы сможете узнать позже...
+            </div>
+            
+            <div class="gifts-image">
+                <img src="./images/gifts/bouquet.jpg" alt="Красивый букет" class="bouquet-photo">
+            </div>
+        </div>
+    </div>
+</section>
+
+
     <!-- ===== RSVP ===== -->
     <section class="rsvp section" id="rsvp">
         <div class="section-overlay"></div>
@@ -497,42 +534,197 @@
             <h2 class="section-title">Подтверждение присутствия</h2>
             <p class="section-subtitle">Пожалуйста, сообщите нам до 1 августа 2026</p>
             
-            <form class="rsvp-form" id="rsvpForm">
-                <div class="form-card">
-                    <div class="form-group">
-                        <label for="name">Ваше имя *</label>
-                        <input type="text" id="name" name="name" required placeholder="Имя и фамилия">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Присутствие *</label>
-                        <div class="radio-group">
-                            <label><input type="radio" name="attendance" value="yes" required> Да, буду!</label>
-                            <label><input type="radio" name="attendance" value="no" required> К сожалению, не смогу</label>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="meal">Предпочтения по еде</label>
-                        <select id="meal" name="meal">
-                            <option value="">Без предпочтений</option>
-                            <option value="vegetarian">Вегетарианское</option>
-                            <option value="seafood">Морепродукты</option>
-                            <option value="meat">Мясо</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="message">Пожелания</label>
-                        <textarea id="message" name="message" rows="4" placeholder="Ваши пожелания..."></textarea>
-                    </div>
-                    
-                    <button type="submit" class="btn btn-submit">Отправить</button>
-                    <div class="form-success" id="formSuccess">Спасибо! Ваш ответ отправлен 💜</div>
+<div class="rsvp-container">
+    <form class="rsvp-form" id="rsvpForm" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSdON3gcyqYVDfG9AdgZQZvQItvn3mqJdmUFy90jVQsa-jIaKA/formResponse" method="POST" autocomplete="off">
+        <div class="form-card">
+            <div class="form-group">
+                <label for="guestCount">Сколько человек будет от вас? *</label>
+                <select id="guestCount" name="entry.1795145089" required>
+                    <option value="1 человек (только я)">1 человек (только я)</option>
+                    <option value="2 человека">2 человека</option>
+                    <option value="3 человека">3 человека</option>
+                    <option value="4 человека">4 человека</option>
+                </select>
+            </div>
+
+            <!-- Гость 1 -->
+            <div class="guest-block" id="guest1">
+                <h4 style="font-family: var(--heading); color: var(--primary); margin: 20px 0 12px; font-size: 17px;">👤 Гость 1 (вы)</h4>
+                <div class="form-group">
+                    <label>Имя и фамилия *</label>
+                    <input type="text" name="entry.1717957405" required placeholder="Анна Петрова">
                 </div>
-            </form>
+                <div class="form-group">
+                    <label>Предпочтения по еде</label>
+                    <select name="entry.1659776979">
+                        <option value="Без предпочтений">Без предпочтений</option>
+                        <option value="Говядина Веллингтон">Говядина Веллингтон</option>
+                        <option value="Стейк тунца Блю Фин">Стейк тунца Блю Фин</option>
+                        <option value="Утка конфи">Утка конфи</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Напитки <small>(можно выбрать несколько)</small></label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="entry.1889058415" value="Без предпочтений"> Без предпочтений</label>
+                        <label><input type="checkbox" name="entry.1889058415" value="Сок"> Сок</label>
+                        <label><input type="checkbox" name="entry.1889058415" value="Лимонад"> Лимонад</label>
+                        <label><input type="checkbox" name="entry.1889058415" value="Шампанское"> Шампанское</label>
+                        <label><input type="checkbox" name="entry.1889058415" value="Вино красное"> Вино красное</label>
+                        <label><input type="checkbox" name="entry.1889058415" value="Вино белое"> Вино белое</label>
+                        <label><input type="checkbox" name="entry.1889058415" value="Вино розовое"> Вино розовое</label>
+                        <label><input type="checkbox" name="entry.1889058415" value="Пиво"> Пиво</label>
+                        <label><input type="checkbox" name="entry.1889058415" value="Ром"> Ром</label>
+                        <label><input type="checkbox" name="entry.1889058415" value="Виски"> Виски</label>
+                        <label><input type="checkbox" name="entry.1889058415" value="Джин"> Джин</label>
+                        <label><input type="checkbox" name="entry.1889058415" value="Водка"> Водка</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Гость 2 -->
+            <div class="guest-block additional-guest" id="guest2" style="display:none;">
+                <h4 style="font-family: var(--heading); color: var(--primary); margin: 20px 0 12px; font-size: 17px;">👤 Гость 2</h4>
+                <div class="form-group">
+                    <label>Имя и фамилия *</label>
+                    <input type="text" name="entry.1846891337" placeholder="Михаил Петров">
+                </div>
+                <div class="form-group">
+                    <label>Предпочтения по еде</label>
+                    <select name="entry.763321919">
+                        <option value="Без предпочтений">Без предпочтений</option>
+                        <option value="Говядина Веллингтон">Говядина Веллингтон</option>
+                        <option value="Стейк тунца Блю Фин">Стейк тунца Блю Фин</option>
+                        <option value="Утка конфи">Утка конфи</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Напитки <small>(можно выбрать несколько)</small></label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="entry.29098670" value="Без предпочтений"> Без предпочтений</label>
+                        <label><input type="checkbox" name="entry.29098670" value="Сок"> Сок</label>
+                        <label><input type="checkbox" name="entry.29098670" value="Лимонад"> Лимонад</label>
+                        <label><input type="checkbox" name="entry.29098670" value="Шампанское"> Шампанское</label>
+                        <label><input type="checkbox" name="entry.29098670" value="Вино красное"> Вино красное</label>
+                        <label><input type="checkbox" name="entry.29098670" value="Вино белое"> Вино белое</label>
+                        <label><input type="checkbox" name="entry.29098670" value="Вино розовое"> Вино розовое</label>
+                        <label><input type="checkbox" name="entry.29098670" value="Пиво"> Пиво</label>
+                        <label><input type="checkbox" name="entry.29098670" value="Ром"> Ром</label>
+                        <label><input type="checkbox" name="entry.29098670" value="Виски"> Виски</label>
+                        <label><input type="checkbox" name="entry.29098670" value="Джин"> Джин</label>
+                        <label><input type="checkbox" name="entry.29098670" value="Водка"> Водка</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Гость 3 -->
+            <div class="guest-block additional-guest" id="guest3" style="display:none;">
+                <h4 style="font-family: var(--heading); color: var(--primary); margin: 20px 0 12px; font-size: 17px;">👤 Гость 3</h4>
+                <div class="form-group">
+                    <label>Имя и фамилия *</label>
+                    <input type="text" name="entry.1778301471" placeholder="Екатерина Смирнова">
+                </div>
+                <div class="form-group">
+                    <label>Предпочтения по еде</label>
+                    <select name="entry.171619992">
+                        <option value="Без предпочтений">Без предпочтений</option>
+                        <option value="Говядина Веллингтон">Говядина Веллингтон</option>
+                        <option value="Стейк тунца Блю Фин">Стейк тунца Блю Фин</option>
+                        <option value="Утка конфи">Утка конфи</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Напитки <small>(можно выбрать несколько)</small></label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="entry.531645130" value="Без предпочтений"> Без предпочтений</label>
+                        <label><input type="checkbox" name="entry.531645130" value="Сок"> Сок</label>
+                        <label><input type="checkbox" name="entry.531645130" value="Лимонад"> Лимонад</label>
+                        <label><input type="checkbox" name="entry.531645130" value="Шампанское"> Шампанское</label>
+                        <label><input type="checkbox" name="entry.531645130" value="Вино красное"> Вино красное</label>
+                        <label><input type="checkbox" name="entry.531645130" value="Вино белое"> Вино белое</label>
+                        <label><input type="checkbox" name="entry.531645130" value="Вино розовое"> Вино розовое</label>
+                        <label><input type="checkbox" name="entry.531645130" value="Пиво"> Пиво</label>
+                        <label><input type="checkbox" name="entry.531645130" value="Ром"> Ром</label>
+                        <label><input type="checkbox" name="entry.531645130" value="Виски"> Виски</label>
+                        <label><input type="checkbox" name="entry.531645130" value="Джин"> Джин</label>
+                        <label><input type="checkbox" name="entry.531645130" value="Водка"> Водка</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Гость 4 -->
+            <div class="guest-block additional-guest" id="guest4" style="display:none;">
+                <h4 style="font-family: var(--heading); color: var(--primary); margin: 20px 0 12px; font-size: 17px;">👤 Гость 4</h4>
+                <div class="form-group">
+                    <label>Имя и фамилия *</label>
+                    <input type="text" name="entry.443680305" placeholder="Дмитрий Иванов">
+                </div>
+                <div class="form-group">
+                    <label>Предпочтения по еде</label>
+                    <select name="entry.797657656">
+                        <option value="Без предпочтений">Без предпочтений</option>
+                        <option value="Говядина Веллингтон">Говядина Веллингтон</option>
+                        <option value="Стейк тунца Блю Фин">Стейк тунца Блю Фин</option>
+                        <option value="Утка конфи">Утка конфи</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Напитки <small>(можно выбрать несколько)</small></label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="entry.51267834" value="Без предпочтений"> Без предпочтений</label>
+                        <label><input type="checkbox" name="entry.51267834" value="Сок"> Сок</label>
+                        <label><input type="checkbox" name="entry.51267834" value="Лимонад"> Лимонад</label>
+                        <label><input type="checkbox" name="entry.51267834" value="Шампанское"> Шампанское</label>
+                        <label><input type="checkbox" name="entry.51267834" value="Вино красное"> Вино красное</label>
+                        <label><input type="checkbox" name="entry.51267834" value="Вино белое"> Вино белое</label>
+                        <label><input type="checkbox" name="entry.51267834" value="Вино розовое"> Вино розовое</label>
+                        <label><input type="checkbox" name="entry.51267834" value="Пиво"> Пиво</label>
+                        <label><input type="checkbox" name="entry.51267834" value="Ром"> Ром</label>
+                        <label><input type="checkbox" name="entry.51267834" value="Виски"> Виски</label>
+                        <label><input type="checkbox" name="entry.51267834" value="Джин"> Джин</label>
+                        <label><input type="checkbox" name="entry.51267834" value="Водка"> Водка</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Пожелания / Аллергии</label>
+                <textarea id="message" name="entry.2123163483" rows="3" placeholder="Если есть важные нюансы..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-submit" id="rsvpSubmitBtn" data-orig="Отправить ответ 💜">Отправить ответ 💜</button>
         </div>
-    </section>
+    </form>
+    <!-- ✅ Сообщение вынесено НАРУЖУ формы -->
+    <div class="form-success" id="formSuccess">Спасибо! Ответ успешно отправлен 💌</div>
+</div>
+
+
+    <!-- ===== ВАША ПЕСНЯ ===== -->
+<section class="song-request section" id="songRequest">
+    <div class="section-overlay"></div>
+    <img src="./images/decor/sumie-corner.png" class="wisteria-decoration wisteria-top-left" alt="">
+    
+    <div class="section-content">
+        <h2 class="section-title">Ваша песня для нас 🎶</h2>
+        <p class="section-subtitle">Напишите трек, под который вы точно будете танцевать — мы передадим его ди-джею!</p>
+        
+        <form class="song-form" id="songForm" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLScR3kJysNpVjEpvTGaC6i-Tgi9PhVv2DL3Y7xU6Vj3sbYwueg/formResponse" method="POST" autocomplete="off">
+            <div class="form-card song-card">
+                <div class="form-group">
+                    <label for="songRequestInput">Название песни *</label>
+                    <input type="text" id="songRequestInput" name="entry.809312334" placeholder="Например: «Perfect» — Ed Sheeran" required>
+                </div>
+                <button type="submit" class="btn btn-submit" id="songSubmitBtn" data-orig="Отправить песню 💜">Отправить песню 💜</button>
+            </div>
+        </form>
+        <div class="form-success" id="songSuccess">Спасибо! Ваша песня добавлена в плейлист 🎵</div>
+    </div>
+</section>
+
+<!-- Скрытый iframe для отправки форм без перезагрузки -->
+<iframe name="hidden_iframe" style="display:none;"></iframe>
+
 
     <!-- ===== ФУТЕР ===== -->
     <footer class="footer">
@@ -550,5 +742,6 @@
     <script src="js/game.js"></script>
   <!--  <script src="carousel.js"></script> -->
     <script src="js/slider.js"></script>
+    <script src="js/forms.js"></script>
 </body>
 </html>

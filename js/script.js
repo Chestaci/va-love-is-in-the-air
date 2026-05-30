@@ -238,24 +238,6 @@ if (videoContainer && videoDots) {
     console.log('🎥 Видео-карусель: автопрокрутка отключена, только ручное управление');
 }
 
-
-    // ==============================
-    // RSVP ФОРМА
-    // ==============================
-    const rsvpForm    = document.getElementById('rsvpForm');
-    const formSuccess = document.getElementById('formSuccess');
-
-    if (rsvpForm) {
-        rsvpForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const formData = new FormData(rsvpForm);
-            console.log('RSVP:', Object.fromEntries(formData));
-            rsvpForm.style.display = 'none';
-            if (formSuccess) formSuccess.style.display = 'block';
-        });
-    }
-
-
     // ==============================
     // АКТИВНЫЙ ПУНКТ МЕНЮ
     // ==============================
