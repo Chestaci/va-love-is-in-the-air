@@ -174,6 +174,54 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+// ==========================================
+// ПАРАЛЛАКС-ГАЛЕРЕЯ — РАБОЧАЯ ВЕРСИЯ
+// ==========================================
+window.initParallaxGallery = function() {
+    const layer1 = document.getElementById('layer1');
+    const layer2 = document.getElementById('layer2');
+    const layer3 = document.getElementById('layer3');
+    
+    if (!layer1 || !layer2 || !layer3) {
+        console.log('⚠️ Слои не найдены');
+        return;
+    }
+    
+    // Дублируем фото
+    function duplicateLayer(layer) {
+        const images = [...layer.querySelectorAll('.parallax-img')];
+        for(let k=0; k<2; k++) {
+            images.forEach(img => layer.appendChild(img.cloneNode(true)));
+        }
+    }
+    
+    duplicateLayer(layer1);
+    duplicateLayer(layer2);
+    duplicateLayer(layer3);
+    
+    // 🎚 Скорости (немного уменьшил, чтобы второй ряд не уезжал)
+    const speeds = {
+        layer1: -0.12,  // Влево
+        layer2: 0.08,   // Вправо (медленнее)
+        layer3: -0.06   // Влево (медленнее)
+    };
+    
+    function updateParallax() {
+        const scrollY = window.scrollY;
+        
+        layer1.style.transform = `translate3d(${scrollY * speeds.layer1}px, 0, 0)`;
+        layer2.style.transform = `translate3d(${scrollY * speeds.layer2}px, 0, 0)`;
+        layer3.style.transform = `translate3d(${scrollY * speeds.layer3}px, 0, 0)`;
+        
+        requestAnimationFrame(updateParallax);
+    }
+    
+    updateParallax();
+    console.log('✅ Галерея запущена');
+};
+
+// Автозапуск
+window.addEventListener('load', () => setTimeout(window.initParallaxGallery, 300));
 
     // ==============================
     // ВИДЕО FADE КАРУСЕЛЬ

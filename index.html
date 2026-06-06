@@ -66,81 +66,50 @@
         </div>
     </section>
 
-    <section id="gallery" class="section">
-  <div class="section-content">
-    <h2 class="section-title reveal-on-scroll">Наши моменты</h2>
+    <!-- ===== ПАРАЛЛАКС-ГАЛЕРЕЯ "НАШИ МОМЕНТЫ" ===== -->
+<section id="gallery" class="section parallax-gallery-section">
+    <div class="section-overlay"></div>
+    <img src="./images/decor/sumie-corner.png" class="wisteria-decoration wisteria-top-left" alt="">
+    <img src="./images/decor/sumie-corner.png" class="wisteria-decoration wisteria-top-right" alt="">
     
-    <div class="wedding-slider-wrapper">
-      <div id="weddingSlider" class="wedding-slider">
+    <div class="section-content">
+        <h2 class="section-title reveal-on-scroll">Наши моменты</h2>
         
-        <!-- Слайд 1 -->
-        <div class="slider-item">
-          <div class="slider-image">
-            <img src="images/gallery/1.jpg" alt="Наше фото 1">
-          </div>
-          <div class="slider-content">
-            <div class="content-left">
-              <h3>Первая встреча</h3>
-              <p class="slider-date">2015</p>
-              <p class="slider-desc">Как будто мы знали друг друга всю жизнь</p>
+        <!-- Контейнер галереи -->
+        <div class="parallax-gallery" id="parallaxGallery">
+            
+            <!-- Слой 1: движется влево -->
+            <div class="parallax-layer layer-1" id="layer1">
+                <img src="./images/gallery/p1-1.jpg" alt="Момент 1" class="parallax-img">
+                <img src="./images/gallery/p1-2.jpg" alt="Момент 2" class="parallax-img">
+                <img src="./images/gallery/p1-3.jpg" alt="Момент 3" class="parallax-img">
+                <img src="./images/gallery/p1-4.jpg" alt="Момент 4" class="parallax-img">
+                <img src="./images/gallery/p1-5.jpg" alt="Момент 5" class="parallax-img">
+                <img src="./images/gallery/p1-6.jpg" alt="Момент 6" class="parallax-img">
             </div>
-            <div class="content-right">
-              <p>📍 Москва</p>
-              <p>☕ Кофейня на Арбате</p>
+            
+            <!-- Слой 2: движется вправо -->
+            <div class="parallax-layer layer-2" id="layer2">
+                <img src="./images/gallery/p2-1.jpg" alt="Момент 7" class="parallax-img">
+                <img src="./images/gallery/p2-2.jpg" alt="Момент 8" class="parallax-img">
+                <img src="./images/gallery/p2-3.jpg" alt="Момент 9" class="parallax-img">
+                <img src="./images/gallery/p2-4.jpg" alt="Момент 10" class="parallax-img">
+                <img src="./images/gallery/p2-5.jpg" alt="Момент 11" class="parallax-img">
+                <img src="./images/gallery/p2-6.jpg" alt="Момент 12" class="parallax-img">
             </div>
-          </div>
+            
+            <!-- Слой 3: движется влево (медленнее) -->
+            <div class="parallax-layer layer-3" id="layer3">
+                <img src="./images/gallery/p3-1.jpg" alt="Момент 13" class="parallax-img">
+                <img src="./images/gallery/p3-2.jpg" alt="Момент 14" class="parallax-img">
+                <img src="./images/gallery/p3-3.jpg" alt="Момент 15" class="parallax-img">
+                <img src="./images/gallery/p3-4.jpg" alt="Момент 16" class="parallax-img">
+                <img src="./images/gallery/p3-5.jpg" alt="Момент 17" class="parallax-img">
+                <img src="./images/gallery/p3-6.jpg" alt="Момент 18" class="parallax-img">
+            </div>
+            
         </div>
-
-        <!-- Слайд 2 (активный) -->
-        <div class="slider-item">
-          <div class="slider-image">
-            <img src="images/gallery/2.jpg" alt="Наше фото 2">
-          </div>
-          <div class="slider-content">
-            <div class="content-left">
-              <h3>Путешествия</h3>
-              <p class="slider-date">2018</p>
-              <p class="slider-desc">Париж, Венеция, Прага — вместе везде прекрасно</p>
-            </div>
-            <div class="content-right">
-              <p>✈️ 12 стран</p>
-              <p>🗺️ 50+ городов</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Слайд 3 -->
-        <div class="slider-item">
-          <div class="slider-image">
-            <img src="images/gallery/3.jpg" alt="Наше фото 3">
-          </div>
-          <div class="slider-content">
-            <div class="content-left">
-              <h3>Предложение</h3>
-              <p class="slider-date">11.07.2026</p>
-              <p class="slider-desc">Романтический вечер на крыше и заветное «Да!»</p>
-            </div>
-            <div class="content-right">
-              <p>💍 Санкт-Петербург</p>
-              <p>🌅 Закат над Невой</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Добавьте остальные слайды по аналогии... -->
-
-      </div>
-
-      <!-- Кнопки навигации (отдельный блок) -->
-      <div class="slider-controls">
-        <button id="sliderPrev" class="slider-btn" type="button" aria-label="Предыдущее">❮</button>
-        <button id="sliderNext" class="slider-btn" type="button" aria-label="Следующее">❯</button>
-      </div>
-
-      <!-- Точки-индикаторы -->
-      <div class="slider-dots" id="sliderDots"></div>
     </div>
-  </div>
 </section>
 
     <!-- ===== НАША ИСТОРИЯ ===== -->
@@ -740,8 +709,6 @@
 
     <script src="js/script.js"></script>
     <script src="js/game.js"></script>
-  <!--  <script src="carousel.js"></script> -->
-    <script src="js/slider.js"></script>
     <script src="js/forms.js"></script>
 </body>
 </html>
