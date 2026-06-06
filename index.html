@@ -38,11 +38,10 @@
             <div class="nav-logo">А & В</div>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#home">Главная</a></li>
-                <li><a href="#gallery">Фото</a></li>
+                <li><a href="gallery.html">Фото</a></li>
                 <li><a href="#about">Наша история</a></li>
                 <li><a href="#location">Место</a></li>
                 <li><a href="#timeline">Программа</a></li>
-                <li><a href="#video">Видео</a></li>
                 <li><a href="#game">Игра</a></li>
                 <li><a href="#rsvp">RSVP</a></li>
             </ul>
@@ -69,14 +68,12 @@
     <!-- ===== ПАРАЛЛАКС-ГАЛЕРЕЯ "НАШИ МОМЕНТЫ" ===== -->
 <section id="gallery" class="section parallax-gallery-section">
     <div class="section-overlay"></div>
-    <img src="./images/decor/sumie-corner.png" class="wisteria-decoration wisteria-top-left" alt="">
-    <img src="./images/decor/sumie-corner.png" class="wisteria-decoration wisteria-top-right" alt="">
-    
+   
     <div class="section-content">
         <h2 class="section-title reveal-on-scroll">Наши моменты</h2>
         
         <!-- Контейнер галереи -->
-        <div class="parallax-gallery" id="parallaxGallery">
+        <div class="parallax-gallery">
             
             <!-- Слой 1: движется влево -->
             <div class="parallax-layer layer-1" id="layer1">
@@ -394,52 +391,6 @@
     </section>
 
 
-    <!-- ===== ВИДЕО (FADE КАРУСЕЛЬ) ===== -->
-    <section class="video-section section" id="video">
-        <div class="section-overlay"></div>
-        
-        <div class="section-content">
-            <h2 class="section-title">Наши видео</h2>
-            
-            <div class="video-fade-carousel" id="videoFadeCarousel">
-                <div class="video-fade-slide active">
-                    <div class="video-wrapper">
-                        <video controls preload="metadata">
-                            <source src="./videos/video-1.mp4" type="video/mp4">
-                            Ваш браузер не поддерживает видео
-                        </video>
-                    </div>
-                    <p class="video-title">Наша история</p>
-                </div>
-                
-                <div class="video-fade-slide">
-                    <div class="video-wrapper">
-                        <video controls preload="metadata">
-                            <source src="./videos/video-2.mp4" type="video/mp4">
-                            Ваш браузер не поддерживает видео
-                        </video>
-                    </div>
-                    <p class="video-title">Свадьба в Черногории</p>
-                </div>
-                
-                <div class="video-fade-slide">
-                    <div class="video-wrapper">
-                        <video controls preload="metadata">
-                            <source src="./videos/video-3.mp4" type="video/mp4">
-                            Ваш браузер не поддерживает видео
-                        </video>
-                    </div>
-                    <p class="video-title">Наши моменты</p>
-                </div>
-                
-                <button class="video-nav-btn prev" id="videoFadePrev">❮</button>
-                <button class="video-nav-btn next" id="videoFadeNext">❯</button>
-                <div class="video-fade-dots" id="videoFadeDots"></div>
-            </div>
-        </div>
-    </section>
-
-
       <!-- 🎮 Игра -->
   <section id="game" class="section">
     <div class="section-content">
@@ -455,6 +406,41 @@
       </div>
     </div>
   </section>
+
+
+      <!-- ===== ПАРАЛЛАКС-ГАЛЕРЕЯ "НАШИ МОМЕНТЫ" ===== -->
+<section id="gallery" class="section parallax-gallery-section">
+    <div class="section-overlay"></div>
+   
+    <div class="section-content">
+        <h2 class="section-title reveal-on-scroll">Наши моменты</h2>
+        
+        <!-- Контейнер галереи -->
+        <div class="parallax-gallery">
+            
+            <!-- Слой 1: движется влево -->
+            <div class="parallax-layer layer-1" id="layer1">
+                <img src="./images/gallery/p4-1.jpg" alt="Момент 1" class="parallax-img">
+                <img src="./images/gallery/p4-2.jpg" alt="Момент 2" class="parallax-img">
+                <img src="./images/gallery/p4-3.jpg" alt="Момент 3" class="parallax-img">
+                <img src="./images/gallery/p4-4.jpg" alt="Момент 4" class="parallax-img">
+                <img src="./images/gallery/p4-5.jpg" alt="Момент 5" class="parallax-img">
+                <img src="./images/gallery/p4-6.jpg" alt="Момент 6" class="parallax-img">
+            </div>
+            
+            <!-- Слой 2: движется вправо -->
+            <div class="parallax-layer layer-2" id="layer2">
+                <img src="./images/gallery/p5-1.jpg" alt="Момент 7" class="parallax-img">
+                <img src="./images/gallery/p5-2.jpg" alt="Момент 8" class="parallax-img">
+                <img src="./images/gallery/p5-3.jpg" alt="Момент 9" class="parallax-img">
+                <img src="./images/gallery/p5-4.jpg" alt="Момент 10" class="parallax-img">
+                <img src="./images/gallery/p5-5.jpg" alt="Момент 11" class="parallax-img">
+                <img src="./images/gallery/p5-6.jpg" alt="Момент 12" class="parallax-img">
+            </div>
+                        
+        </div>
+    </div>
+</section>
 
 
   <!-- ===== О подарках ===== -->
@@ -488,6 +474,41 @@
             <div class="gifts-image">
                 <img src="./images/gifts/bouquet.jpg" alt="Красивый букет" class="bouquet-photo">
             </div>
+        </div>
+    </div>
+</section>
+
+
+      <!-- ===== ПАРАЛЛАКС-ГАЛЕРЕЯ "НАШИ МОМЕНТЫ" ===== -->
+<section id="gallery" class="section parallax-gallery-section">
+    <div class="section-overlay"></div>
+   
+    <div class="section-content">
+        <h2 class="section-title reveal-on-scroll">Наши моменты</h2>
+        
+        <!-- Контейнер галереи -->
+        <div class="parallax-gallery">
+            
+            <!-- Слой 1: движется влево -->
+            <div class="parallax-layer layer-1" id="layer1">
+                <img src="./images/gallery/p6-1.jpg" alt="Момент 1" class="parallax-img">
+                <img src="./images/gallery/p6-2.jpg" alt="Момент 2" class="parallax-img">
+                <img src="./images/gallery/p6-3.jpg" alt="Момент 3" class="parallax-img">
+                <img src="./images/gallery/p6-4.jpg" alt="Момент 4" class="parallax-img">
+                <img src="./images/gallery/p6-5.jpg" alt="Момент 5" class="parallax-img">
+                <img src="./images/gallery/p6-6.jpg" alt="Момент 6" class="parallax-img">
+            </div>
+            
+            <!-- Слой 2: движется вправо -->
+            <div class="parallax-layer layer-2" id="layer2">
+                <img src="./images/gallery/p7-1.jpg" alt="Момент 7" class="parallax-img">
+                <img src="./images/gallery/p7-2.jpg" alt="Момент 8" class="parallax-img">
+                <img src="./images/gallery/p7-3.jpg" alt="Момент 9" class="parallax-img">
+                <img src="./images/gallery/p7-4.jpg" alt="Момент 10" class="parallax-img">
+                <img src="./images/gallery/p7-5.jpg" alt="Момент 11" class="parallax-img">
+                <img src="./images/gallery/p7-6.jpg" alt="Момент 12" class="parallax-img">
+            </div>
+                        
         </div>
     </div>
 </section>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Фото и видео — Анастасия & Вадим</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/gallery.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- ===== НАВИГАЦИЯ ===== -->
+    <nav class="nav-menu">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html" style="text-decoration: none; color: var(--text);">А & В</a>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html#home">Главная</a></li>
+                <li><a href="index.html#about">Наша история</a></li>
+                <li><a href="gallery.html" class="active">Фото</a></li>
+                <li><a href="index.html#location">Место</a></li>
+                <li><a href="index.html#timeline">Программа</a></li>
+                <li><a href="index.html#rsvp">RSVP</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <span class="hamburger"></span>
+            </button>
+        </div>
+    </nav>
+
+
+<!-- ===== КОМПАКТНЫЕ ВКЛАДКИ ===== -->
+<section class="gallery-tabs">
+    <button class="tab-btn active" onclick="showTab('photos')">📸 Фото</button>
+    <button class="tab-btn" onclick="showTab('videos')">🎥 Видео</button>
+</section>
+
+<!-- ===== ПРОСТАЯ СЕТКА ФОТО ===== -->
+<section class="simple-photo-grid" id="photosSection">
+    <div class="photo-grid-container">
+        <!-- ✅ ВИДЕО ВСТАВЛЯЕТСЯ КАК ОБЫЧНЫЙ БЛОК -->
+    <div class="photo-item">
+        <video controls preload="metadata">
+            <source src="./videos/video-1.mp4" type="video/mp4">
+        </video>
+    </div>
+        <div class="photo-item"><img src="./images/gallery-wedding/ph1.jpg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="./images/gallery-wedding/ph2.jpg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="./images/gallery-wedding/ph3.jpg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="./images/gallery-wedding/ph4.jpg" alt="" loading="lazy"></div>
+
+ <div class="photo-item">
+        <video controls preload="metadata">
+            <source src="./videos/video-2.mp4" type="video/mp4">
+        </video>
+    </div>
+
+        <div class="photo-item"><img src="./images/gallery-wedding/ph5.jpg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="./images/gallery-wedding/ph6.jpg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="./images/gallery-wedding/ph7.jpg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="./images/gallery-wedding/ph8.jpg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="./images/gallery-wedding/ph9.jpg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="./images/gallery-wedding/ph10.jpg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="./images/gallery-wedding/ph11.jpg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="./images/gallery-wedding/ph12.jpg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="./images/gallery-wedding/ph13.jpg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="./images/gallery-wedding/ph14.jpg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="./images/gallery-wedding/ph15.jpg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="./images/gallery-wedding/ph16.jpg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="./images/gallery-wedding/ph17.jpg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="./images/gallery-wedding/ph18.jpg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="./images/gallery-wedding/ph19.jpg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="./images/gallery-wedding/ph20.jpg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="./images/gallery-wedding/ph21.jpg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="./images/gallery-wedding/ph22.jpg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="./images/gallery-wedding/ph23.jpg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="./images/gallery-wedding/ph24.jpg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="./images/gallery-wedding/ph25.jpg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="./images/gallery-wedding/ph26.jpg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="./images/gallery-wedding/ph27.jpg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="./images/gallery-wedding/ph28.jpg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="./images/gallery-wedding/ph29.jpg" alt="" loading="lazy"></div>
+        <div class="photo-item"><img src="./images/gallery-wedding/ph30.jpg" alt="" loading="lazy"></div>
+        <!-- Добавляй фото просто копируя строку <div class="photo-item">... -->
+    </div>
+</section>
+
+    <!-- ===== ФУТЕР ===== -->
+    <footer class="footer">
+        <div class="footer-content">
+            <h3>Анастасия & Вадим</h3>
+            <p>12 сентября 2026 • Санкт-Петербург</p>
+            <p class="footer-love">С любовью ждём вас! 💜</p>
+            <p>Это не финал истории, а только ее край. 
+                Впереди — новые путешествия, рецепты и много-много счастливых дней, 
+                которые мы хотим проживать вместе. Спасибо, что вы часть нашей вселенной.</p>
+        </div>
+    </footer>
+
+<!-- Лайтбокс -->
+<div class="lightbox" id="lightbox">
+    <button class="lightbox-close">&times;</button>
+    <img class="lightbox-img" id="lightbox-img" alt="">
+</div>
+
+    <script src="js/script.js"></script>
+    <script src="js/gallery.js"></script>
+</body>
+</html>

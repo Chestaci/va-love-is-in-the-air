@@ -603,7 +603,7 @@ img { max-width: 100%; height: auto; display: block; }
 .parallax-gallery-section {
     position: relative;
     overflow: hidden;
-    padding: 60px 0 100px; /* Уменьшили общий отступ секции */
+    padding: 60px 0 100px;
     min-height: auto;
     background: var(--bg);
 }
@@ -614,52 +614,64 @@ img { max-width: 100%; height: auto; display: block; }
     max-width: 1600px;
     margin: 0 auto;
     padding: 20px 0;
-    overflow: hidden;
+    /* ✅ Мягкие края: фото плавно растворяются слева и справа */
+    mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
 }
 
-/* Слои */
 .parallax-layer {
     display: flex;
-    gap: 12px;
-    padding: 3px 0;
+    gap: 16px;
+    padding: 4px 0;
     position: relative;
     will-change: transform;
     flex-wrap: nowrap;
     overflow: visible;
 }
 
-/* Изображения */
 .parallax-img {
     flex-shrink: 0;
     width: auto;
-    height: 260px;
+    height: 280px;
     object-fit: cover;
     object-position: center;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(93,64,55,0.15);
-    transition: transform 0.3s ease;
+    border-radius: 12px;
+    box-shadow: 0 6px 25px rgba(93,64,55,0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Высоты рядов */
-.layer-1 .parallax-img { height: 260px; }
-.layer-2 .parallax-img { height: 300px; margin: 8px 0; }
-.layer-3 .parallax-img { height: 280px; }
+.parallax-img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 35px rgba(93,64,55,0.25);
+}
 
-/* 📱 Мобильная версия */
+/* Визуальный ритм для десктопа */
+.layer-1 .parallax-img { height: 280px; }
+.layer-2 .parallax-img { height: 320px; }
+.layer-3 .parallax-img { height: 300px; }
+
+/* 📱 Мобильная версия: ОДИНАКОВЫЙ размер для всех рядов */
 @media (max-width: 768px) {
     .parallax-gallery-section { padding: 40px 0 80px; }
-    .parallax-layer { gap: 8px; padding: 2px 0; }
+    .parallax-layer { gap: 10px; padding: 2px 0; }
     
-    .parallax-img { height: 130px; border-radius: 8px; }
-    .layer-1 .parallax-img { height: 130px; }
-    .layer-2 .parallax-img { height: 160px; margin: 6px 0; }
-    .layer-3 .parallax-img { height: 145px; }
+    /* ✅ Принудительно одинаковая высота */
+    .parallax-img, 
+    .layer-1 .parallax-img, 
+    .layer-2 .parallax-img, 
+    .layer-3 .parallax-img { 
+        height: 150px !important; 
+        border-radius: 10px; 
+    }
 }
 
 @media (max-width: 480px) {
-    .parallax-img { height: 105px; }
-    .layer-2 .parallax-img { height: 130px; }
-    .layer-3 .parallax-img { height: 115px; }
+    .parallax-img, 
+    .layer-1 .parallax-img, 
+    .layer-2 .parallax-img, 
+    .layer-3 .parallax-img { 
+        height: 120px !important; 
+    }
 }
 
 /* ============================================
@@ -1101,4 +1113,25 @@ img { max-width: 100%; height: auto; display: block; }
 @media (max-width: 480px) {
     .hero h1 { font-size: 28px; } .section-title { font-size: 26px; } .envelope-img { width: 280px; }
     .story-content { padding: 20px; } .story-content h3 { font-size: 22px; } .carousel-btn { width: 45px; height: 45px; }
+}
+
+/* ✅ Полностью убираем горизонтальные отступы у страницы */
+html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow-x: hidden !important;
+}
+
+/* ✅ Принудительно растягиваем футер на весь viewport */
+.footer {
+    width: 100vw !important;
+    position: relative !important;
+    left: 50% !important;
+    right: 50% !important;
+    margin-left: -50vw !important;
+    margin-right: -50vw !important;
+    max-width: none !important;
+    padding: 60px 30px !important;
+    box-sizing: border-box;
+    z-index: 10;
 }

@@ -1,51 +1,67 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-    // ==============================
-    // КОНВЕРТ
-    // ==============================
-    const envelopeOverlay  = document.getElementById('envelopeOverlay');
-    const envelopeWrapper  = document.getElementById('envelopeWrapper');
-    const envelopeClosed   = document.getElementById('envelopeClosed');
-    const envelopeOpen     = document.getElementById('envelopeOpen');
-    const invitationCard   = document.getElementById('invitationCard');
-    const envelopeSeal     = document.getElementById('envelopeSeal');
-    const envelopeHint     = document.getElementById('envelopeHint');
-    const btnContinue      = document.getElementById('btnContinue');
+// ==============================
+// КОНВЕРТ — ПОЛНАЯ АНИМАЦИЯ + ЗАПОМИНАНИЕ
+// ==============================
+const envelopeOverlay  = document.getElementById('envelopeOverlay');
+const envelopeWrapper  = document.getElementById('envelopeWrapper');
+const envelopeClosed   = document.getElementById('envelopeClosed');
+const envelopeOpen     = document.getElementById('envelopeOpen');
+const invitationCard   = document.getElementById('invitationCard');
+const envelopeSeal     = document.getElementById('envelopeSeal');
+const envelopeHint     = document.getElementById('envelopeHint');
+const btnContinue      = document.getElementById('btnContinue');
 
-    let envelopeOpened = false;
+// Проверяем, открывали ли уже в этой вкладке
+const alreadyOpened = sessionStorage.getItem('envelopeOpened') === 'true';
+
+if (alreadyOpened && envelopeOverlay) {
+    // Если уже открывали → мгновенно скрываем, чтобы не мелькало
+    envelopeOverlay.style.display = 'none';
+    document.body.style.overflow = 'auto';
+} else if (envelopeOverlay) {
+    // Первый вход → блокируем скролл страницы
     document.body.style.overflow = 'hidden';
 
+    // 🔹 1. Открытие (пошаговая анимация)
     function openEnvelope() {
-        if (envelopeOpened) return;
-        envelopeOpened = true;
+        if (sessionStorage.getItem('envelopeOpened') === 'true') return;
 
+        // Скрываем печать и подсказку
         if (envelopeSeal) envelopeSeal.classList.add('hide');
         if (envelopeHint) envelopeHint.classList.add('hide');
 
+        // Через 300мс: закрываем старый конверт, показываем открытый
         setTimeout(() => {
             if (envelopeClosed) envelopeClosed.classList.add('hide');
-            if (envelopeOpen)   envelopeOpen.classList.add('show');
+            if (envelopeOpen) envelopeOpen.classList.add('show');
         }, 300);
 
+        // Через 700мс: выезжает карточка с фото и кнопкой
         setTimeout(() => {
             if (invitationCard) invitationCard.classList.add('show');
         }, 700);
+
+        // Запоминаем, что открыли
+        sessionStorage.setItem('envelopeOpened', 'true');
     }
 
+    // 🔹 2. Закрытие (переход на сайт)
     function closeEnvelope() {
-        if (envelopeOverlay) envelopeOverlay.classList.add('hidden');
+        envelopeOverlay.classList.add('hidden');
         document.body.style.overflow = 'auto';
 
+        // Плавное появление контента главной страницы
         setTimeout(() => {
             document.querySelectorAll('.hero .fade-in').forEach((el, i) => {
-                setTimeout(() => {
-                    el.style.opacity = '1';
-                    el.style.transform = 'translateY(0)';
-                }, i * 150);
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+                el.style.transitionDelay = `${i * 0.15}s`;
             });
         }, 400);
     }
 
+    // Клик по конверту или печати
     if (envelopeWrapper) {
         envelopeWrapper.addEventListener('click', function(e) {
             if (!e.target.closest('#btnContinue')) {
@@ -55,6 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Клик по кнопке "Узнать подробнее"
     if (btnContinue) {
         btnContinue.addEventListener('click', function(e) {
             e.preventDefault();
@@ -62,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
             closeEnvelope();
         });
     }
-
+}
 
     // ==============================
     // ЗАТУХАНИЕ ФОНА ПРИ СКРОЛЛЕ
@@ -116,112 +133,55 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
 
-    // ==============================
-    // ФОТО КАРУСЕЛЬ С 3D ЭФФЕКТОМ
-    // ==============================
-    const photoCarousel = document.getElementById('photoCarousel');
-    const photoPrev     = document.getElementById('photoPrev');
-    const photoNext     = document.getElementById('photoNext');
-    const photoDots     = document.getElementById('photoDots');
+// ==========================================
+// ПАРАЛЛАКС: АВТО-ИНИЦИАЛИЗАЦИЯ ВСЕХ ГАЛЕРЕЙ
+// ==========================================
+window.initAllParallaxGalleries = function() {
+    const galleries = document.querySelectorAll('.parallax-gallery');
+    if (!galleries.length) return;
 
-    if (photoCarousel && photoDots) {
-        const slides   = photoCarousel.querySelectorAll('.carousel-slide');
-        let current    = 0;
-        let autoPlayId = null;
+    galleries.forEach((gallery) => {
+        const layers = gallery.querySelectorAll('.parallax-layer');
+        
+        layers.forEach((layer, index) => {
+            // 1. Дублируем контент для бесшовной прокрутки
+            const originals = [...layer.querySelectorAll('.parallax-img')];
+            for (let k = 0; k < 3; k++) {
+                originals.forEach(img => layer.appendChild(img.cloneNode(true)));
+            }
 
-        slides.forEach((_, i) => {
-            const dot = document.createElement('div');
-            dot.classList.add('carousel-dot');
-            if (i === 0) dot.classList.add('active');
-            dot.addEventListener('click', () => goTo(i));
-            photoDots.appendChild(dot);
-        });
+            // 2. Скорость зависит от позиции слоя (чередование направлений)
+            const speeds = [-0.12, 0.08, -0.06, 0.05];
+            const speed = speeds[index % speeds.length];
 
-        const dots = photoDots.querySelectorAll('.carousel-dot');
+            // 3. Запускаем анимацию после рендера
+            requestAnimationFrame(() => {
+                const setWidth = layer.scrollWidth / 4; // ширина одного полного набора
+                let currentX = speed > 0 ? -setWidth : 0;
 
-        function updateSlides() {
-            slides.forEach((slide, i) => {
-                slide.classList.toggle('active', i === current);
+                function animate() {
+                    const scrollY = window.scrollY;
+                    const target = scrollY * speed;
+
+                    // Математическое зацикливание
+                    if (speed < 0) {
+                        currentX = -(Math.abs(target) % setWidth);
+                    } else {
+                        currentX = -setWidth + (target % setWidth);
+                    }
+
+                    layer.style.transform = `translate3d(${currentX}px, 0, 0)`;
+                    requestAnimationFrame(animate);
+                }
+                animate();
             });
-        }
-
-        function goTo(index) {
-            current = index;
-            photoCarousel.style.transform = `translateX(-${current * 100}%)`;
-            dots.forEach((d, i) => d.classList.toggle('active', i === current));
-            updateSlides();
-            resetAuto();
-        }
-
-        function next() { goTo((current + 1) % slides.length); }
-        function prev() { goTo((current - 1 + slides.length) % slides.length); }
-
-        if (photoNext) photoNext.addEventListener('click', next);
-        if (photoPrev) photoPrev.addEventListener('click', prev);
-
-        function resetAuto() {
-            clearInterval(autoPlayId);
-            autoPlayId = setInterval(next, 6000);
-        }
-        resetAuto();
-
-        let tx = 0;
-        photoCarousel.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; });
-        photoCarousel.addEventListener('touchend', e => {
-            const diff = tx - e.changedTouches[0].screenX;
-            if (diff > 50) next();
-            if (diff < -50) prev();
         });
-    }
-
-// ==========================================
-// ПАРАЛЛАКС-ГАЛЕРЕЯ — РАБОЧАЯ ВЕРСИЯ
-// ==========================================
-window.initParallaxGallery = function() {
-    const layer1 = document.getElementById('layer1');
-    const layer2 = document.getElementById('layer2');
-    const layer3 = document.getElementById('layer3');
-    
-    if (!layer1 || !layer2 || !layer3) {
-        console.log('⚠️ Слои не найдены');
-        return;
-    }
-    
-    // Дублируем фото
-    function duplicateLayer(layer) {
-        const images = [...layer.querySelectorAll('.parallax-img')];
-        for(let k=0; k<2; k++) {
-            images.forEach(img => layer.appendChild(img.cloneNode(true)));
-        }
-    }
-    
-    duplicateLayer(layer1);
-    duplicateLayer(layer2);
-    duplicateLayer(layer3);
-    
-    // 🎚 Скорости (немного уменьшил, чтобы второй ряд не уезжал)
-    const speeds = {
-        layer1: -0.12,  // Влево
-        layer2: 0.08,   // Вправо (медленнее)
-        layer3: -0.06   // Влево (медленнее)
-    };
-    
-    function updateParallax() {
-        const scrollY = window.scrollY;
-        
-        layer1.style.transform = `translate3d(${scrollY * speeds.layer1}px, 0, 0)`;
-        layer2.style.transform = `translate3d(${scrollY * speeds.layer2}px, 0, 0)`;
-        layer3.style.transform = `translate3d(${scrollY * speeds.layer3}px, 0, 0)`;
-        
-        requestAnimationFrame(updateParallax);
-    }
-    
-    updateParallax();
-    console.log('✅ Галерея запущена');
+    });
+    console.log(`✅ Запущено ${galleries.length} параллакс-галерей`);
 };
 
-// Автозапуск
-window.addEventListener('load', () => setTimeout(window.initParallaxGallery, 300));
+// Автозапуск после загрузки страницы
+window.addEventListener('load', () => setTimeout(window.initAllParallaxGalleries, 300));
 
     // ==============================
     // ВИДЕО FADE КАРУСЕЛЬ

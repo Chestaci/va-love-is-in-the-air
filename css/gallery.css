@@ -1,0 +1,213 @@
+/* ============================================
+   СТРАНИЦА ГАЛЕРЕИ
+   ============================================ */
+
+/* ✅ ГАЛЕРЕЯ: слева направо, БЕЗ обрезки фото рядом с видео */
+.photo-grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    padding: 0 15px 60px;
+    max-width: 1600px;
+    margin: 0 auto;
+    
+    /* 🔑 ГЛАВНОЕ: отключает растягивание элементов под высоту видео в ряду */
+    align-items: start; 
+}
+
+.photo-item {
+    border-radius: 12px;
+    background: #f5f0e8;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+    /* Убрали overflow: hidden, чтобы он не резал контент */
+}
+
+.photo-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(52,10,131,0.12);
+}
+
+/* 🔑 Гарантируем естественные пропорции без обрезки */
+.photo-item img,
+.photo-item video {
+    width: 100%;
+    height: auto;          /* Никаких фиксированных высот */
+    display: block;
+    border-radius: 12px;   /* Скругление на самом медиа, а не на обёртке */
+    object-fit: unset !important; /* Принудительно отменяем cover/crop */
+}
+
+/* Адаптив */
+@media (max-width: 900px) {
+    .photo-grid-container { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+}
+@media (max-width: 550px) {
+    .photo-grid-container { grid-template-columns: 1fr; gap: 10px; }
+}
+
+.lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15,15,20,0.95);
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.lightbox.active { display: flex; }
+.lightbox-img {
+    max-width: 95%;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 0 40px rgba(0,0,0,0.5);
+}
+.lightbox-close {
+    position: absolute;
+    top: 20px; right: 25px;
+    background: none; border: none;
+    color: #fff; font-size: 40px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+.lightbox-close:hover { transform: scale(1.2); }
+
+/* Лайтбокс */
+.lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.95);
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox.active {
+    display: flex;
+}
+
+.lightbox-img {
+    max-width: 90%;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.lightbox-close,
+.lightbox-prev,
+.lightbox-next {
+    position: absolute;
+    background: rgba(255,255,255,0.1);
+    border: none;
+    color: white;
+    font-size: 40px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox-close:hover,
+.lightbox-prev:hover,
+.lightbox-next:hover {
+    background: rgba(255,255,255,0.25);
+    transform: scale(1.1);
+}
+
+.lightbox-close {
+    top: 20px;
+    right: 20px;
+    font-size: 45px;
+    width: 50px;
+    height: 50px;
+}
+
+.lightbox-prev {
+    left: 20px;
+}
+
+.lightbox-next {
+    right: 20px;
+}
+
+.lightbox-caption {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-family: var(--heading);
+    font-size: 18px;
+    text-align: center;
+    padding: 10px 30px;
+    background: rgba(0,0,0,0.6);
+    border-radius: 25px;
+}
+
+/* Адаптив */
+@media (max-width: 768px) {
+    .gallery-hero {
+        min-height: 280px;
+        margin-top: 60px;
+    }
+    
+    .filter-buttons {
+        gap: 8px;
+    }
+    
+    .filter-btn {
+        padding: 8px 16px;
+        font-size: 13px;
+    }
+    
+    .masonry-gallery {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 10px;
+    }
+    
+    .gallery-item.large {
+        grid-row: span 2;
+    }
+    
+    .video-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .lightbox-prev,
+    .lightbox-next {
+        width: 45px;
+        height: 45px;
+        font-size: 28px;
+    }
+    
+    .lightbox-caption {
+        font-size: 14px;
+        padding: 8px 20px;
+        bottom: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .masonry-gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Плавное появление секций */
+.photo-gallery-section,
+.video-gallery-section {
+    transition: opacity 0.3s ease;
+}
+
+.photo-gallery-section.hidden,
+.video-gallery-section.hidden {
+    display: none;
+}
