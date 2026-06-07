@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
 
 // ==============================
-// КОНВЕРТ — ПОЛНАЯ АНИМАЦИЯ + ЗАПОМИНАНИЕ
+// КОНВЕРТ — БЕЗ ВСПЫШЕК
 // ==============================
 const envelopeOverlay  = document.getElementById('envelopeOverlay');
 const envelopeWrapper  = document.getElementById('envelopeWrapper');
@@ -15,53 +15,52 @@ const btnContinue      = document.getElementById('btnContinue');
 // Проверяем, открывали ли уже в этой вкладке
 const alreadyOpened = sessionStorage.getItem('envelopeOpened') === 'true';
 
-if (alreadyOpened && envelopeOverlay) {
-    // Если уже открывали → мгновенно скрываем, чтобы не мелькало
-    envelopeOverlay.style.display = 'none';
+if (alreadyOpened) {
+    // ✅ Если уже открывали: сразу показываем сайт, скрываем конверт
+    document.body.classList.add('site-loaded');
     document.body.style.overflow = 'auto';
-} else if (envelopeOverlay) {
-    // Первый вход → блокируем скролл страницы
+    if (envelopeOverlay) envelopeOverlay.style.display = 'none';
+} else {
+    //  Первый визит: сайт скрыт, скролл заблокирован
     document.body.style.overflow = 'hidden';
 
-    // 🔹 1. Открытие (пошаговая анимация)
     function openEnvelope() {
         if (sessionStorage.getItem('envelopeOpened') === 'true') return;
 
-        // Скрываем печать и подсказку
         if (envelopeSeal) envelopeSeal.classList.add('hide');
         if (envelopeHint) envelopeHint.classList.add('hide');
 
-        // Через 300мс: закрываем старый конверт, показываем открытый
         setTimeout(() => {
             if (envelopeClosed) envelopeClosed.classList.add('hide');
             if (envelopeOpen) envelopeOpen.classList.add('show');
         }, 300);
 
-        // Через 700мс: выезжает карточка с фото и кнопкой
         setTimeout(() => {
             if (invitationCard) invitationCard.classList.add('show');
         }, 700);
-
-        // Запоминаем, что открыли
-        sessionStorage.setItem('envelopeOpened', 'true');
     }
 
-    // 🔹 2. Закрытие (переход на сайт)
     function closeEnvelope() {
+        // 1. Запоминаем, что открыли
+        sessionStorage.setItem('envelopeOpened', 'true');
+        
+        // 2. Плавно убираем конверт
         envelopeOverlay.classList.add('hidden');
-        document.body.style.overflow = 'auto';
-
-        // Плавное появление контента главной страницы
+        
+        // 3. Через 600мс (пока конверт исчезает) проявляем сайт
         setTimeout(() => {
+            document.body.classList.add('site-loaded');
+            document.body.style.overflow = 'auto';
+            
+            // 4. Запускаем анимацию появления контента главной
             document.querySelectorAll('.hero .fade-in').forEach((el, i) => {
                 el.style.opacity = '1';
                 el.style.transform = 'translateY(0)';
                 el.style.transitionDelay = `${i * 0.15}s`;
             });
-        }, 400);
+        }, 600);
     }
 
-    // Клик по конверту или печати
     if (envelopeWrapper) {
         envelopeWrapper.addEventListener('click', function(e) {
             if (!e.target.closest('#btnContinue')) {
@@ -71,7 +70,6 @@ if (alreadyOpened && envelopeOverlay) {
         });
     }
 
-    // Клик по кнопке "Узнать подробнее"
     if (btnContinue) {
         btnContinue.addEventListener('click', function(e) {
             e.preventDefault();

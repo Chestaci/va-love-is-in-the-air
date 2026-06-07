@@ -22,10 +22,11 @@
             <ul class="nav-links" id="navLinks">
                 <li><a href="index.html#home">Главная</a></li>
                 <li><a href="index.html#about">Наша история</a></li>
-                <li><a href="gallery.html" class="active">Фото</a></li>
-                <li><a href="index.html#location">Место</a></li>
-                <li><a href="index.html#timeline">Программа</a></li>
+                <li><a href="index.html#location">Место проведения</a></li>
+                <li><a href="index.html#timeline">Программа вечера</a></li>
+                <li><a href="#game">Игра</a></li>
                 <li><a href="index.html#rsvp">RSVP</a></li>
+                <li><a href="gallery.html">Фото и видео</a></li>
             </ul>
             <button class="mobile-menu-toggle" id="mobileMenuToggle">
                 <span class="hamburger"></span>
@@ -45,19 +46,20 @@
     <div class="photo-grid-container">
         <!-- ✅ ВИДЕО ВСТАВЛЯЕТСЯ КАК ОБЫЧНЫЙ БЛОК -->
     <div class="photo-item">
-        <video controls preload="metadata">
-            <source src="./videos/video-1.mp4" type="video/mp4">
-        </video>
+    <video autoplay muted loop playsinline preload="metadata" class="grid-video">
+        <source src="./videos/video-1.mp4" type="video/mp4">
+    </video>
     </div>
+
         <div class="photo-item"><img src="./images/gallery-wedding/ph1.jpg" alt="" loading="lazy"></div>
         <div class="photo-item"><img src="./images/gallery-wedding/ph2.jpg" alt="" loading="lazy"></div>
         <div class="photo-item"><img src="./images/gallery-wedding/ph3.jpg" alt="" loading="lazy"></div>
         <div class="photo-item"><img src="./images/gallery-wedding/ph4.jpg" alt="" loading="lazy"></div>
 
- <div class="photo-item">
-        <video controls preload="metadata">
-            <source src="./videos/video-2.mp4" type="video/mp4">
-        </video>
+    <div class="photo-item">
+    <video autoplay muted loop playsinline preload="metadata" class="grid-video">
+        <source src="./videos/video-2.mp4" type="video/mp4">
+    </video>
     </div>
 
         <div class="photo-item"><img src="./images/gallery-wedding/ph5.jpg" alt="" loading="lazy"></div>
@@ -102,10 +104,13 @@
         </div>
     </footer>
 
-<!-- Лайтбокс -->
+<!-- ЛАЙТБОКС -->
 <div class="lightbox" id="lightbox">
-    <button class="lightbox-close">&times;</button>
-    <img class="lightbox-img" id="lightbox-img" alt="">
+    <button class="lightbox-close" aria-label="Закрыть">&times;</button>
+    <button class="lightbox-nav lightbox-prev" aria-label="Предыдущее">&#10094;</button>
+    <button class="lightbox-nav lightbox-next" aria-label="Следующее">&#10095;</button>
+    <div class="lightbox-content" id="lightbox-content"></div>
+    <div class="lightbox-caption" id="lightbox-caption"></div>
 </div>
 
     <script src="js/script.js"></script>

@@ -8,6 +8,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/main.css">
+    
+    <!-- ✅ АНТИ-ВСПЫШКА: Скрываем контент сайта, но НЕ трогаем конверт -->
+    <style>
+        .nav-menu, .section, footer { opacity: 0; transition: opacity 0.7s ease; }
+        body.site-loaded .nav-menu, 
+        body.site-loaded .section, 
+        body.site-loaded footer { opacity: 1; }
+    </style>
+</head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
 <body>
@@ -38,12 +48,12 @@
             <div class="nav-logo">А & В</div>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#home">Главная</a></li>
-                <li><a href="gallery.html">Фото</a></li>
                 <li><a href="#about">Наша история</a></li>
-                <li><a href="#location">Место</a></li>
-                <li><a href="#timeline">Программа</a></li>
+                <li><a href="#location">Место проведения</a></li>
+                <li><a href="#timeline">Программа вечера</a></li>
                 <li><a href="#game">Игра</a></li>
                 <li><a href="#rsvp">RSVP</a></li>
+                <li><a href="gallery.html">Фото и видео</a></li>
             </ul>
             <button class="mobile-menu-toggle" id="mobileMenuToggle">
                 <span class="hamburger"></span>
@@ -61,7 +71,6 @@
             <h1 class="fade-in">Анастасия & Вадим</h1>
             <p class="date fade-in">12 сентября 2026</p>
             <p class="location-subtitle fade-in">Санкт-Петербург • Дача Шаляпина</p>
-            <a href="#about" class="btn btn-primary fade-in">Наша история</a>
         </div>
     </section>
 
@@ -70,8 +79,7 @@
     <div class="section-overlay"></div>
    
     <div class="section-content">
-        <h2 class="section-title reveal-on-scroll">Наши моменты</h2>
-        
+       
         <!-- Контейнер галереи -->
         <div class="parallax-gallery">
             
@@ -119,12 +127,14 @@
             <img src="./images/decor/sumie-branch-vertical.png" alt="Дерево глицинии">
         </div>
         
-        <img src="./images/decor/sumie-corner.png" class="wisteria-decoration wisteria-top-left" alt="">
-        <img src="./images/decor/sumie-corner.png" class="wisteria-decoration wisteria-top-right" alt="">
-        
         <div class="section-content">
+          <!-- Обертка для декора и заголовка -->
+          <div class="header-decor-wrapper">
+            <img src="./images/decor/sumie-corner.png" class="header-decor-img left" alt="">
             <h2 class="section-title">Наша история</h2>
-            
+            <img src="./images/decor/sumie-corner.png" class="header-decor-img right" alt="">
+          </div>
+               
             <div class="story-timeline">
                 <!-- 1: Фото слева -->
                 <div class="story-item reveal-on-scroll">
@@ -240,11 +250,14 @@
         <!-- ===== МЕСТО ===== -->
     <section class="location section" id="location">
         <div class="section-overlay"></div>
-        <img src="./images/decor/sumie-corner.png" class="wisteria-decoration wisteria-top-left" alt="">
-        <img src="./images/decor/sumie-corner.png" class="wisteria-decoration wisteria-top-right" alt="">
         
         <div class="section-content">
+
+            <div class="header-decor-wrapper">
+            <img src="./images/decor/sumie-corner.png" class="header-decor-img left" alt="">
             <h2 class="section-title">Место проведения</h2>
+            <img src="./images/decor/sumie-corner.png" class="header-decor-img right" alt="">
+          </div>
             
             <div class="location-container">
                 <div class="location-frame">
@@ -276,11 +289,14 @@
     <!-- ===== ПРОГРАММА ДНЯ ===== -->
     <section class="timeline section" id="timeline">
         <div class="section-overlay"></div>
-        <img src="./images/decor/sumie-timeline-icons.png" class="wisteria-decoration wisteria-top-left" alt="">
-        <img src="./images/decor/sumie-corner.png" class="wisteria-decoration wisteria-top-right" alt="">
         
         <div class="section-content">
+
+            <div class="header-decor-wrapper">
+            <img src="./images/decor/sumie-corner.png" class="header-decor-img left" alt="">
             <h2 class="section-title">Программа вечера</h2>
+            <img src="./images/decor/sumie-corner.png" class="header-decor-img right" alt="">
+          </div>
             <h3>(или «Тайминг есть, но мы оставляем за собой право на импровизацию»)</h3>
             
             <div class="vertical-timeline">
@@ -413,7 +429,6 @@
     <div class="section-overlay"></div>
    
     <div class="section-content">
-        <h2 class="section-title reveal-on-scroll">Наши моменты</h2>
         
         <!-- Контейнер галереи -->
         <div class="parallax-gallery">
@@ -446,11 +461,14 @@
   <!-- ===== О подарках ===== -->
 <section class="gifts section" id="gifts">
     <div class="section-overlay"></div>
-    <img src="./images/decor/sumie-corner.png" class="wisteria-decoration wisteria-top-left" alt="">
-    <img src="./images/decor/sumie-corner.png" class="wisteria-decoration wisteria-top-right" alt="">
     
     <div class="section-content">
-        <h2 class="section-title">О подарках 💜</h2>
+        
+        <div class="header-decor-wrapper">
+            <img src="./images/decor/sumie-corner.png" class="header-decor-img left" alt="">
+            <h2 class="section-title">О подарках</h2>
+            <img src="./images/decor/sumie-corner.png" class="header-decor-img right" alt="">
+          </div>
         
         <div class="gifts-container">
             <div class="gifts-text">
@@ -484,7 +502,6 @@
     <div class="section-overlay"></div>
    
     <div class="section-content">
-        <h2 class="section-title reveal-on-scroll">Наши моменты</h2>
         
         <!-- Контейнер галереи -->
         <div class="parallax-gallery">
@@ -517,11 +534,14 @@
     <!-- ===== RSVP ===== -->
     <section class="rsvp section" id="rsvp">
         <div class="section-overlay"></div>
-        <img src="./images/decor/sumie-branch-horizontal.png" class="wisteria-decoration wisteria-top-left" alt="">
-        <img src="./images/decor/divider 2.png" class="wisteria-decoration wisteria-top-right" alt="">
         
         <div class="section-content">
+           
+            <div class="header-decor-wrapper">
+            <img src="./images/decor/sumie-corner.png" class="header-decor-img left" alt="">
             <h2 class="section-title">Подтверждение присутствия</h2>
+            <img src="./images/decor/sumie-corner.png" class="header-decor-img right" alt="">
+          </div>
             <p class="section-subtitle">Пожалуйста, сообщите нам до 1 августа 2026</p>
             
 <div class="rsvp-container">
@@ -693,10 +713,14 @@
     <!-- ===== ВАША ПЕСНЯ ===== -->
 <section class="song-request section" id="songRequest">
     <div class="section-overlay"></div>
-    <img src="./images/decor/sumie-corner.png" class="wisteria-decoration wisteria-top-left" alt="">
     
     <div class="section-content">
-        <h2 class="section-title">Ваша песня для нас 🎶</h2>
+        
+            <div class="header-decor-wrapper">
+            <img src="./images/decor/sumie-corner.png" class="header-decor-img left" alt="">
+            <h2 class="section-title">Ваша песня для нас 🎶</h2>
+            <img src="./images/decor/sumie-corner.png" class="header-decor-img right" alt="">
+          </div>
         <p class="section-subtitle">Напишите трек, под который вы точно будете танцевать — мы передадим его ди-джею!</p>
         
         <form class="song-form" id="songForm" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLScR3kJysNpVjEpvTGaC6i-Tgi9PhVv2DL3Y7xU6Vj3sbYwueg/formResponse" method="POST" autocomplete="off">
@@ -709,6 +733,22 @@
             </div>
         </form>
         <div class="form-success" id="songSuccess">Спасибо! Ваша песня добавлена в плейлист 🎵</div>
+    </div>
+</section>
+
+<!-- ===== ЗАГЛЯНИТЕ В НАШ АЛЬБОМ ===== -->
+<section class="cta-gallery section">
+    <div class="section-overlay"></div>
+    <div class="section-content">
+        <div class="cta-container">
+            <h2 class="cta-title">Минутка ностальгии из Черногории</h2>
+            <p class="cta-text">
+                Пока вы ждёте официальный банкет, предлагаем подсмотреть, как все прошло в Черногории! 
+                В разделе <strong>«Фото и видео»</strong> уже ждут первые кадры и 
+                видео-зарисовки из путешествия. 
+            </p>
+            <a href="gallery.html" class="btn btn-primary cta-btn">Перейти в альбом →</a>
+        </div>
     </div>
 </section>
 

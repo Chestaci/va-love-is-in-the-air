@@ -1073,7 +1073,7 @@ img { max-width: 100%; height: auto; display: block; }
 /* ============================================
    ФУТЕР
    ============================================ */
-.footer { background: rgba(93,64,55,0.9); color: white; padding: 60px 30px; text-align: center; }
+.footer { background: #5C3A42; color: #fff; padding: 60px 30px; text-align: center; }
 .footer-content h3 { font-family: var(--heading); font-size: 36px; margin-bottom: 10px; }
 .footer-content p { font-size: 16px; opacity: 0.9; }
 .footer-love { font-family: var(--heading); font-style: italic; font-size: 20px; margin-top: 20px; }
@@ -1134,4 +1134,119 @@ html, body {
     padding: 60px 30px !important;
     box-sizing: border-box;
     z-index: 10;
+}
+
+/* ============================================
+   ЗАГОЛОВКИ С ДЕКОРОМ ПО БОКАМ
+   ============================================ */
+
+/* Контейнер, который держит всё вместе */
+.header-decor-wrapper {
+    display: flex;
+    justify-content: center; /* Центрируем по горизонтали */
+    align-items: center;     /* Центрируем по вертикали */
+    gap: 20px;               /* Расстояние между картинкой и текстом */
+    margin-bottom: 50px;     /* Отступ снизу до контента секции */
+    position: relative;
+    z-index: 5;
+     /* 🔑 ЗАПРЕЩАЕМ ПЕРЕНОС НА НОВУЮ СТРОКУ */
+    flex-wrap: nowrap;
+}
+
+.section-title {
+    white-space: nowrap;  /* ← Заголовок не переносится */
+    margin: 0;
+}
+
+/* Стили для самих картинок декора */
+.header-decor-img {
+    width: 300px;            /* Размер картинки (можно менять) */
+    height: auto;
+    opacity: 0.9;
+}
+
+/* Отражаем правую картинку зеркально (если она угловая) */
+.header-decor-img.right {
+    transform: scaleX(-1);
+}
+
+/* Адаптив для мобильных: декор остается, но компактнее */
+@media (max-width: 768px) {
+    .header-decor-wrapper {
+        gap: 8px;
+        margin-bottom: 40px;
+        flex-wrap: nowrap;
+    }
+    .header-decor-img {
+        width: 120px; /* Комфортный размер для планшетов и крупных телефонов */
+    }
+    .section-title {
+        font-size: 22px;
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-decor-wrapper {
+        gap: 5px; /* Уменьшаем расстояние между картинкой и текстом */
+        margin-bottom: 5px;
+    }
+    .header-decor-img {
+        width: 100px; /* ✅ Видимый размер даже на узких экранах (убрали display: none) */
+    }
+    .section-title {
+        font-size: 20px; /* Чуть уменьшаем шрифт заголовка, чтобы всё влезло в одну строку */
+    }
+}
+
+/* ===== CTA: ПЕРЕХОД В ГАЛЕРЕЮ ===== */
+.cta-gallery {
+    background: linear-gradient(135deg, var(--cream), var(--bg));
+    text-align: center;
+    padding: 80px 20px;
+    min-height: auto;
+}
+
+.cta-container {
+    max-width: 720px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.cta-title {
+    font-family: var(--heading);
+    font-size: clamp(26px, 5vw, 36px);
+    color: var(--text);
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.cta-text {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--text);
+    opacity: 0.9;
+    margin-bottom: 35px;
+}
+
+.cta-btn {
+    font-size: 17px;
+    padding: 16px 42px;
+}
+
+/* Лёгкая декоративная рамка */
+.cta-container::before {
+    content: '';
+    position: absolute;
+    top: -15px; left: -15px; right: -15px; bottom: -15px;
+    border: 1.5px dashed rgba(155,126,209,0.25);
+    border-radius: 24px;
+    z-index: -1;
+}
+
+@media (max-width: 768px) {
+    .cta-gallery { padding: 60px 15px; }
+    .cta-container::before { display: none; } /* На мобильных убираем рамку для чистоты */
+    .cta-text { font-size: 16px; }
 }
