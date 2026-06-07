@@ -203,7 +203,7 @@
                             Эти кольца стали нам помолвочными.</p>
                     </div>
                 </div>
-            </div>
+            
 
                  <!-- 5: Фото слева -->
                 <div class="story-item reveal-on-scroll">
@@ -240,6 +240,7 @@
                             Приходите разделить этот день с нами. Будем очень рады!</p>
                     </div>
                 </div>
+              </div>
             </div>
             
             <!-- Разделитель из глицинии -->
@@ -260,9 +261,24 @@
           </div>
             
             <div class="location-container">
-                <div class="location-frame">
-                    <img src="./images/location/location-map.png" alt="Карта" class="location-image">
-                </div>
+                <div class="location-video">
+    <video 
+        class="venue-video"
+        controls 
+        preload="metadata"
+        poster="./images/location/video-poster.jpg"
+        playsinline
+        muted
+    >
+        <source src="https://dachashalyapina.ru/wp-content/uploads/2024/11/social_with_subs.mp4" type="video/mp4">
+        Ваш браузер не поддерживает видео. <a href="https://dachashalyapina.ru/wp-content/uploads/2024/11/social_with_subs.mp4" target="_blank">Скачать видео</a>
+    </video>
+    
+    <!-- Кнопка открытия на весь экран (опционально) -->
+    <button class="video-fullscreen-btn" onclick="toggleFullscreen(this)">
+        <i class="fas fa-expand"></i>
+    </button>
+</div>
                 
                 <div class="location-info">
                     <h3>Санкт-Петербург</h3>
@@ -280,7 +296,9 @@
                         </div>
                     </div>
                     
-                    <a href="https://yandex.ru/maps" target="_blank" class="btn btn-primary">Открыть на карте</a>
+                    <a href="https://yandex.ru/maps/?text=Санкт-Петербург+проспект+Тореза+8" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+                        📍 Открыть на Яндекс.Картах
+                    </a>
                 </div>
             </div>
         </div>

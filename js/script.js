@@ -266,3 +266,35 @@ if (videoContainer && videoDots) {
     });
 
 });
+
+// ===== ПОЛНОЭКРАННОЕ ВИДЕО ОСОБНЯКА =====
+function toggleFullscreen(btn) {
+    const videoContainer = btn.closest('.location-video');
+    const video = videoContainer.querySelector('.venue-video');
+    
+    if (!document.fullscreenElement) {
+        // Войти в полноэкранный режим
+        if (videoContainer.requestFullscreen) {
+            videoContainer.requestFullscreen();
+        } else if (videoContainer.webkitRequestFullscreen) { /* Safari */
+            videoContainer.webkitRequestFullscreen();
+        } else if (videoContainer.msRequestFullscreen) { /* IE11 */
+            videoContainer.msRequestFullscreen();
+        }
+        btn.innerHTML = '<i class="fas fa-compress"></i>';
+    } else {
+        // Выйти из полноэкранного режима
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        }
+        btn.innerHTML = '<i class="fas fa-expand"></i>';
+    }
+}
+
+// Возвращаем иконку кнопки при выходе из фуллскрина (клавиша Esc)
+document.addEventListener('fullscreenchange', () => {
+    if (!document.fullscreenElement) {
+        const btn = document.querySelector('.video-fullscreen-btn');
+        if (btn) btn.innerHTML = '<i class="fas fa-expand"></i>';
+    }
+});
