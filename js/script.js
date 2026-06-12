@@ -79,6 +79,40 @@ if (alreadyOpened) {
     }
 }
 
+// ==========================================
+// УМЕНЬШЕНИЕ ПЕЧАТИ ТОЛЬКО НА МОБИЛЬНОМ (С !IMPORTANT)
+// ==========================================
+function resizeSealForMobile() {
+    if (window.innerWidth <= 768) {
+        const seal = document.getElementById('envelopeSeal');
+        if (seal) {
+            // Используем setProperty с !important для перебивания любого CSS
+            seal.style.setProperty('width', '45px', 'important');
+            seal.style.setProperty('height', '45px', 'important');
+            seal.style.setProperty('min-width', '45px', 'important');
+            seal.style.setProperty('min-height', '45px', 'important');
+            seal.style.setProperty('max-width', '45px', 'important');
+            seal.style.setProperty('max-height', '45px', 'important');
+
+            // 🔑 ПОДНИМАЕМ ПЕЧАТЬ ВЫШЕ (было 50%, ставим 42%)
+            seal.style.setProperty('top', '42%', 'important');
+            
+            const span = seal.querySelector('span');
+            if (span) {
+                span.style.setProperty('font-size', '11px', 'important');
+            }
+        }
+    }
+}
+
+// Запускаем сразу и при изменении размера
+window.addEventListener('load', resizeSealForMobile);
+window.addEventListener('resize', resizeSealForMobile);
+
+// Запускаем ещё раз через 500мс (на случай, если элемент загрузился позже)
+setTimeout(resizeSealForMobile, 500);
+setTimeout(resizeSealForMobile, 1000);
+
     // ==============================
     // ЗАТУХАНИЕ ФОНА ПРИ СКРОЛЛЕ
     // ==============================
@@ -315,3 +349,4 @@ if (window.innerWidth <= 768) {
         });
     });
 }
+

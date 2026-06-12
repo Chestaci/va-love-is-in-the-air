@@ -161,13 +161,41 @@ img { max-width: 100%; height: auto; display: block; }
 /* ============================================
    КОНВЕРТ
    ============================================ */
+/* ============================================
+   КОНВЕРТ (С ПОДМЕНОЙ ФОНА НА МОБИЛЬНОМ)
+   ============================================ */
 .envelope-overlay {
-    position: fixed; inset: 0;
-    background: url('../images/envelope/envelope-bg.png') center/cover;
-    z-index: 10000; display: flex; align-items: center; justify-content: center; flex-direction: column;
-    opacity: 1; visibility: visible; transition: opacity 1s, visibility 1s;
+    position: fixed;
+    inset: 0;
+    /* Десктопный фон */
+    background: url('../images/envelope/envelope-bg.png') center/cover no-repeat;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 1s, visibility 1s;
 }
-.envelope-overlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+
+.envelope-overlay.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* 🔑 МОБИЛЬНАЯ ВЕРСИЯ ФОНА КОНВЕРТА */
+@media (max-width: 768px) {
+    .envelope-overlay {
+        /* Подменяем на мобильную картинку */
+        background-image: url('../images/envelope/envelope-bg-mobile.png') !important;
+        
+        /* Центрируем, чтобы важное не обрезалось */
+        background-position: center center !important;
+        background-size: cover !important;
+    }
+}
 
 .envelope-wrapper { position: relative; cursor: pointer; animation: gentleFloat 4s ease-in-out infinite; }
 @keyframes gentleFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
@@ -209,6 +237,79 @@ img { max-width: 100%; height: auto; display: block; }
     cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 15px rgba(155,126,209,0.3);
 }
 .btn-continue:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(155,126,209,0.4); }
+
+/* ============================================
+   КОНВЕРТ — УВЕЛИЧЕННЫЙ НА МОБИЛЬНОМ
+   ============================================ */
+@media (max-width: 768px) {
+    /* Увеличиваем сам конверт */
+    .envelope-wrapper {
+        transform: scale(1.15); /* Увеличение на 15% */
+    }
+    
+    /* Увеличиваем изображения конверта */
+    .envelope-img {
+        width: 400px !important; /* Было 350px */
+        max-width: 85vw !important;
+    }
+    
+    /* Печать (сургучная печать) */
+    .envelope-seal {
+        width: 45px !important;       /* Делаем её заметно меньше (было 55px) */
+        height: 45px !important;
+        min-width: 45px !important;
+        min-height: 45px !important;
+    }
+    
+    .envelope-seal span {
+        font-size: 11px !important;   /* Уменьшаем буквы внутри */
+    }
+    
+    /* Увеличиваем карточку с приглашением */
+    .invitation-card {
+        max-width: 520px !important; /* Было 480px */
+        padding: 45px 35px !important; /* Было 40px 30px */
+    }
+    
+    .invitation-picture {
+        max-width: 440px !important; /* Было 400px */
+    }
+    
+    .btn-continue {
+        padding: 18px 50px !important; /* Было 16px 45px */
+        font-size: 18px !important;
+    }
+    
+    /* Увеличиваем подсказку */
+    .envelope-hint {
+        font-size: 16px !important; /* Было 15px */
+        margin-top: 40px !important;
+    }
+}
+
+/* Для очень маленьких экранов (меньше 480px) */
+@media (max-width: 480px) {
+    .envelope-wrapper {
+        transform: scale(1.1); /* Чуть меньше увеличение на маленьких экранах */
+    }
+    
+    .envelope-img {
+        width: 350px !important;
+        max-width: 90vw !important;
+    }
+    
+    .envelope-seal {
+        width: 60px !important;
+        height: 60px !important;
+        font-size: 13px !important;
+    }
+    
+    .invitation-card {
+        max-width: 450px !important;
+        padding: 40px 30px !important;
+    }
+}
+
 
 /* ============================================
    ГЛАВНЫЙ ЭКРАН
