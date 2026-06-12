@@ -299,3 +299,19 @@ document.addEventListener('fullscreenchange', () => {
     }
 });
 
+// ==========================================
+// ГАРАНТИРОВАННАЯ ПОДМЕНА ФОНОВ НА МОБИЛЬНОМ
+// ==========================================
+if (window.innerWidth <= 768) {
+    document.addEventListener('DOMContentLoaded', function() {
+        const bgElements = document.querySelectorAll('.section-bg-parallax[data-mobile-bg]');
+        
+        bgElements.forEach(el => {
+            const mobileUrl = el.getAttribute('data-mobile-bg');
+            if (mobileUrl) {
+                // Добавляем случайное число, чтобы убить кэш браузера
+                el.style.backgroundImage = `url('${mobileUrl}?v=${Date.now()}')`;
+            }
+        });
+    });
+}

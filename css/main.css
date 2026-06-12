@@ -1096,6 +1096,76 @@ img { max-width: 100%; height: auto; display: block; }
     background: rgba(255,255,255,0.9);
 }
 
+/* ============================================
+   ФОНОВЫЕ ИЗОБРАЖЕНИЯ (ФИНАЛЬНАЯ ВЕРСИЯ)
+   ============================================ */
+
+/* --- БАЗОВЫЕ НАСТРОЙКИ --- */
+.section {
+    position: relative;
+    overflow: hidden; /* КРИТИЧНО: без этого маска (плавный переход) не работает! */
+}
+
+.section-bg-parallax {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: 0;
+    
+    /* Плавное затухание сверху и снизу */
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+}
+
+.section-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(245, 240, 232, 0.35);
+    z-index: 1;
+}
+
+.section-content {
+    position: relative;
+    z-index: 2;
+}
+
+/* --- ДЕСКТОП --- */
+.section-bg-parallax {
+    background-attachment: fixed;
+    background-position: center;
+    opacity: 0.9;
+}
+
+.perast-bg { background-image: url('../images/perast-bg.jpg'); opacity: 0.75; }
+.bg-story { background-image: url('../images/bg-story.jpg'); }
+.bg-program { background-image: url('../images/bg-program.jpg'); }
+
+
+/* --- МОБИЛЬНАЯ ВЕРСИЯ --- */
+@media (max-width: 768px) {
+    .section-bg-parallax {
+        /* 🔑 ЗАСТАВЛЯЕМ ВСЕ ФОНЫ СТОЯТЬ НА МЕСТЕ (как первый) */
+        background-attachment: fixed !important;
+        
+        /* 🔑 ПРИЖИМАЕМ К ВЕРХУ, чтобы не съедать верхнюю часть картинки */
+        background-position: center top !important;
+        background-size: cover !important;
+        opacity: 0.85 !important;
+        
+        /* 🔑 УСИЛЕННЫЙ ПЛАВНЫЙ ПЕРЕХОД (с -webkit- для iPhone) */
+        -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%) !important;
+        mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%) !important;
+    }
+
+    /* 🔑 ПРИНУДИТЕЛЬНАЯ ПОДМЕНА НА МОБИЛЬНЫЕ КАРТИНКИ */
+    .perast-bg { background-image: url('../images/perast-bg-mobile.jpg') !important; }
+    .bg-story { background-image: url('../images/bg-story-mobile.jpg') !important; }
+    .bg-program { background-image: url('../images/bg-program-mobile.jpg') !important; }
+
+    .section-overlay { background: rgba(245, 240, 232, 0.25) !important; }
+}
+
 
 /* ============================================
    ФУТЕР
@@ -1470,103 +1540,4 @@ html, body {
     }
     .card-content h4 { font-size: 16px; }
     .card-content p { font-size: 13px; }
-}
-
-/* ============================================
-   📱 МОБИЛЬНАЯ ВЕРСИЯ — БЕЗ ИСЧЕЗНОВЕНИЙ И ОБРЕЗКИ
-   ============================================ */
-@media (max-width: 768px) {
-    .section-bg-parallax {
-        /* Отключаем fixed — он ломает рендер на iOS/Android */
-        background-attachment: scroll !important;
-        
-        /* Корректируем позицию, чтобы главное не уходило за экран */
-        background-position: center 20% !important;
-        background-size: 110% auto !important; /* Чуть шире, чтобы не обрезало по бокам */
-        
-        opacity: 0.85; /* На мобильном тоже хорошо видно */
-        
-        /* Убираем агрессивную маску — на узких экранах она "съедает" фон */
-        mask-image: linear-gradient(to bottom, transparent 3%, black 15%, black 85%, transparent 3%);
-        -webkit-mask-image: linear-gradient(to bottom, transparent 3%, black 15%, black 85%, transparent 3%);
-    }
-    
-    .perast-bg { opacity: 0.65; }
-    .section-overlay { background: rgba(245, 240, 232, 0.25); }
-}
-
-/* ============================================
-   ФОНОВЫЕ ИЗОБРАЖЕНИЯ — ФИНАЛЬНАЯ ВЕРСИЯ
-   ============================================ */
-.section {
-    position: relative;
-    overflow: hidden;
-}
-
-.section-bg-parallax {
-    position: absolute;
-    inset: 0;
-    background-size: cover;
-    background-position: center 30%;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    z-index: 0;
-    opacity: 0.9;
-    
-    /* ✅ ПЛАВНОЕ ЗАТУХАНИЕ КРАЁВ */
-    mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
-}
-
-/* ДЕСКТОПНЫЕ ФОНА */
-.perast-bg { 
-    background-image: url('../images/perast-bg.jpg'); 
-    opacity: 0.75; 
-}
-.bg-story { 
-    background-image: url('../images/bg-story.jpg'); 
-}
-.bg-program { 
-    background-image: url('../images/bg-program.jpg'); 
-}
-
-.section-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(245, 240, 232, 0.35);
-    z-index: 1;
-}
-
-.section-content {
-    position: relative;
-    z-index: 2;
-}
-
-/* ============================================
-   📱 МОБИЛЬНАЯ ВЕРСИЯ
-   ============================================ */
-@media (max-width: 768px) {
-    .section-bg-parallax {
-        background-attachment: scroll !important;
-        background-position: center 20% !important;
-        background-size: cover !important;
-        opacity: 0.85 !important;
-        mask-image: linear-gradient(to bottom, transparent 5%, black 20%, black 80%, transparent 5%) !important;
-        -webkit-mask-image: linear-gradient(to bottom, transparent 5%, black 20%, black 80%, transparent 5%) !important;
-    }
-    
-    .perast-bg { 
-        background-image: url('../images/perast-bg-mobile.jpg') !important; 
-        opacity: 0.65 !important; 
-    }
-    .bg-story { 
-        background-image: url('../images/bg-story-mobile.jpg') !important; 
-    }
-    .bg-program { 
-        background-image: url('../images/bg-program-mobile.jpg') !important; 
-    }
-    
-    .section-overlay { 
-        background: rgba(245, 240, 232, 0.25) !important; 
-    }
 }
