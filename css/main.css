@@ -374,6 +374,94 @@ img { max-width: 100%; height: auto; display: block; }
 /* ЧЕРЕДОВАНИЕ: чётные меняют порядок */
 .story-item:nth-child(even) { flex-direction: row-reverse; }
 
+
+/* ============================================
+   БЛОК "АТМОСФЕРА И НАПИТКИ" (В МЕСТЕ ПРОВЕДЕНИЯ)
+   ============================================ */
+.location-features {
+    max-width: 1150px;
+    margin: 60px auto 0;
+    text-align: center;
+}
+
+.features-title {
+    font-family: var(--heading);
+    font-size: 28px;
+    color: var(--text);
+    margin-bottom: 40px;
+    font-weight: 600;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 колонки на десктопе */
+    gap: 25px;
+}
+
+.feature-card {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(155, 126, 209, 0.15);
+    border-radius: 16px;
+    padding: 30px 25px;
+    text-align: left;
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 10px 30px rgba(155, 126, 209, 0.15);
+}
+
+.feature-icon {
+    font-size: 32px;
+    margin-bottom: 15px;
+    line-height: 1;
+}
+
+.feature-card h4 {
+    font-family: var(--heading);
+    font-size: 20px;
+    color: var(--primary);
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.feature-card p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text);
+    opacity: 0.9;
+    margin: 0;
+}
+
+/* Адаптив для мобильных */
+@media (max-width: 768px) {
+    .location-features {
+        margin-top: 40px;
+    }
+    
+    .features-title {
+        font-size: 24px;
+        margin-bottom: 30px;
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr; /* 1 колонка на телефоне */
+        gap: 20px;
+    }
+    
+    .feature-card {
+        padding: 25px 20px;
+    }
+    
+    .feature-card h4 {
+        font-size: 18px;
+    }
+}
+
+
 /* ============================================
    ПРОГРАММА ВЕЧЕРА
    ============================================ */
