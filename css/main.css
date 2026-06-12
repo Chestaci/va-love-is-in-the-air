@@ -59,9 +59,12 @@ img { max-width: 100%; height: auto; display: block; }
 .section-content { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; }
 
 .hero {
-    position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center;
-    background-image: url('../images/perast-bg.png');
-    background-size: cover; background-position: center; background-attachment: fixed;
+    position: relative; 
+    min-height: 100vh; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    /* ✅ УБРАЛИ background-image — теперь фон берётся из .perast-bg */
     transition: opacity 0.8s ease;
 }
 .hero.bg-faded { opacity: 0.25; }
@@ -1333,5 +1336,237 @@ html, body {
         font-size: 14px;
         bottom: 10px;
         right: 10px;
+    }
+}
+/* ============================================
+   МЕСТО ПРОВЕДЕНИЯ
+   ============================================ */
+.location-section {
+    padding: 80px 0 100px;
+    background: linear-gradient(180deg, var(--bg) 0%, var(--cream) 100%);
+}
+
+.location-wrapper {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr; /* Видео чуть шире, инфо компактнее */
+    gap: 40px;
+    max-width: 1150px;
+    margin: 50px auto 0;
+    align-items: center; /* Центрируем блок инфо по вертикали */
+}
+
+/* 🎬 Видео */
+.location-video {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 12px 40px rgba(93,64,55,0.12);
+    background: #fff;
+}
+
+.venue-video {
+    width: 100%;
+    display: block;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+}
+
+.video-caption {
+    padding: 12px 16px;
+    text-align: center;
+    font-family: var(--heading);
+    font-size: 14px;
+    color: var(--text);
+    background: rgba(255,255,255,0.9);
+    margin: 0;
+}
+
+/* 📍 Информационные блоки */
+.location-info {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.location-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px 20px;
+    
+    /*  Элегантный стиль вместо больших белых блоков */
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(155, 126, 209, 0.15);
+    border-left: 3px solid var(--secondary); /* Декоративный акцент */
+    border-radius: 14px;
+    transition: all 0.3s ease;
+}
+
+.location-card:hover {
+    background: rgba(255, 255, 255, 0.75);
+    transform: translateX(4px);
+    box-shadow: 0 6px 20px rgba(155, 126, 209, 0.12);
+}
+
+.card-icon {
+    font-size: 22px;
+    line-height: 1.2;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.card-content h4 {
+    font-family: var(--heading);
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--primary);
+    margin: 0 0 5px;
+}
+
+.card-content p {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--text);
+    margin: 0 0 6px;
+}
+
+.card-content strong {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+/* Кнопка карты */
+.map-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary);
+    text-decoration: none;
+    padding: 7px 14px;
+    background: rgba(155, 126, 209, 0.1);
+    border-radius: 18px;
+    transition: all 0.3s ease;
+}
+
+.map-link:hover {
+    background: var(--primary);
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+/* 📱 Адаптив */
+@media (max-width: 850px) {
+    .location-wrapper {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    .location-video { order: -1; } /* На телефоне видео сверху */
+    
+    .location-card {
+        padding: 14px 16px;
+        border-left-width: 2px;
+    }
+    .card-content h4 { font-size: 16px; }
+    .card-content p { font-size: 13px; }
+}
+
+/* ============================================
+   📱 МОБИЛЬНАЯ ВЕРСИЯ — БЕЗ ИСЧЕЗНОВЕНИЙ И ОБРЕЗКИ
+   ============================================ */
+@media (max-width: 768px) {
+    .section-bg-parallax {
+        /* Отключаем fixed — он ломает рендер на iOS/Android */
+        background-attachment: scroll !important;
+        
+        /* Корректируем позицию, чтобы главное не уходило за экран */
+        background-position: center 20% !important;
+        background-size: 110% auto !important; /* Чуть шире, чтобы не обрезало по бокам */
+        
+        opacity: 0.85; /* На мобильном тоже хорошо видно */
+        
+        /* Убираем агрессивную маску — на узких экранах она "съедает" фон */
+        mask-image: linear-gradient(to bottom, transparent 3%, black 15%, black 85%, transparent 3%);
+        -webkit-mask-image: linear-gradient(to bottom, transparent 3%, black 15%, black 85%, transparent 3%);
+    }
+    
+    .perast-bg { opacity: 0.65; }
+    .section-overlay { background: rgba(245, 240, 232, 0.25); }
+}
+
+/* ============================================
+   ФОНОВЫЕ ИЗОБРАЖЕНИЯ — ФИНАЛЬНАЯ ВЕРСИЯ
+   ============================================ */
+.section {
+    position: relative;
+    overflow: hidden;
+}
+
+.section-bg-parallax {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center 30%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    z-index: 0;
+    opacity: 0.9;
+    
+    /* ✅ ПЛАВНОЕ ЗАТУХАНИЕ КРАЁВ */
+    mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+}
+
+/* ДЕСКТОПНЫЕ ФОНА */
+.perast-bg { 
+    background-image: url('../images/perast-bg.jpg'); 
+    opacity: 0.75; 
+}
+.bg-story { 
+    background-image: url('../images/bg-story.jpg'); 
+}
+.bg-program { 
+    background-image: url('../images/bg-program.jpg'); 
+}
+
+.section-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(245, 240, 232, 0.35);
+    z-index: 1;
+}
+
+.section-content {
+    position: relative;
+    z-index: 2;
+}
+
+/* ============================================
+   📱 МОБИЛЬНАЯ ВЕРСИЯ
+   ============================================ */
+@media (max-width: 768px) {
+    .section-bg-parallax {
+        background-attachment: scroll !important;
+        background-position: center 20% !important;
+        background-size: cover !important;
+        opacity: 0.85 !important;
+        mask-image: linear-gradient(to bottom, transparent 5%, black 20%, black 80%, transparent 5%) !important;
+        -webkit-mask-image: linear-gradient(to bottom, transparent 5%, black 20%, black 80%, transparent 5%) !important;
+    }
+    
+    .perast-bg { 
+        background-image: url('../images/perast-bg-mobile.jpg') !important; 
+        opacity: 0.65 !important; 
+    }
+    .bg-story { 
+        background-image: url('../images/bg-story-mobile.jpg') !important; 
+    }
+    .bg-program { 
+        background-image: url('../images/bg-program-mobile.jpg') !important; 
+    }
+    
+    .section-overlay { 
+        background: rgba(245, 240, 232, 0.25) !important; 
     }
 }

@@ -298,3 +298,4 @@ document.addEventListener('fullscreenchange', () => {
         if (btn) btn.innerHTML = '<i class="fas fa-expand"></i>';
     }
 });
+
