@@ -596,6 +596,32 @@ img { max-width: 100%; height: auto; display: block; }
 .detail-item p { font-size: 14px; opacity: 0.85; }
 
 
+/* ============================================
+   ПОДЗАГОЛОВОК "ПРОГРАММА ВЕЧЕРА" — УВЕЛИЧЕННЫЙ И ПО ЦЕНТРУ
+   ============================================ */
+.program-subtitle {
+    text-align: center !important;
+    font-family: var(--heading) !important;
+    font-size: 20px !important; /* Было меньше, теперь крупнее */
+    font-style: italic !important;
+    color: var(--text) !important;
+    opacity: 0.8 !important;
+    margin: -50px auto 40px !important;
+    max-width: 700px;
+    line-height: 1.5 !important;
+}
+
+/* Мобильная версия */
+@media (max-width: 768px) {
+    .program-subtitle {
+        font-size: 14px !important;
+        margin: -50px auto 30px !important;
+        padding: 0 20px !important;
+    }
+}
+
+
+
 /* Игра */
 .game-container { display:flex; flex-direction:column; align-items:center; gap:10px; position:relative; }
 #gameCanvas { background:#ffeef2; border-radius:12px; max-width:100%; touch-action: none; }
@@ -1150,14 +1176,6 @@ img { max-width: 100%; height: auto; display: block; }
 
 
 /* ============================================
-   ФУТЕР
-   ============================================ */
-.footer { background: #5C3A42; color: #fff; padding: 60px 30px; text-align: center; }
-.footer-content h3 { font-family: var(--heading); font-size: 36px; margin-bottom: 10px; }
-.footer-content p { font-size: 16px; opacity: 0.9; }
-.footer-love { font-family: var(--heading); font-style: italic; font-size: 20px; margin-top: 20px; }
-
-/* ============================================
    АНИМАЦИИ
    ============================================ */
 .fade-in { opacity: 0; transform: translateY(30px); animation: fadeInUp 0.8s ease-out forwards; }
@@ -1199,20 +1217,6 @@ html, body {
     margin: 0 !important;
     padding: 0 !important;
     overflow-x: hidden !important;
-}
-
-/* ✅ Принудительно растягиваем футер на весь viewport */
-.footer {
-    width: 100vw !important;
-    position: relative !important;
-    left: 50% !important;
-    right: 50% !important;
-    margin-left: -50vw !important;
-    margin-right: -50vw !important;
-    max-width: none !important;
-    padding: 60px 30px !important;
-    box-sizing: border-box;
-    z-index: 10;
 }
 
 /* ===== CTA: ПЕРЕХОД В ГАЛЕРЕЮ ===== */
@@ -1460,3 +1464,53 @@ html, body {
     .card-content h4 { font-size: 16px; }
     .card-content p { font-size: 13px; }
 }
+
+/* ============================================
+   ФУТЕР
+   ============================================ */
+.footer { 
+    background: #5C3A42; 
+    color: #fff; 
+    padding: 25px 20px !important; /* Было 60px 30px */
+    text-align: center; 
+}
+
+.footer-content h3 { 
+    font-family: var(--heading); 
+    font-size: 25px !important; /* Было 36px */
+    margin-bottom: 5px !important; 
+}
+
+.footer-content p { 
+    font-size: 19px !important; /* Было 16px */
+    opacity: 0.9;
+    margin: 3px 0 !important;
+    line-height: 1.4 !important;
+}
+
+.footer-love { 
+    font-family: var(--heading); 
+    font-style: italic; 
+    font-size: 25px !important; /* Было 20px */
+    margin: 10px 0 !important; 
+}
+
+/* Мобильная версия — ещё компактнее */
+@media (max-width: 768px) {
+    .footer {
+        padding: 20px 15px !important;
+    }
+    
+    .footer-content h3 {
+        font-size: 18px !important;
+    }
+    
+    .footer-content p {
+        font-size: 11px !important;
+    }
+    
+    .footer-love {
+        font-size: 12px !important;
+    }
+}
+
