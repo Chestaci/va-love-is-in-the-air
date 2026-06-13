@@ -73,7 +73,6 @@ img { max-width: 100%; height: auto; display: block; }
    ДЕКОР: СУМИ-Э ГЛИЦИНИЯ (НОВЫЕ!)
    ============================================ */
 
-
 /* Разделитель между секциями */
 .wisteria-divider {
     display: block;
@@ -99,9 +98,6 @@ img { max-width: 100%; height: auto; display: block; }
 .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(155,126,209,0.4); }
 .btn-submit { width: 100%; font-size: 17px; padding: 17px; }
 
-/* ============================================
-   КОНВЕРТ
-   ============================================ */
 /* ============================================
    КОНВЕРТ (С ПОДМЕНОЙ ФОНА НА МОБИЛЬНОМ)
    ============================================ */
@@ -1094,6 +1090,36 @@ img { max-width: 100%; height: auto; display: block; }
 .perast-bg { background-image: url('../images/perast-bg.jpg'); opacity: 0.75; }
 .bg-story { background-image: url('../images/bg-story.jpg'); }
 .bg-program { background-image: url('../images/bg-program.jpg'); }
+/* ✅ ОДИН ФОН НА ТРИ СЕКЦИИ */
+.bg-footer { background-image: url('../images/bg-footer.jpg'); }
+
+/* ============================================
+   НЕПРЕРЫВНЫЙ ФОН ДЛЯ ПОСЛЕДНИХ ТРЁХ СЕКЦИЙ
+   ============================================ */
+
+/* Убираем маску (затухание) для всех трёх секций */
+.bg-footer {
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+}
+
+/* Добавляем плавный переход ТОЛЬКО сверху у первой секции (RSVP) */
+#rsvp .bg-footer {
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%) !important;
+    mask-image: linear-gradient(to bottom, transparent 0%, black 15%) !important;
+}
+
+/* Добавляем плавный переход ТОЛЬКО снизу у последней секции (CTA) */
+.cta-gallery .bg-footer {
+    -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%) !important;
+    mask-image: linear-gradient(to bottom, black 85%, transparent 100%) !important;
+}
+
+/* Средняя секция (Песня) - вообще без маски */
+#songRequest .bg-footer {
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+}
 
 
 /* --- МОБИЛЬНАЯ ВЕРСИЯ --- */
@@ -1116,6 +1142,8 @@ img { max-width: 100%; height: auto; display: block; }
     .perast-bg { background-image: url('../images/perast-bg-mobile.jpg') !important; }
     .bg-story { background-image: url('../images/bg-story-mobile.jpg') !important; }
     .bg-program { background-image: url('../images/bg-program-mobile.jpg') !important; }
+    /* ✅ МОБИЛЬНАЯ ВЕРСИЯ */
+    .bg-footer { background-image: url('../images/bg-footer-mobile.jpg') !important; }
 
     .section-overlay { background: rgba(245, 240, 232, 0.25) !important; }
 }
