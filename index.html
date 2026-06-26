@@ -473,7 +473,13 @@
             </div>
             
             <div class="gifts-image">
-                <img src="./images/gifts/bouquet.jpg" alt="Красивый букет" class="bouquet-photo">
+                <!-- ===== <img src="./images/gifts/bouquet.jpg" alt="Красивый букет" class="bouquet-photo">===== -->
+                <img src="images/gifts/bouquet.png" alt="Красивый букет" class="wc-bouquet-bg">
+                <img src="images\gifts\bouquet_bubble_1.png" alt="bouquet_bubble_1" data-name="пузырёк1" data-code="#2D6A5A" class="wc-bouquet-bubble" style="top: 20%; left: 40%; width: 33%;">
+                <img src="images\gifts\bouquet_bubble_2.png" alt="bouquet_bubble_2" data-name="Изумруд" data-code="#2D6A5A" class="wc-bouquet-bubble" style="top: 35%; left: 60%; width: 33%;">
+                <img src="images\gifts\bouquet_bubble_3.png" alt="bouquet_bubble_3" data-name="Изумруд" data-code="#2D6A5A" class="wc-bouquet-bubble" style="top: 50%; left: 40%; width: 33%;">
+                <img src="images\gifts\bouquet_bubble_4.png" alt="bouquet_bubble_4" data-name="Изумруд" data-code="#2D6A5A" class="wc-bouquet-bubble" style="top: 65%; left: 60%; width: 33%;">
+                <img src="images\gifts\bouquet_bubble_5.png" alt="bouquet_bubble_5" data-name="Изумруд" data-code="#2D6A5A" class="wc-bouquet-bubble" style="top: 80%; left: 40%; width: 33%;">
             </div>
         </div>
     </div>
@@ -720,5 +726,26 @@
     <script src="js/script.js"></script>
     <script src="js/game.js"></script>
     <script src="js/forms.js"></script>
+    <script>
+(function() {
+  const wcCircles = document.querySelectorAll('.wc-circle');
+  
+  wcCircles.forEach(function(circle) {
+    circle.addEventListener('click', function(e) {
+      wcCircles.forEach(function(c) {
+        if (c !== this) c.classList.remove('active');
+      }, this);
+      this.classList.toggle('active');
+      e.stopPropagation();
+    });
+  });
+  
+  document.addEventListener('click', function() {
+    wcCircles.forEach(function(c) {
+      c.classList.remove('active');
+    });
+  });
+})();
+</script>
 </body>
 </html>
