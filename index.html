@@ -475,11 +475,32 @@
             <div class="gifts-image">
                 <!-- ===== <img src="./images/gifts/bouquet.jpg" alt="Красивый букет" class="bouquet-photo">===== -->
                 <img src="images/gifts/bouquet.png" alt="Красивый букет" class="wc-bouquet-bg">
-                <img src="images\gifts\bouquet_bubble_1.png" alt="bouquet_bubble_1" data-name="пузырёк1" data-code="#2D6A5A" class="wc-bouquet-bubble" style="top: 20%; left: 40%; width: 33%;">
+
+                <div data-name="Изумруд | Зеленый" data-code="#2D6A5A" class="wc-bouquet-bubble" style="top: 20%; left: 40%; width: 33%; --c:#2D6A5A; --text:#FFFFFF;">
+                    <img src="images\gifts\bouquet_bubble_1.png" alt="bouquet_bubble_1">
+                </div>
+                
+                <div data-name="Олива" data-code="#6B7542" class="wc-bouquet-bubble" style="top: 35%; left: 60%; width: 33%; --c:#6B7542; --text:#FFFFFF;">
+                    <img src="images\gifts\bouquet_bubble_2.png" alt="bouquet_bubble_2">
+                </div>
+
+                <div data-name="Пудровый розовый" data-code="#E3B8B8" class="wc-bouquet-bubble" style="top: 50%; left: 40%; width: 33%; --c:#E3B8B8; --text:#2A1F1F;">
+                    <img src="images\gifts\bouquet_bubble_3.png" alt="bouquet_bubble_3">
+                </div>
+
+                <div data-name="Сиреневый" data-code="#B57EDC" class="wc-bouquet-bubble" style="top: 65%; left: 60%; width: 33%; --c:#C8A2C8; --text:#FFFFFF;">
+                    <img src="images\gifts\bouquet_bubble_4.png" alt="bouquet_bubble_4">
+                </div>
+
+                <div data-name="Фиолетовый" data-code="#6B4E8B" class="wc-bouquet-bubble" style="top: 80%; left: 40%; width: 33%; --c:#6B4E8B; --text:#FFFFFF;">
+                    <img src="images\gifts\bouquet_bubble_5.png" alt="bouquet_bubble_5">
+                </div>
+
+                <!--<img src="images\gifts\bouquet_bubble_1.png" alt="bouquet_bubble_1" data-name="пузырёк1" data-code="#2D6A5A" class="wc-bouquet-bubble" style="top: 20%; left: 40%; width: 33%;">
                 <img src="images\gifts\bouquet_bubble_2.png" alt="bouquet_bubble_2" data-name="Изумруд" data-code="#2D6A5A" class="wc-bouquet-bubble" style="top: 35%; left: 60%; width: 33%;">
                 <img src="images\gifts\bouquet_bubble_3.png" alt="bouquet_bubble_3" data-name="Изумруд" data-code="#2D6A5A" class="wc-bouquet-bubble" style="top: 50%; left: 40%; width: 33%;">
                 <img src="images\gifts\bouquet_bubble_4.png" alt="bouquet_bubble_4" data-name="Изумруд" data-code="#2D6A5A" class="wc-bouquet-bubble" style="top: 65%; left: 60%; width: 33%;">
-                <img src="images\gifts\bouquet_bubble_5.png" alt="bouquet_bubble_5" data-name="Изумруд" data-code="#2D6A5A" class="wc-bouquet-bubble" style="top: 80%; left: 40%; width: 33%;">
+                <img src="images\gifts\bouquet_bubble_5.png" alt="bouquet_bubble_5" data-name="Изумруд" data-code="#2D6A5A" class="wc-bouquet-bubble" style="top: 80%; left: 40%; width: 33%;">===== -->
             </div>
         </div>
     </div>
@@ -728,11 +749,11 @@
     <script src="js/forms.js"></script>
     <script>
 (function() {
-  const wcCircles = document.querySelectorAll('.wc-circle');
+  const wcBubble = document.querySelectorAll('.wc-bouquet-bubble');
   
-  wcCircles.forEach(function(circle) {
+  wcBubble.forEach(function(circle) {
     circle.addEventListener('click', function(e) {
-      wcCircles.forEach(function(c) {
+      wcBubble.forEach(function(c) {
         if (c !== this) c.classList.remove('active');
       }, this);
       this.classList.toggle('active');
@@ -741,7 +762,7 @@
   });
   
   document.addEventListener('click', function() {
-    wcCircles.forEach(function(c) {
+    wcBubble.forEach(function(c) {
       c.classList.remove('active');
     });
   });

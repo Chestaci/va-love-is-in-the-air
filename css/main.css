@@ -888,12 +888,15 @@ img { max-width: 100%; height: auto; display: block; }
   width: 100%;
   max-width: 600px; /* Подберите под ваш дизайн */
   margin: 0 auto;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .wc-bouquet-bg {
   width: 100%;
   height: auto;
   display: block;
+  -webkit-user-drag: none;
 }
 
 .wc-bouquet-bubble {
@@ -907,6 +910,9 @@ img { max-width: 100%; height: auto; display: block; }
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
   /* Центрируем кружок по его координатам */
   transform: translate(-50%, -50%);
+  user-select: none;
+  will-change: transform;
+  -webkit-user-drag: none;
 }
 
 .wc-bouquet-bubble:hover,
@@ -922,12 +928,14 @@ img { max-width: 100%; height: auto; display: block; }
   white-space: pre;
   
   position: absolute;
-  top: 100%;
+  top: calc(100% - 20px);
   left: 50%;
   transform: translate(-50%, 20%);
   
-  background: rgba(255, 255, 255, 0.97);
-  color: #3a3a3a;
+  /*background: rgba(255, 255, 255, 0.507);*/
+  background: var(--c, rgba(255, 255, 255, 0.507));
+  /*color: #3a3a3a;*/
+  color: var(--text,#222);
   padding: 10px 18px;
   border-radius: 8px;
   font-size: 15px;
@@ -952,13 +960,13 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 /* Мобильная адаптация */
-@media (max-width: 600px) {
+/*@media (max-width: 600px) {
   .wc-bouquet-bubble::after {
     font-size: 13px;
     padding: 8px 14px;
     min-width: 110px;
   }
-}
+}*/
 /* ===== КОНЕЦ ПАЛИТРЫ ===== */
 
 
@@ -978,6 +986,11 @@ img { max-width: 100%; height: auto; display: block; }
     }
     .bouquet-photo {
         max-width: 85%;
+    }
+    .wc-bouquet-bubble::after {
+        font-size: 13px;
+        padding: 8px 14px;
+        min-width: 110px;
     }
 }
 
