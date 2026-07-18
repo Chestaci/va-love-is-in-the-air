@@ -164,7 +164,6 @@ setTimeout(resizeSealForMobile, 1000);
         revealObserver.observe(el);
     });
 
-
 // ==========================================
 // ПАРАЛЛАКС: АВТО-ИНИЦИАЛИЗАЦИЯ ВСЕХ ГАЛЕРЕЙ
 // ==========================================
@@ -350,3 +349,49 @@ if (window.innerWidth <= 768) {
     });
 }
 
+// ==========================================
+// 🔥 ТАЙМЕР ОБРАТНОГО ОТСЧЕТА (ЧИСТЫЙ КОД)
+// ==========================================
+function initCountdown() {
+    const targetDate = new Date('September 12, 2026 00:00:00').getTime();
+    
+    const daysEl = document.getElementById('days');
+    const hoursEl = document.getElementById('hours');
+    const minutesEl = document.getElementById('minutes');
+    const secondsEl = document.getElementById('seconds');
+    
+    if (!daysEl || !hoursEl || !minutesEl || !secondsEl) {
+        console.warn('⚠️ Элементы таймера не найдены в HTML');
+        return;
+    }
+    
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+        
+        if (distance > 0) {
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            daysEl.textContent = String(days).padStart(2, '0');
+            hoursEl.textContent = String(hours).padStart(2, '0');
+            minutesEl.textContent = String(minutes).padStart(2, '0');
+            secondsEl.textContent = String(seconds).padStart(2, '0');
+        } else {
+            daysEl.textContent = '00';
+            hoursEl.textContent = '00';
+            minutesEl.textContent = '00';
+            secondsEl.textContent = '00';
+        }
+    }
+    
+    // Запускаем сразу и обновляем каждую секунду
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+    console.log('✅ Таймер обратного отсчёта успешно запущен!');
+}
+
+// Вызываем функцию сразу, так как DOM уже точно загружен
+initCountdown();
