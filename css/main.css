@@ -2,11 +2,14 @@
    ПЕРЕМЕННЫЕ
    ============================================ */
 :root {
-    --bg: #F5F0E8;
-    --text: #49352f;
-    --primary: #340a83;
-    --secondary: #c2ace7;
-    --cream: #F9F5F0;
+    --bg: #F5F0E8;             /* Тёплый кремово-белый */
+    --text: #5D4037;           /* Тёплый коричневый (вместо тёмного) */
+    --primary: #422b5c;        /* Приглушённый фиолетово-сливовый */
+    --secondary: #B57EDC;      /* Сиреневый (акцент) */
+    --cream: #FDF8F5;          /* Пудровый кремовый */
+    --olive: #6B7542;          /* Оливковый (новый) */
+    --pink: #E3B8B8;           /* Пудровый розовый (новый) */
+    --green: #2D6A5A;          /* Изумрудный (новый) */
     --heading: 'Playfair Display', serif;
     --body: 'Lato', sans-serif;
 }
@@ -55,7 +58,7 @@ img { max-width: 100%; height: auto; display: block; }
    СЕКЦИИ & ФОН
    ============================================ */
 .section { position: relative; min-height: 100vh; padding: 140px 30px 80px; }
-.section-overlay { position: absolute; inset: 0; background: rgba(245, 240, 232, 0.85); z-index: 0; }
+.section-overlay { position: absolute; inset: 0; background: rgba(245, 240, 232, 0.3); z-index: 0; }
 .section-content { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; }
 
 .hero {
@@ -90,12 +93,13 @@ img { max-width: 100%; height: auto; display: block; }
 
 .btn {
     display: inline-block; padding: 15px 40px;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    color: white; text-decoration: none; border-radius: 30px;
+    background: linear-gradient(135deg, rgba(36, 44, 2, 0.5), rgba(227, 184, 184, 0.55));
+    box-shadow: 0 4px 15px rgba(227, 184, 184, 0.3);
+    color: var(--text); text-decoration: none; border-radius: 30px;
     font-family: var(--heading); font-size: 16px; border: none; cursor: pointer;
     transition: all 0.3s; box-shadow: 0 4px 15px rgba(155,126,209,0.3);
 }
-.btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(155,126,209,0.4); }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(107, 78, 113, 0.4); }
 .btn-submit { width: 100%; font-size: 17px; padding: 17px; }
 
 /* ============================================
@@ -169,8 +173,8 @@ img { max-width: 100%; height: auto; display: block; }
 .invitation-card.show { opacity: 1; visibility: visible; transform: translate(-50%, -60%) scale(1); }
 .invitation-picture { max-width: 400px; width: 100%; border-radius: 8px; margin: 0 auto 25px; }
 .btn-continue {
-    padding: 16px 45px; background: linear-gradient(135deg, var(--primary), var(--secondary));
-    color: white; border: none; border-radius: 30px; font-family: var(--heading); font-size: 17px;
+    padding: 16px 45px; background: linear-gradient(135deg, rgba(36, 44, 2, 0.5), rgba(227, 184, 184, 0.55));
+    color: var(--primary); border: none; border-radius: 30px; font-family: var(--heading); font-size: 17px;
     cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 15px rgba(155,126,209,0.3);
 }
 .btn-continue:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(155,126,209,0.4); }
@@ -274,10 +278,11 @@ img { max-width: 100%; height: auto; display: block; }
     bottom: -60px !important; 
     width: 3px;
     background: linear-gradient(to bottom, 
-        rgba(155,126,209,0.1) 0%, 
-        rgba(155,126,209,0.8) 15%, 
-        rgba(155,126,209,0.8) 85%, 
-        rgba(155,126,209,0.1) 100%);
+        rgba(107, 117, 66, 0.1) 0%,    /* Оливковый светлый */
+        rgba(107, 78, 113, 0.6) 15%,   /* Фиолетовый */
+        rgba(181, 126, 220, 0.6) 85%,  /* Сиреневый */
+        rgba(227, 184, 184, 0.1) 100%  /* Пудровый */
+    );
     transform: translateX(-50%);
     z-index: 1;
     border-radius: 2px;
@@ -346,7 +351,7 @@ img { max-width: 100%; height: auto; display: block; }
 /* ФОТО В КРУГЕ */
 .story-image .image-wrapper {
     width: 320px; height: 320px; border-radius: 50%; overflow: hidden;
-    border: 8px solid white; box-shadow: 0 15px 50px rgba(93,64,55,0.2);
+    border: 8px solid rgba(22, 11, 43, 0.589); box-shadow: 0 15px 50px rgba(93,64,55,0.2);
     background: var(--cream); margin: 0 auto;
 }
 .story-image img {
@@ -356,11 +361,11 @@ img { max-width: 100%; height: auto; display: block; }
 .story-image:hover img { transform: scale(1.08); }
 
 .story-content {
-    padding: 35px; background: rgba(255,255,255,0.85); border-radius: 16px;
+    padding: 35px; border-radius: 16px;
     backdrop-filter: blur(10px); box-shadow: 0 10px 40px rgba(93,64,55,0.1);
 }
 .story-date {
-    font-family: var(--heading); font-size: 28px; color: var(--primary);
+    font-family: var(--heading); font-size: 28px; color: #6B4E71;  /* Приглушённый фиолетовый */ border-bottom: 2px solid #E3B8B8;  /* Пудровый */
     font-weight: 700; margin-bottom: 15px; display: inline-block;
     padding-bottom: 10px; border-bottom: 2px solid var(--secondary);
 }
@@ -370,6 +375,13 @@ img { max-width: 100%; height: auto; display: block; }
 /* ЧЕРЕДОВАНИЕ: чётные меняют порядок */
 .story-item:nth-child(even) { flex-direction: row-reverse; }
 
+/* ============================================
+   МЕСТО
+   ============================================ */
+.location-info h3 { font-family: var(--heading); font-size: 32px; margin-bottom: 10px; }
+.detail-item:hover { transform: translateX(5px); }
+.detail-item h4 { font-family: var(--heading); font-size: 17px; margin-bottom: 5px; }
+.detail-item p { font-size: 14px; opacity: 0.85; }
 
 /* ============================================
    БЛОК "АТМОСФЕРА И НАПИТКИ" (В МЕСТЕ ПРОВЕДЕНИЯ)
@@ -395,19 +407,16 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 .feature-card {
-    background: rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(155, 126, 209, 0.15);
+    background: linear-gradient(135deg, rgba(36, 44, 2, 0.5), rgba(227, 184, 184, 0.55));
     border-radius: 16px;
     padding: 30px 25px;
     text-align: left;
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .feature-card:hover {
     transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 10px 30px rgba(155, 126, 209, 0.15);
 }
 
 .feature-icon {
@@ -485,14 +494,14 @@ img { max-width: 100%; height: auto; display: block; }
 
 .timeline-item::before {
     content: ''; position: absolute; left: -48px; top: 25px;
-    width: 18px; height: 18px; background: linear-gradient(135deg, var(--primary), var(--secondary));
-    border-radius: 50%; border: 4px solid var(--bg); box-shadow: 0 0 0 4px rgba(155,126,209,0.3);
+    width: 18px; height: 18px; background: linear-gradient(135deg, #6B7542, #E3B8B8);
+    border-radius: 50%; border: 4px solid var(--bg); box-shadow: 0 0 0 4px rgba(107, 117, 66, 0.2);
     z-index: 2; animation: pulseDot 2s ease-in-out infinite;
 }
 @keyframes pulseDot { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.2); opacity: 0.8; } }
 
 .event-wrapper {
-    display: flex; align-items: flex-start; gap: 25px; background: rgba(255,255,255,0.8);
+    display: flex; align-items: flex-start; gap: 25px;
     padding: 30px; border-radius: 14px; backdrop-filter: blur(10px);
     box-shadow: 0 8px 30px rgba(93,64,55,0.1); transition: transform 0.3s, box-shadow 0.3s;
 }
@@ -501,92 +510,6 @@ img { max-width: 100%; height: auto; display: block; }
 .event-content h3 { font-family: var(--heading); font-size: 22px; margin-bottom: 10px; }
 .event-content p { font-size: 15px; opacity: 0.85; line-height: 1.7; }
 
-
-/* ============================================
-   ПАРАЛЛАКС-ГАЛЕРЕЯ
-   ============================================ */
-
-.parallax-gallery-section {
-    position: relative;
-    overflow: hidden;
-    padding: 60px 0 100px;
-    min-height: auto;
-    background: var(--bg);
-}
-
-.parallax-gallery {
-    position: relative;
-    width: 100%;
-    max-width: 1600px;
-    margin: 0 auto;
-    padding: 20px 0;
-    /* ✅ Мягкие края: фото плавно растворяются слева и справа */
-    mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
-}
-
-.parallax-layer {
-    display: flex;
-    gap: 16px;
-    padding: 4px 0;
-    position: relative;
-    will-change: transform;
-    flex-wrap: nowrap;
-    overflow: visible;
-}
-
-.parallax-img {
-    flex-shrink: 0;
-    width: auto;
-    height: 280px;
-    object-fit: cover;
-    object-position: center;
-    border-radius: 12px;
-    box-shadow: 0 6px 25px rgba(93,64,55,0.15);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.parallax-img:hover {
-    transform: scale(1.03);
-    box-shadow: 0 10px 35px rgba(93,64,55,0.25);
-}
-
-/* Визуальный ритм для десктопа */
-.layer-1 .parallax-img { height: 280px; }
-.layer-2 .parallax-img { height: 320px; }
-.layer-3 .parallax-img { height: 300px; }
-
-/* 📱 Мобильная версия: ОДИНАКОВЫЙ размер для всех рядов */
-@media (max-width: 768px) {
-    .parallax-gallery-section { padding: 40px 0 80px; }
-    .parallax-layer { gap: 10px; padding: 2px 0; }
-    
-    /* ✅ Принудительно одинаковая высота */
-    .parallax-img, 
-    .layer-1 .parallax-img, 
-    .layer-2 .parallax-img, 
-    .layer-3 .parallax-img { 
-        height: 150px !important; 
-        border-radius: 10px; 
-    }
-}
-
-@media (max-width: 480px) {
-    .parallax-img, 
-    .layer-1 .parallax-img, 
-    .layer-2 .parallax-img, 
-    .layer-3 .parallax-img { 
-        height: 120px !important; 
-    }
-}
-
-/* ============================================
-   МЕСТО
-   ============================================ */
-.location-info h3 { font-family: var(--heading); font-size: 32px; margin-bottom: 10px; }
-.detail-item:hover { transform: translateX(5px); }
-.detail-item h4 { font-family: var(--heading); font-size: 17px; margin-bottom: 5px; }
-.detail-item p { font-size: 14px; opacity: 0.85; }
 
 
 /* ============================================
@@ -614,14 +537,13 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 
-
 /* Игра */
 .game-container { display:flex; flex-direction:column; align-items:center; gap:10px; position:relative; }
 #gameCanvas { background:#ffeef2; border-radius:12px; max-width:100%; touch-action: none; }
-#gameStart { padding:10px 30px; font-size:1.2rem; background:#a5676e; color:white; border:none; border-radius:30px; cursor:pointer; }
+#gameStart { padding:10px 30px; font-size:1.2rem; background: linear-gradient(135deg, rgba(36, 44, 2, 0.5), rgba(227, 184, 184, 0.55)); color:white; border:none; border-radius:30px; cursor:pointer; }
 #gameScore { font-size:1.5rem; font-weight:bold; }
 #winMessage { text-align:center; }
-.win-text { font-family:'Marck Script', cursive; font-size:2.5rem; color:#a5676e; }
+.win-text { font-family:'Marck Script', cursive; font-size:2.5rem; color: #6B4E71; }
 
 /* 🔥 Название игры */
 .game-title {
@@ -814,6 +736,84 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 
+/* ============================================
+   ПАРАЛЛАКС-ГАЛЕРЕЯ
+   ============================================ */
+
+.parallax-gallery-section {
+    position: relative;
+    overflow: hidden;
+    padding: 60px 0 100px;
+    min-height: auto;
+    background: var(--bg);
+}
+
+.parallax-gallery {
+    position: relative;
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 20px 0;
+    /* ✅ Мягкие края: фото плавно растворяются слева и справа */
+    mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+}
+
+.parallax-layer {
+    display: flex;
+    gap: 16px;
+    padding: 4px 0;
+    position: relative;
+    will-change: transform;
+    flex-wrap: nowrap;
+    overflow: visible;
+}
+
+.parallax-img {
+    flex-shrink: 0;
+    width: auto;
+    height: 280px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 12px;
+    box-shadow: 0 6px 25px rgba(93,64,55,0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.parallax-img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 35px rgba(93,64,55,0.25);
+}
+
+/* Визуальный ритм для десктопа */
+.layer-1 .parallax-img { height: 280px; }
+.layer-2 .parallax-img { height: 320px; }
+.layer-3 .parallax-img { height: 300px; }
+
+/* 📱 Мобильная версия: ОДИНАКОВЫЙ размер для всех рядов */
+@media (max-width: 768px) {
+    .parallax-gallery-section { padding: 40px 0 80px; }
+    .parallax-layer { gap: 10px; padding: 2px 0; }
+    
+    /* ✅ Принудительно одинаковая высота */
+    .parallax-img, 
+    .layer-1 .parallax-img, 
+    .layer-2 .parallax-img, 
+    .layer-3 .parallax-img { 
+        height: 150px !important; 
+        border-radius: 10px; 
+    }
+}
+
+@media (max-width: 480px) {
+    .parallax-img, 
+    .layer-1 .parallax-img, 
+    .layer-2 .parallax-img, 
+    .layer-3 .parallax-img { 
+        height: 120px !important; 
+    }
+}
+
 /* ===== О ПОДАРКАХ ===== */
 .gifts-container {
     display: grid;
@@ -894,9 +894,7 @@ img { max-width: 100%; height: auto; display: block; }
   left: 50%;
   transform: translate(-50%, 20%);
   
-  /*background: rgba(255, 255, 255, 0.507);*/
   background: var(--c, rgba(255, 255, 255, 0.507));
-  /*color: #3a3a3a;*/
   color: var(--text,#222);
   padding: 10px 18px;
   border-radius: 8px;
@@ -920,17 +918,6 @@ img { max-width: 100%; height: auto; display: block; }
   opacity: 1;
   visibility: visible;
 }
-
-/* Мобильная адаптация */
-/*@media (max-width: 600px) {
-  .wc-bouquet-bubble::after {
-    font-size: 13px;
-    padding: 8px 14px;
-    min-width: 110px;
-  }
-}*/
-/* ===== КОНЕЦ ПАЛИТРЫ ===== */
-
 
 /* Адаптив */
 @media (max-width: 768px) {
@@ -962,9 +949,8 @@ img { max-width: 100%; height: auto; display: block; }
 .info-block {
     margin-top: 25px;
     padding: 25px;
-    background: linear-gradient(135deg, rgba(155, 126, 209, 0.08), rgba(194, 172, 231, 0.08));
+    background: linear-gradient(135deg, rgba(36, 44, 2, 0.5), rgba(227, 184, 184, 0.55));
     border-radius: 16px;
-    border-left: 4px solid var(--primary);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -976,7 +962,7 @@ img { max-width: 100%; height: auto; display: block; }
 .info-block-title {
     font-family: var(--heading);
     font-size: 20px;
-    color: var(--primary);
+    color: #25312e;  /* Изумрудный вместо фиолетового */
     margin-bottom: 15px;
     font-weight: 600;
 }
@@ -1150,7 +1136,7 @@ img { max-width: 100%; height: auto; display: block; }
 .section-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(245, 240, 232, 0.35);
+    background: rgba(245, 240, 232, 0.5);
     z-index: 1;
 }
 
@@ -1393,8 +1379,6 @@ html, body {
 .location-video {
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 12px 40px rgba(93,64,55,0.12);
-    background: #fff;
 }
 
 .venue-video {
@@ -1410,7 +1394,6 @@ html, body {
     font-family: var(--heading);
     font-size: 14px;
     color: var(--text);
-    background: rgba(255,255,255,0.9);
     margin: 0;
 }
 
@@ -1428,18 +1411,15 @@ html, body {
     padding: 16px 20px;
     
     /*  Элегантный стиль вместо больших белых блоков */
-    background: rgba(255, 255, 255, 0.45);
+    background: linear-gradient(135deg, rgba(36, 44, 2, 0.5), rgba(227, 184, 184, 0.55));
     backdrop-filter: blur(10px);
     border: 1px solid rgba(155, 126, 209, 0.15);
-    border-left: 3px solid var(--secondary); /* Декоративный акцент */
     border-radius: 14px;
     transition: all 0.3s ease;
 }
 
 .location-card:hover {
-    background: rgba(255, 255, 255, 0.75);
     transform: translateX(4px);
-    box-shadow: 0 6px 20px rgba(155, 126, 209, 0.12);
 }
 
 .card-icon {
@@ -1476,16 +1456,16 @@ html, body {
     gap: 6px;
     font-size: 13px;
     font-weight: 600;
-    color: var(--primary);
     text-decoration: none;
     padding: 7px 14px;
-    background: rgba(155, 126, 209, 0.1);
+    background: rgba(107, 117, 66, 0.1);  /* Оливковый светлый */
+    color: #6B4E71;  /* Фиолетовый текст */
     border-radius: 18px;
     transition: all 0.3s ease;
 }
 
 .map-link:hover {
-    background: var(--primary);
+    background: #4c5330;  /* Оливковый */
     color: #fff;
     transform: translateY(-1px);
 }
@@ -1510,7 +1490,7 @@ html, body {
    ФУТЕР
    ============================================ */
 .footer { 
-    background: #5C3A42; 
+    background: linear-gradient(135deg, rgba(36, 44, 2, 1), rgba(227, 184, 184, 1));
     color: #fff; 
     padding: 25px 20px !important; /* Было 60px 30px */
     text-align: center; 
