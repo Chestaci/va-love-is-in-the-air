@@ -127,18 +127,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 🌸 Заставка до начала игры (🔥 с вашим текстом и переносом строк)
     let idleAnimId = null;
-function drawIdleScreen() {
+
+    function drawIdleScreen() {
     drawBackground();
     ctx.fillStyle = 'rgba(245, 240, 232, 0.7)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // 🔥 Заголовок поднят (было 85 → стало 45)
-    ctx.fillStyle = '#340a83';
+    // 🔥 ЗАГОЛОВОК — меняйте цвет здесь (было #340a83, стало #5D4037 — тёплый коричневый)
+    ctx.fillStyle = '#5D4037';  // ← ИЗМЕНИТЕ ЦВЕТ ЗДЕСЬ
     ctx.font = 'bold 28px "Playfair Display", Georgia, serif';
     ctx.textAlign = 'center';
     ctx.fillText('💍 Love Leap: Groom Run', canvas.width/2, 45);
 
-    // 🔥 Описание поднято (было 115/135/155 → стало 70/90/110)
+    // Описание
     ctx.font = '15px "Playfair Display", Georgia, serif';
     ctx.fillStyle = '#49352f';
     const descLine1 = 'Жених спешит к невесте, а путь преграждают';
@@ -148,7 +149,7 @@ function drawIdleScreen() {
     ctx.fillText(descLine2, canvas.width/2, 90);
     ctx.fillText(descLine3, canvas.width/2, 110);
 
-    // 🔥 Плавающие сердечки тоже чуть выше (было 210 → стало 175)
+    // Плавающие сердечки
     const t = Date.now() / 1000;
     ctx.font = '26px serif';
     for(let i = 0; i < 6; i++) {
@@ -156,14 +157,6 @@ function drawIdleScreen() {
         let y = 175 + Math.sin(t * 0.7 + i * 1.3) * 18;
         ctx.fillText('💜', x, y);
     }
-
-    // 🔥 Подсказка тоже подтянута (было 295 → стало 255)
-    const pulse = 0.6 + 0.4 * Math.sin(Date.now() / 400);
-    ctx.globalAlpha = pulse;
-    ctx.font = 'bold 18px "Playfair Display", Georgia, serif';
-    ctx.fillStyle = '#340a83';
-    ctx.fillText('Нажмите «Начать»', canvas.width/2, 255); // ✅ Убрали "или Пробел" по вашему запросу
-    ctx.globalAlpha = 1.0;
 
     if (!gameRunning) idleAnimId = requestAnimationFrame(drawIdleScreen);
 }
