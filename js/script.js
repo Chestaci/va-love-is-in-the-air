@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 seal.style.setProperty('min-height', '45px', 'important');
                 seal.style.setProperty('max-width', '45px', 'important');
                 seal.style.setProperty('max-height', '45px', 'important');
-                seal.style.setProperty('top', '42%', 'important');
+                seal.style.setProperty('top', '50%', 'important');
                 const span = seal.querySelector('span');
                 if (span) {
                     span.style.setProperty('font-size', '11px', 'important');
