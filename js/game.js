@@ -435,23 +435,26 @@ function enterFullscreen() {
     }
 }
 
-    function exitFullscreen() {
-        const container = document.querySelector('.game-container');
-        if (!container) return;
-
-        if (document.exitFullscreen) document.exitFullscreen();
-        else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-
-        container.classList.remove('game-fullscreen-mode');
-        const exitBtn = document.getElementById('gameExitBtn');
-        if (exitBtn) exitBtn.remove();
-
-        document.body.style.overflow = '';
-        document.body.style.touchAction = '';
-        
-        // Разблокируем ориентацию
-        if (screen.orientation?.unlock) screen.orientation.unlock();
-    }
+function exitFullscreen() {
+    const container = document.querySelector('.game-container');
+    if (!container) return;
+    if (document.exitFullscreen) document.exitFullscreen();
+    else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+    container.classList.remove('game-fullscreen-mode');
+    
+    const exitBtn = document.getElementById('gameExitBtn');
+    if (exitBtn) exitBtn.remove();
+    
+    // 🔥 УДАЛЯЕМ подсказку "Поверните телефон"
+    const hint = document.getElementById('rotateHint');
+    if (hint) hint.remove();
+    
+    document.body.style.overflow = '';
+    document.body.style.touchAction = '';
+    
+    // Разблокируем ориентацию
+    if (screen.orientation?.unlock) screen.orientation.unlock();
+}
 
     document.addEventListener('fullscreenchange', () => {
         if (!document.fullscreenElement) exitFullscreen();

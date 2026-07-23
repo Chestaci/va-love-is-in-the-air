@@ -1438,6 +1438,19 @@ body:has(.gallery-tabs) .nav-links a[href="gallery.html"] {
 /* ============================================
 🔥 УБИРАЕМ ПУСТОЕ МЕСТО МЕЖДУ ПЕСНЕЙ И НОСТАЛЬГИЕЙ
 ============================================ */
+
+#songRequest.section {
+    min-height: auto !important;
+    padding-bottom: 30px !important;
+}
+
+/* 2. Уменьшаем отступы у "Минутки ностальгии" */
+.cta-gallery {
+    padding-top: 150px !important;
+    padding-bottom: 50px !important;
+}
+
+
 @media (max-width: 768px) {
     /* 1. Убираем min-height: 100vh у блока с песней */
     #songRequest.section {
@@ -1450,5 +1463,179 @@ body:has(.gallery-tabs) .nav-links a[href="gallery.html"] {
         min-height: auto !important;
         padding-top: 135px !important;
         padding-bottom: 30px !important;
+    }
+}
+
+/* ============================================
+🔥 ПОДСКАЗКА ПОД ПАЛИТРОЙ БУКЕТА
+============================================ */
+.bouquet-hint {
+    max-width: 600px;
+    margin: 18px auto 0;
+    padding: 12px 22px;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 30px;
+    text-align: center;
+    font-family: var(--heading);
+    font-size: 14px;
+    color: var(--primary);
+    font-style: italic;
+    box-shadow: 0 4px 15px rgba(93, 64, 55, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    animation: hintPulse 3s ease-in-out infinite;
+}
+
+.bouquet-hint-icon {
+    font-size: 18px;
+    font-style: normal;
+    filter: drop-shadow(0 2px 4px rgba(155, 126, 209, 0.4));
+}
+
+@keyframes hintPulse {
+    0%, 100% { opacity: 0.85; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.02); }
+}
+
+@media (max-width: 768px) {
+    .bouquet-hint {
+        font-size: 13px;
+        padding: 10px 18px;
+        margin: 14px auto 0;
+    }
+}
+
+/* ============================================
+🔥 ОБЁРТКА ДЛЯ ПАЛИТРЫ + ПОДСКАЗКИ
+(чтобы они были в одной grid-ячейке и центрированы)
+============================================ */
+.bouquet-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.bouquet-wrapper .gifts-image {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bouquet-wrapper .gifts-image img {
+    max-width: 100%;
+    height: auto;
+}
+
+.bouquet-wrapper .bouquet-hint {
+    margin-top: 18px;
+    width: 100%;
+    max-width: 500px;
+}
+
+/* ============================================
+🔥 ТЕКСТ ПО ЦЕНТРУ ПОСЛЕ ЗАГОЛОВКА
+============================================ */
+.gifts-intro-centered {
+    font-family: var(--heading);
+    font-size: 15px;
+    color: var(--primary);
+    margin: 25px auto 35px !important;
+    font-weight: 600;
+    text-align: center;
+    max-width: 700px;
+    line-height: 1.5;
+}
+
+/* Убираем старый текст из левой колонки */
+.gifts-text .gifts-intro {
+    display: none !important;
+}
+
+/* ============================================
+🔥 УМЕНЬШАЕМ КАРТИНКУ ПАЛИТРЫ
+============================================ */
+.bouquet-wrapper .gifts-image {
+    max-width: 420px !important; /* Было 600px, теперь меньше */
+    margin: 0 auto;
+}
+
+/* На мобильном тоже уменьшаем */
+@media (max-width: 768px) {
+    .gifts-intro-centered {
+        font-size: 15px;
+        margin: 20px auto 25px !important;
+        padding: 0 15px;
+    }
+    
+    .bouquet-wrapper .gifts-image {
+        max-width: 320px !important;
+    }
+}
+
+/* ============================================
+🔥 БЛОКИ СЛЕВА ВЫРАВНЕНЫ ПО ВЕРХУ КАРТИНКИ
+============================================ */
+.gifts-container {
+    align-items: stretch !important; /* Левая колонка = высоте картинки справа */
+}
+
+.gifts-text {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important; /* 🔥 Все блоки прижаты К ВЕРХУ */
+    align-items: stretch !important;
+    gap: 18px !important; /* 🔥 Небольшое расстояние между блоками */
+    height: 100% !important;
+}
+
+/* Убираем лишние margin-top у блоков, чтобы gap работал корректно */
+.gifts-text .info-block {
+    margin-top: 0 !important;
+}
+
+.gifts-text .gifts-intro {
+    margin-bottom: 0 !important;
+}
+
+/* На мобильном отключаем растягивание, чтобы не ломало верстку */
+@media (max-width: 768px) {
+    .gifts-text {
+        gap: 12px !important;
+    }
+}
+
+/* ============================================
+🔥 ЦЕНТРИРОВАНИЕ В БЛОКАХ "АТМОСФЕРА И НАПИТКИ"
+============================================ */
+.feature-card {
+    text-align: center !important;
+}
+
+.feature-icon {
+    margin: 0 auto 12px !important;
+    display: block !important;
+}
+
+.feature-card h4 {
+    text-align: center !important;
+}
+
+/* На мобильном тоже центрируем */
+@media (max-width: 768px) {
+    .feature-icon {
+        margin: 0 auto 10px !important;
     }
 }
