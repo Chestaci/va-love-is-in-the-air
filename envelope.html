@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Анастасия & Вадим — Приглашение на банкет</title>
+    
+    <!-- Шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <!-- Иконки -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    
+    <!-- Стили -->
+    <link rel="stylesheet" href="css/main.css">
+    
+    <style>
+        /* Специально для страницы конверта — блокируем скролл */
+        html, body {
+            margin: 0 !important;
+            padding: 0 !important;
+            overflow: hidden !important;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 🔥 КОНВЕРТ -->
+    <div class="envelope-overlay" id="envelopeOverlay">
+        <div class="envelope-wrapper" id="envelopeWrapper">
+            <img src="./images/envelope/envelope-closed.png" alt="Конверт" class="envelope-img" id="envelopeClosed">
+            <img src="./images/envelope/envelope-open.png" alt="Открытый конверт" class="envelope-img envelope-open" id="envelopeOpen">
+            <div class="envelope-seal pulse" id="envelopeSeal">
+                <span>А & В</span>
+            </div>
+        </div>
+        <div class="envelope-hint" id="envelopeHint">Нажмите, чтобы открыть</div>
+        
+        <!-- Карточка-приглашение, которая появляется внутри конверта -->
+        <div class="invitation-card" id="invitationCard">
+            <img src="./images/envelope/invitation-picture.png" alt="Приглашение" class="invitation-picture">
+            <button class="btn-continue" id="btnContinue">Узнать подробнее ↓</button>
+        </div>
+    </div>
+
+    <!-- Скрипты -->
+    <script src="js/script.js"></script>
+</body>
+</html>
