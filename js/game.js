@@ -465,14 +465,7 @@ function enterFullscreen() {
         animFrameId=requestAnimationFrame(gameLoop);
     });
     
-    // 🔥 Управление: Пробел + Стрелка вверх + Тап + Клик
-   // document.addEventListener('keydown', (e) => { 
-   //     if ((e.code === 'Space' || e.code === 'ArrowUp') && gameRunning) { 
-   //         e.preventDefault(); 
-   //         jump(); 
-   //     } 
-   // });
-    
+  
     canvas.addEventListener('touchstart', (e) => { e.preventDefault(); if(gameRunning) jump(); }, {passive:false});
     canvas.addEventListener('mousedown', (e) => { if(gameRunning) { e.preventDefault(); jump(); }});
 
