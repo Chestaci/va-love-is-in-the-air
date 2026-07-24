@@ -10,12 +10,23 @@
     --olive: #6B7542;
     --pink: #E3B8B8;
     --green: #2D6A5A;
-    --heading: 'Playfair Display', serif;
-    --body: 'Lato', sans-serif;
+--heading: 'Caveat', cursive;
+--body: 'Comfortaa', cursive;
     --glass-bg: rgba(255, 255, 255, 0.1);
     --glass-border: 1px solid rgba(255, 255, 255, 0.3);
     --glass-shadow: 0 10px 40px rgba(93, 64, 55, 0.12);
     --glass-blur: blur(14px);
+    
+    /* ============================================
+       🎨 ТИПОГРАФИКА — МЕНЯЙТЕ ЗДЕСЬ, И ВСЁ ОБНОВИТСЯ
+       ============================================ */
+    --heading-color: #422b5c;      /* Черничный — для заголовков секций */
+    --subheading-color: #55357a;   /* Оливковый — для подзаголовков */
+    --body-color: #3E2723;         /* Тёмно-шоколадный — для основного текста */
+    
+    --heading-size: 33px;          /* Размер заголовков секций */
+    --subheading-size: 18px;       /* Размер подзаголовков */
+    --body-size: 15px;             /* Размер основного текста */
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -1814,4 +1825,170 @@ html, body {
     margin: 0 !important; 
     padding: 0 !important; 
     overflow-x: hidden !important; 
+}
+
+/* ============================================
+🎨 УНИВЕРСАЛЬНАЯ ТИПОГРАФИКА
+Меняйте переменные в :root — всё обновится автоматически
+============================================ */
+
+/* 📌 ЗАГОЛОВКИ СЕКЦИЙ (курсив, черничный) */
+/* Наша история, Место проведения, Программа вечера, Важные детали, 
+   Подтверждение присутствия, Ваша песня для плейлиста */
+.section-title {
+    color: var(--heading-color) !important;
+    font-size: var(--heading-size) !important;
+    font-style: italic !important;
+    font-family: var(--heading) !important;
+    font-weight: 600 !important;
+}
+
+/* Атмосфера и напитки */
+.features-title {
+    color: var(--heading-color) !important;
+    font-size: calc(var(--heading-size) - 5px) !important;
+    font-style: italic !important;
+    font-family: var(--heading) !important;
+    font-weight: 600 !important;
+}
+
+/* Мини-игра */
+.game-title, .game-main-title {
+    color: var(--heading-color) !important;
+    font-size: calc(var(--heading-size) - 5px) !important;
+    font-style: italic !important;
+    font-family: var(--heading) !important;
+    font-weight: 600 !important;
+}
+
+/* Минутка ностальгии из Черногории */
+.cta-title {
+    color: var(--heading-color) !important;
+    font-size: var(--heading-size) !important;
+    font-style: italic !important;
+    font-family: var(--heading) !important;
+    font-weight: 700 !important;
+}
+
+/* 📌 ПОДЗАГОЛОВКИ (меньше, оливковый) */
+/* Даты в истории: Октябрь 2014, Апрель 2015 и т.д. */
+.story-date {
+    color: var(--subheading-color) !important;
+    font-size: var(--subheading-size) !important;
+    font-family: var(--heading) !important;
+    font-weight: 700 !important;
+    border-bottom-color: var(--subheading-color) !important;
+}
+
+/* Начало, Адрес */
+.location-card h4 {
+    color: var(--subheading-color) !important;
+    font-size: var(--subheading-size) !important;
+    font-family: var(--heading) !important;
+    font-weight: 600 !important;
+}
+
+/* Welcome-зона, Авторский бар, Лимонад-бар, Дачный самовар */
+.feature-card h4 {
+    color: var(--subheading-color) !important;
+    font-size: var(--subheading-size) !important;
+    font-family: var(--heading) !important;
+    font-weight: 600 !important;
+}
+
+/* Подзаголовок программы: "или тайминг есть..." */
+.program-subtitle {
+    color: var(--subheading-color) !important;
+    font-size: calc(var(--subheading-size) - 2px) !important;
+    font-family: var(--heading) !important;
+    font-style: italic !important;
+}
+
+/* Заголовки событий: Welcome. Сбор гостей..., Рассаживаемся... и т.д. */
+.event-content h3 {
+    color: var(--subheading-color) !important;
+    font-size: var(--subheading-size) !important;
+    font-family: var(--heading) !important;
+    font-weight: 600 !important;
+}
+
+/* "Дорогие гости! Ваше присутствие — уже самый ценный подарок для нас" */
+.gifts-intro-centered {
+    color: var(--subheading-color) !important;
+    font-size: var(--subheading-size) !important;
+    font-family: var(--heading) !important;
+    font-weight: 600 !important;
+}
+
+/* "Пожалуйста, сообщите нам до 1 сентября 2026" и "Напишите трек..." */
+.section-subtitle {
+    color: var(--subheading-color) !important;
+    font-size: calc(var(--subheading-size) - 2px) !important;
+    font-family: var(--heading) !important;
+}
+
+/* 📌 ОСНОВНОЙ ТЕКСТ (тёмно-шоколадный, спокойный) */
+/* Тексты в истории */
+.story-content p {
+    color: var(--body-color) !important;
+    font-size: var(--body-size) !important;
+    font-family: var(--body) !important;
+    line-height: 1.8 !important;
+}
+
+/* Тексты в карточках места */
+.card-content p {
+    color: var(--body-color) !important;
+    font-size: var(--body-size) !important;
+    font-family: var(--body) !important;
+    line-height: 1.6 !important;
+}
+
+/* Тексты в карточках атмосферы */
+.feature-card p {
+    color: var(--body-color) !important;
+    font-size: var(--body-size) !important;
+    font-family: var(--body) !important;
+    line-height: 1.6 !important;
+}
+
+/* Тексты в таймлайне программы */
+.event-content p {
+    color: var(--body-color) !important;
+    font-size: var(--body-size) !important;
+    font-family: var(--body) !important;
+    line-height: 1.7 !important;
+}
+
+/* Тексты в блоке "Важные детали" */
+.info-block-text {
+    color: var(--body-color) !important;
+    font-size: var(--body-size) !important;
+    font-family: var(--body) !important;
+    line-height: 1.7 !important;
+}
+
+/* Текст в "Минутке ностальгии" */
+.cta-text {
+    color: var(--body-color) !important;
+    font-size: var(--body-size) !important;
+    font-family: var(--body) !important;
+    line-height: 1.7 !important;
+}
+
+/* 📱 Мобильная адаптация */
+@media (max-width: 768px) {
+    :root {
+        --heading-size: 28px;
+        --subheading-size: 16px;
+        --body-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --heading-size: 24px;
+        --subheading-size: 15px;
+        --body-size: 13px;
+    }
 }
