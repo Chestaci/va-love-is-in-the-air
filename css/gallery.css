@@ -136,3 +136,20 @@
     opacity: 0.85;
     max-width: 80%;
 }
+
+/* ============================================
+🔥 ВЫРАВНИВАНИЕ МОБИЛЬНОГО МЕНЮ
+============================================ */
+@media (max-width: 768px) {
+    .nav-links {
+        align-items: stretch !important;
+        padding: 15px 20px !important;
+    }
+    
+    .nav-links a {
+        padding: 0px 0 !important;
+        text-align: left !important;
+        width: 100% !important;
+        display: block !important;
+    }
+}

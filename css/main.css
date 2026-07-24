@@ -420,7 +420,7 @@ img { max-width: 100%; height: auto; display: block; }
     display: flex; 
     align-items: center; 
     justify-content: center; 
-    gap: 50px;
+    gap: 5px;
     margin-bottom: 70px; 
     opacity: 0; 
     transform: translateY(60px);
@@ -468,7 +468,7 @@ img { max-width: 100%; height: auto; display: block; }
 
 .story-image, .story-content { 
     flex: 1; 
-    max-width: 420px; 
+    max-width: 500px; 
     z-index: 2; 
 }
 .story-image .image-wrapper {
@@ -577,11 +577,11 @@ img { max-width: 100%; height: auto; display: block; }
     opacity: 0.95;
 }
 .card-icon { 
-    width: 50px; 
-    height: 50px; 
+    width: 60px; 
+    height: 60px; 
     line-height: 1.2; 
     flex-shrink: 0; 
-    margin-top: 2px; 
+    margin-top: 3px; 
 }
 .card-content strong { 
     color: var(--primary); 
@@ -670,7 +670,7 @@ img { max-width: 100%; height: auto; display: block; }
     max-width: 750px; 
     margin: 0 auto; 
     position: relative; 
-    padding-left: 60px; 
+    padding-left: 25px; 
 }
 .vertical-timeline::before {
     content: ''; 
@@ -705,7 +705,7 @@ img { max-width: 100%; height: auto; display: block; }
 .timeline-item::before {
     content: ''; 
     position: absolute; 
-    left: -48px; 
+    left: -18px; 
     top: 25px;
     width: 18px; 
     height: 18px; 
@@ -1411,6 +1411,11 @@ img { max-width: 100%; height: auto; display: block; }
     .card-content p { 
         font-size: 13px; 
     }
+        /* Размер иконки на мобильном */
+    .card-icon {
+        width: 63px !important;
+        height: 63px !important;
+    }
 }
 
 @media (max-width: 768px) {
@@ -1517,7 +1522,7 @@ img { max-width: 100%; height: auto; display: block; }
         flex-direction: column !important; 
         gap: 25px; 
         margin-bottom: 50px;
-        padding-left: 60px !important;
+        padding-left: 26px !important;
     }
     .story-item::after { 
         left: 25px !important; 
@@ -2118,5 +2123,34 @@ html, body {
     .location-dot {
         font-size: 1em;
         opacity: 0.6;
+    }
+}
+
+/* ============================================
+🔥 ИНДИВИДУАЛЬНЫЙ СДВИГ ДЛЯ КАЖДОЙ КАРТИНКИ
+============================================ */
+
+/* Уменьшаем расстояние между картинкой и текстом */
+.story-item {
+    gap: 5px !important;
+}
+
+/* Нечётные (1, 3, 5) — слева от текста */
+.story-item:nth-child(1) .story-image { transform: translateY(-140px) translateX(175px); }
+.story-item:nth-child(3) .story-image { transform: translateY(-160px) translateX(175px); }
+.story-item:nth-child(5) .story-image { transform: translateY(-190px) translateX(175px); }
+
+/* Чётные (2, 4, 6) — справа от текста (зеркально) */
+.story-item:nth-child(2) .story-image { transform: translateY(-100px) translateX(-175px); }
+.story-item:nth-child(4) .story-image { transform: translateY(-155px) translateX(-175px); }
+.story-item:nth-child(6) .story-image { transform: translateY(-120px) translateX(-175px); }
+
+/* 📱 На мобильном — обычный вид без сдвигов */
+@media (max-width: 768px) {
+    .story-item {
+        gap: 15px !important;
+    }
+    .story-item .story-image {
+        transform: translateY(0) translateX(0) !important;
     }
 }
