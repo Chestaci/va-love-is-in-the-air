@@ -135,12 +135,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 🔥 ЗАГОЛОВОК — меняйте цвет здесь (было #340a83, стало #5D4037 — тёплый коричневый)
     ctx.fillStyle = '#422b5c';  // ← ИЗМЕНИТЕ ЦВЕТ ЗДЕСЬ
-    ctx.font = 'bold 28px "Caveat", cursiv';
+    ctx.font = 'bold 28px "Amatic SC", cursiv';
     ctx.textAlign = 'center';
     ctx.fillText('💍 Love Leap: Groom Run', canvas.width/2, 45);
 
     // Описание
-    ctx.font = '15px "Nunito", sans-serif';
+    ctx.font = '15px "Comfortaa", serif';
     ctx.fillStyle = '#55357a';
     const descLine1 = 'Жених спешит к невесте, а путь преграждают';
     const descLine2 = 'летящие торты, бокалы и другие «сюрпризы».';

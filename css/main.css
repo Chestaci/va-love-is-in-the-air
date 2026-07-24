@@ -10,7 +10,7 @@
     --olive: #6B7542;
     --pink: #E3B8B8;
     --green: #2D6A5A;
---heading: 'Caveat', cursive;
+--heading: 'Amatic SC', cursive;
 --body: 'Comfortaa', cursive;
     --glass-bg: rgba(255, 255, 255, 0.1);
     --glass-border: 1px solid rgba(255, 255, 255, 0.3);
@@ -24,9 +24,9 @@
     --subheading-color: #55357a;   /* Оливковый — для подзаголовков */
     --body-color: #3E2723;         /* Тёмно-шоколадный — для основного текста */
     
-    --heading-size: 33px;          /* Размер заголовков секций */
-    --subheading-size: 18px;       /* Размер подзаголовков */
-    --body-size: 15px;             /* Размер основного текста */
+    --heading-size: 42px;          /* Размер заголовков секций */
+    --subheading-size: 20px;       /* Размер подзаголовков */
+    --body-size: 12px;             /* Размер основного текста */
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -115,9 +115,9 @@ img { max-width: 100%; height: auto; display: block; }
 .hero.bg-faded { opacity: 0.25; }
 .wisteria-divider { display: none !important; }
 
-.perast-bg { background-image: url('../images/perast-bg.jpg'); opacity: 0.75; }
-.bg-story { background-image: url('../images/bg-story.jpg'); }
-.bg-program { background-image: url('../images/bg-program.jpg'); }
+.perast-bg { background-image: url('../images/perast-bg.jpg'); opacity: 0.42; }
+.bg-story { background-image: url('../images/bg-story.jpg'); opacity: 0.42;}
+.bg-program { background-image: url('../images/bg-program.jpg'); opacity: 0.42;}
 .bg-footer { 
     background-image: url('../images/bg-footer.jpg');
     -webkit-mask-image: none !important; 
@@ -1840,7 +1840,7 @@ html, body {
     font-size: var(--heading-size) !important;
     font-style: italic !important;
     font-family: var(--heading) !important;
-    font-weight: 600 !important;
+    font-weight: 500 !important;
 }
 
 /* Атмосфера и напитки */
@@ -1849,7 +1849,7 @@ html, body {
     font-size: calc(var(--heading-size) - 5px) !important;
     font-style: italic !important;
     font-family: var(--heading) !important;
-    font-weight: 600 !important;
+    font-weight: 400 !important;
 }
 
 /* Мини-игра */
@@ -1867,7 +1867,7 @@ html, body {
     font-size: var(--heading-size) !important;
     font-style: italic !important;
     font-family: var(--heading) !important;
-    font-weight: 700 !important;
+    font-weight: 400 !important;
 }
 
 /* 📌 ПОДЗАГОЛОВКИ (меньше, оливковый) */
