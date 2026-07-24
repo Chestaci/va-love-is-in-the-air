@@ -56,8 +56,8 @@ img { max-width: 100%; height: auto; display: block; }
     display: flex; justify-content: space-between; align-items: center;
 }
 .nav-logo { font-family: var(--heading); font-size: 20px; font-weight: 700; color: var(--text); }
-.nav-links { display: flex; list-style: none; gap: 10px; }
-.nav-links a { font-family: var(--heading); font-size: 14px; padding: 8px 5px !important; color: var(--text); text-decoration: none; transition: color 0.3s; }
+.nav-links { display: flex; list-style: none; gap: 30px; }
+.nav-links a { font-family: var(--heading); font-size: 19px; padding: 8px 5px !important; color: var(--text); text-decoration: none; transition: color 0.3s; }
 .nav-links a:hover { color: var(--primary); }
 .mobile-menu-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
 .hamburger { display: block; width: 24px; height: 2px; background: var(--text); position: relative; }
@@ -336,10 +336,11 @@ img { max-width: 100%; height: auto; display: block; }
 }
 .hero h1 { 
     font-family: var(--heading); 
-    font-size: 64px; 
-    font-weight: 400; 
+    font-size: 63px; 
+    font-weight: 500; 
     font-style: italic; 
     margin-bottom: 15px; 
+    text-shadow: 0.5px 0 0 currentColor, -0.5px 0 0 currentColor;
 }
 .date { 
     font-family: var(--heading); 
@@ -472,8 +473,8 @@ img { max-width: 100%; height: auto; display: block; }
     z-index: 2; 
 }
 .story-image .image-wrapper {
-    width: 250px; 
-    height: 250px; 
+    width: 150px; 
+    height: 150px; 
     border-radius: 50%;
     border: 1px solid rgba(22, 11, 43, 0.589); 
     box-shadow: 0 15px 50px rgba(93,64,55,0.2);
@@ -932,8 +933,8 @@ img { max-width: 100%; height: auto; display: block; }
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 30px;
     text-align: center;
-    font-family: var(--heading);
-    font-size: 14px;
+    font-family: var(--body);
+    font-size: 11px;
     color: var(--primary);
     font-style: italic;
     box-shadow: 0 4px 15px rgba(93, 64, 55, 0.08);
@@ -1324,15 +1325,15 @@ img { max-width: 100%; height: auto; display: block; }
     margin-bottom: 5px !important; 
 }
 .footer-content p { 
-    font-size: 19px !important; 
+    font-size: 14px !important; 
     opacity: 0.9; 
     margin: 3px 0 !important; 
     line-height: 1.4 !important; 
 }
 .footer-love { 
     font-family: var(--heading); 
-    font-style: italic; 
-    font-size: 25px !important; 
+    font-family: 'Comfortaa', cursive;
+    font-size: 5px !important; 
     margin: 10px 0 !important; 
 }
 
@@ -1524,8 +1525,8 @@ img { max-width: 100%; height: auto; display: block; }
         top: 20px !important; 
     }
     .story-image .image-wrapper { 
-        width: 260px; 
-        height: 260px; 
+        width: 150px; 
+        height: 150px; 
     }
     .story-content { 
         padding: 22px; 
@@ -1688,7 +1689,7 @@ img { max-width: 100%; height: auto; display: block; }
         font-size: 18px !important; 
     }
     .footer-content p { 
-        font-size: 11px !important; 
+        font-size: 9px !important; 
     }
     .footer-love { 
         font-size: 12px !important; 
@@ -1699,7 +1700,7 @@ img { max-width: 100%; height: auto; display: block; }
         background-attachment: fixed !important;
         background-position: center top !important;
         background-size: cover !important;
-        opacity: 0.85 !important;
+        opacity: 0.42 !important;
         -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%) !important;
         mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%) !important;
     }
@@ -1988,7 +1989,62 @@ html, body {
 @media (max-width: 480px) {
     :root {
         --heading-size: 24px;
-        --subheading-size: 15px;
-        --body-size: 13px;
+        --subheading-size: 17px;
+        --body-size: 12px;
     }
+}
+
+/* ============================================
+🔥 ЖИРНАЯ ДАТА СВАДЬБЫ НА ГЛАВНОМ ЭКРАНЕ
+============================================ */
+.date {
+    font-weight: 500 !important;
+    text-shadow: 0.5px 0 0 currentColor, -0.5px 0 0 currentColor;
+}
+
+/* ============================================
+🔥 ШРИФТ COMFORTAA ДЛЯ АНКЕТЫ ГОСТЯ
+(кроме заголовка "Подтверждение присутствия")
+============================================ */
+
+/* Подзаголовок "Пожалуйста, сообщите нам до 1 сентября 2026" */
+#rsvp .section-subtitle {
+    font-family: 'Comfortaa', cursive !important;
+    font-size: var(--body-size) !important;
+}
+
+/* Метки полей (Имя и фамилия, Предпочтения по еде, Напитки) */
+#rsvp .form-group label {
+    font-family: 'Comfortaa', cursive !important;
+    font-size: var(--body-size) !important;
+}
+
+/* Поля ввода, выпадающие списки, текстовые области */
+#rsvp .form-group input[type="text"],
+#rsvp .form-group select,
+#rsvp .form-group textarea {
+    font-family: 'Comfortaa', cursive !important;
+    font-size: var(--body-size) !important;
+}
+
+/* Чекбоксы */
+#rsvp .checkbox-label {
+    font-family: 'Comfortaa', cursive !important;
+}
+
+/* ============================================
+🔥 ШРИФТ COMFORTAA ДЛЯ БЛОКА "ВАША ПЕСНЯ ДЛЯ ПЛЕЙЛИСТА"
+(кроме заголовка "Ваша песня для плейлиста 🎶")
+============================================ */
+
+/* Подзаголовок "Напишите трек, под который вы точно будете танцевать..." */
+#songRequest .section-subtitle {
+    font-family: 'Comfortaa', cursive !important;
+    font-size: var(--body-size) !important;
+}
+
+/* Поле ввода названия песни */
+#songRequest .form-group input[type="text"] {
+    font-family: 'Comfortaa', cursive !important;
+    font-size: var(--body-size) !important;
 }

@@ -15,7 +15,6 @@
 .photo-item {
     /* 🔑 Запрещает разрывать элемент между столбцами */
     break-inside: avoid;
-    
     margin-bottom: 16px;
     border-radius: 16px;
     overflow: hidden;
