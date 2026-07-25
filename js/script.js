@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const envelopeHint     = document.getElementById('envelopeHint');
     const btnContinue      = document.getElementById('btnContinue');
 
-    // 🔥 Если конверта нет на странице (мы на index.html) — просто показываем сайт
+    // 🔥 Если конверта нет на странице (мы на main.html) — просто показываем сайт
     if (!envelopeOverlay) {
         document.body.classList.add('site-loaded');
         document.body.style.overflow = 'auto';
@@ -21,12 +21,12 @@ document.addEventListener('DOMContentLoaded', function() {
             el.style.transitionDelay = `${i * 0.15}s`;
         });
     } else {
-        // 🔥 Конверт есть (мы на envelope.html)
+        // 🔥 Конверт есть (мы на index.html)
         const alreadyOpened = sessionStorage.getItem('envelopeOpened') === 'true';
 
         if (alreadyOpened) {
             // ✅ Уже открывали — перенаправляем на главную
-            window.location.href = 'index.html';
+            window.location.href = 'main.html';
         } else {
             // Первый визит: сайт скрыт, скролл заблокирован
             document.body.style.overflow = 'hidden';
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 envelopeOverlay.classList.add('hidden');
                 // 3. Перенаправляем на главную страницу
                 setTimeout(() => {
-                    window.location.href = 'index.html';
+                    window.location.href = 'main.html';
                 }, 1000);
             }
 
