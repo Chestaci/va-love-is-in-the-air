@@ -2,7 +2,7 @@
    ПЕРЕМЕННЫЕ
    ============================================ */
 :root {
-    --bg: #d3bb97;
+    --bg: #F5F0E8;
     --text: #5D4037;
     --primary: #422b5c;
     --secondary: #B57EDC;
@@ -1439,7 +1439,7 @@ img { max-width: 100%; height: auto; display: block; }
         display: block; 
     }
     .nav-logo-img {
-        height: 42px;
+        height: 47px;
     }
     
     /* Секции */
@@ -1734,10 +1734,10 @@ img { max-width: 100%; height: auto; display: block; }
 
 @media (max-width: 480px) {
     .hero h1 { 
-        font-size: 28px; 
+        font-size: 30px; 
     } 
     .section-title { 
-        font-size: 26px; 
+        font-size: 28px; 
     } 
     .envelope-img { 
         width: 280px; 
@@ -1758,7 +1758,7 @@ img { max-width: 100%; height: auto; display: block; }
         padding: 18px; 
     } 
     .story-content h3 { 
-        font-size: 22px; 
+        font-size: 24px; 
     }
     .parallax-img, .layer-1 .parallax-img, .layer-2 .parallax-img, .layer-3 .parallax-img {
         height: 120px !important;
@@ -1986,7 +1986,7 @@ html, body {
     :root {
         --heading-size: 28px;
         --subheading-size: 16px;
-        --body-size: 14px;
+        --body-size: 16px;
     }
 }
 
@@ -1994,7 +1994,7 @@ html, body {
     :root {
         --heading-size: 24px;
         --subheading-size: 17px;
-        --body-size: 12px;
+        --body-size: 14px;
     }
 }
 
