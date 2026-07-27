@@ -388,35 +388,44 @@ function enterFullscreen() {
     const container = document.querySelector('.game-container');
     if (!container) return;
 
-    if (container.requestFullscreen) container.requestFullscreen().catch(() => {});
-    else if (container.webkitRequestFullscreen) container.webkitRequestFullscreen();
+    // 🔥 Определяем iOS
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+                  (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    
 
-    container.classList.add('game-fullscreen-mode');
-    document.body.style.overflow = 'hidden';
-    document.body.style.touchAction = 'none';
-
-    // 🔥 Визуальная подсказка повернуть телефон (только для портретного режима)
-    if (!document.getElementById('rotateHint')) {
-        const hint = document.createElement('div');
-        hint.id = 'rotateHint';
-        hint.innerHTML = '🔄 Поверните телефон для лучшего опыта';
-        hint.style.cssText = `
-            position:fixed; top:50%; left:50%; 
-            transform:translate(-50%,-50%) rotate(-90deg);
-            background:rgba(52,10,131,0.9); color:white;
-            padding:12px 25px; border-radius:30px;
-            font-family:var(--heading); font-size:16px;
-            z-index:10002; white-space:nowrap;
-            animation:pulseRotate 2s ease-in-out infinite;
-            display:none;
-        `;
-        document.body.appendChild(hint);
+    if (isIOS) {
+        // 🔥 iOS: псевдо-fullscreen через position: fixed
+        container.classList.add('game-fullscreen-mode');
         
-        // Показываем только если экран в портрете
-        if (window.innerHeight > window.innerWidth) {
-            hint.style.display = 'block';
-            setTimeout(() => { hint.style.opacity = '0'; hint.style.transition = 'opacity 0.5s'; }, 4000);
+        // Скрываем ВСЁ остальное на странице
+        document.body.style.overflow = 'hidden';
+        document.body.style.position = 'fixed';
+        document.body.style.width = '100%';
+        document.body.style.top = '0';
+        document.body.style.left = '0';
+        document.body.style.touchAction = 'none';
+        
+        // Скрываем навигацию и другие элементы
+        const navMenu = document.querySelector('.nav-menu');
+        if (navMenu) navMenu.style.display = 'none';
+        
+        // Скрываем все секции кроме игры
+        document.querySelectorAll('.section').forEach(section => {
+            if (!section.contains(container)) {
+                section.style.visibility = 'hidden';
+            }
+        });
+        
+    } else {
+        // Android/Desktop: настоящий fullscreen
+        if (container.requestFullscreen) {
+            container.requestFullscreen().catch(() => {});
+        } else if (container.webkitRequestFullscreen) {
+            container.webkitRequestFullscreen();
         }
+        container.classList.add('game-fullscreen-mode');
+        document.body.style.overflow = 'hidden';
+        document.body.style.touchAction = 'none';
     }
     
     // Кнопка выхода для iOS
@@ -428,6 +437,9 @@ function enterFullscreen() {
         container.appendChild(exitBtn);
         exitBtn.addEventListener('click', exitFullscreen);
     }
+
+    // 🔥 Подсказка поворота — улучшенная версия
+    /* showRotateHint(); */
     
     // Пытаемся заблокировать ориентацию (работает в некоторых браузерах)
     if (screen.orientation?.lock) {
@@ -435,22 +447,103 @@ function enterFullscreen() {
     }
 }
 
+/* // 🔥 Отдельная функция для подсказки поворота
+function showRotateHint() {
+    // Удаляем старую подсказку, если есть
+    const oldHint = document.getElementById('rotateHint');
+    if (oldHint) oldHint.remove();
+    
+    const hint = document.createElement('div');
+    hint.id = 'rotateHint';
+    hint.innerHTML = '🔄 Поверните телефон для лучшего опыта';
+    hint.style.cssText = `
+        position:fixed; top:50%; left:50%; 
+        transform:translate(-50%,-50%) rotate(-90deg);
+        background:rgba(52,10,131,0.95); color:white;
+        padding:12px 25px; border-radius:30px;
+        font-family:var(--heading); font-size:16px;
+        z-index:10002; white-space:nowrap;
+        animation:pulseRotate 2s ease-in-out infinite;
+        pointer-events:none;
+    `;
+    document.body.appendChild(hint);
+    
+    // Показываем только если экран в портрете
+    function checkOrientation() {
+        if (window.innerHeight > window.innerWidth) {
+            hint.style.display = 'block';
+        } else {
+            hint.style.display = 'none';
+        }
+    }
+    
+    checkOrientation();
+    
+    // Слушаем изменение ориентации
+    window.addEventListener('orientationchange', checkOrientation);
+    window.addEventListener('resize', checkOrientation);
+    
+    // Автоматически скрываем через 5 секунд
+    setTimeout(() => {
+        hint.style.transition = 'opacity 0.5s';
+        hint.style.opacity = '0';
+        setTimeout(() => hint.remove(), 500);
+    }, 5000);
+} */
+
 function exitFullscreen() {
     const container = document.querySelector('.game-container');
     if (!container) return;
-    if (document.exitFullscreen) document.exitFullscreen();
-    else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-    container.classList.remove('game-fullscreen-mode');
+
+// 🔥 Определяем iOS
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+                  (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
     
+
+    if (isIOS) {
+        // iOS: убираем псевдо-fullscreen
+        container.classList.remove('game-fullscreen-mode');
+        
+        // Восстанавливаем body
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.width = '';
+        document.body.style.top = '';
+        document.body.style.left = '';
+        document.body.style.touchAction = '';
+        
+        // Показываем навигацию
+        const navMenu = document.querySelector('.nav-menu');
+        if (navMenu) navMenu.style.display = '';
+        
+        // Показываем все секции
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.visibility = '';
+        });
+        
+    } else {
+        // Android/Desktop: настоящий fullscreen
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        }
+        container.classList.remove('game-fullscreen-mode');
+        document.body.style.overflow = '';
+        document.body.style.touchAction = '';
+    }
+    
+    // Убираем кнопку выхода
     const exitBtn = document.getElementById('gameExitBtn');
     if (exitBtn) exitBtn.remove();
     
     // 🔥 УДАЛЯЕМ подсказку "Поверните телефон"
-    const hint = document.getElementById('rotateHint');
-    if (hint) hint.remove();
+    /* const hint = document.getElementById('rotateHint');
+    if (hint) hint.remove(); */
     
-    document.body.style.overflow = '';
-    document.body.style.touchAction = '';
+// Убираем слушатели ориентации
+    window.removeEventListener('orientationchange', () => {});
+    window.removeEventListener('resize', () => {});
     
     // Разблокируем ориентацию
     if (screen.orientation?.unlock) screen.orientation.unlock();

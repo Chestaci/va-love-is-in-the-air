@@ -1,4 +1,15 @@
 document.addEventListener('DOMContentLoaded', function() {
+
+    // ==========================================
+    // 🔥 ДЕТЕКТОР iOS — добавляем класс на body
+    // ==========================================
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+                  (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    if (isIOS) {
+        document.body.classList.add('ios-device');
+        console.log('📱 Обнаружен iOS — применяем специальные стили');
+    }
+
     // ==============================
     // КОНВЕРТ — БЕЗ ВСПЫШЕК
     // ==============================
