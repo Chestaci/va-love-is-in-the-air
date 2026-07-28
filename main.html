@@ -36,6 +36,7 @@
                 <li><a href="#rsvp">RSVP</a></li>
                 <li><a href="#songRequest">Песня</a></li>
                 <li><a href="gallery.html">Фото и видео</a></li>
+                <li><a href="#share">Поделиться</a></li>
             </ul>
             <button class="mobile-menu-toggle" id="mobileMenuToggle">
                 <span class="hamburger"></span>
@@ -669,6 +670,48 @@ data-mobile-bg="./images/perast-bg-mobile.jpg"></div>
     </section>
 
     <iframe name="hidden_iframe" style="display:none;"></iframe>
+
+    <!-- ============================================
+🔥 БЛОК "ДЕЛИТЕСЬ МОМЕНТАМИ" (QR + WhatsApp)
+============================================ -->
+<section class="share-moments" id="share">
+    <div class="section-content">
+        <h2 class="section-title">Делитесь моментами!</h2>
+        <p class="share-subtitle">
+            Мы хотим сохранить все ваши фото и эмоции! 
+            Загружайте снимки в общий альбом и присоединяйтесь к нашему чату.
+        </p>
+        
+        <div class="share-grid">
+            <!-- QR-код для альбома -->
+            <div class="share-card">
+                <h3 class="share-card-title">📸 Общий альбом</h3>
+                <div class="qr-wrapper">
+                    <img src="images/qr.png" alt="QR-код для доступа к альбому" class="qr-image">
+                </div>
+                <p class="share-card-text">
+                    Наведите камеру телефона, чтобы загрузить фото в наш общий альбом
+                </p>
+            </div>
+            
+            <!-- WhatsApp чат -->
+            <div class="share-card">
+                <h3 class="share-card-title">💬 Чат гостей</h3>
+                <div class="whatsapp-wrapper">
+                        <a href="https://chat.whatsapp.com/ВАША_ССЫЛКА_СЮДА" 
+                               target="_blank" 
+                               rel="noopener" 
+                               class="btn whatsapp-btn">
+                               Присоединиться к чату
+                        </a>
+                </div>
+                <p class="share-card-text">
+                    Общий чат для всех гостей — вопросы, координация и просто общение перед праздником
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
 
     <!-- ===== ФУТЕР ===== -->
     <footer class="footer">
