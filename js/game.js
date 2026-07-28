@@ -333,7 +333,7 @@ function victory() {
         ctx.fillStyle = 'rgba(0,0,0,0.4)'; ctx.fillRect(0,0,canvas.width,canvas.height);
         ctx.fillStyle = 'white'; ctx.font = 'bold 22px "Playfair Display", serif'; ctx.textAlign = 'center';
         ctx.fillText('Попробуйте ещё раз! 💜', canvas.width/2, canvas.height/2);
-        startBtn.textContent = '🔁 Играть заново'; startBtn.style.display = 'inline-block';
+        startBtn.textContent = 'Играть заново'; startBtn.style.display = 'inline-block';
         goalDisplay.style.display = 'none';
     }
 
@@ -369,7 +369,7 @@ function victory() {
     let replayBtn = document.getElementById('gameReplay');
     if (!replayBtn) {
         replayBtn = document.createElement('button'); replayBtn.id='gameReplay'; replayBtn.className='game-replay-btn';
-        replayBtn.textContent='🔁 Повторить игру'; replayBtn.style.display='none'; winDiv.appendChild(replayBtn);
+        replayBtn.textContent='Повторить игру'; replayBtn.style.display='none'; winDiv.appendChild(replayBtn);
         replayBtn.addEventListener('click', () => { winDiv.style.display='none'; replayBtn.style.display='none';
             if(endingImg) endingImg.style.display='none'; resetGame(); gameRunning=true;
             startBtn.style.display = 'none'; // 🔥 Сразу скрываем кнопку, т.к. игра уже запущена

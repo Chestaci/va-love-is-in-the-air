@@ -1963,6 +1963,7 @@ html, body {
     font-size: var(--body-size) !important;
     font-family: var(--body) !important;
     line-height: 1.7 !important;
+    text-align: left !important;
 }
 
 /* Тексты в блоке "Важные детали" */
@@ -2073,6 +2074,7 @@ html, body {
     color: var(--text);
     font-style: italic;
     opacity: 0.9;
+    text-align: left !important;
 }
 
 .venue-history p {
@@ -2161,9 +2163,9 @@ html, body {
 ============================================ */
  body.ios-device .section-bg-parallax {
     background-attachment: scroll !important;
-    background-size: cover !important;
+    /* background-size: cover !important; */
     background-repeat: repeat-y !important;
-    /* background-size: 100vw 100vh !important; */
+    background-size: 100vw 100vh !important;
     background-position: center center !important;
     /* -webkit-background-size: 100vw 100vh !important; */
     -webkit-background-size: 100vw 100vh !important;
@@ -2223,3 +2225,4 @@ body.ios-device .game-fullscreen-mode #gameScore {
     z-index: 10000 !important;
     pointer-events: none !important;
 }
+
