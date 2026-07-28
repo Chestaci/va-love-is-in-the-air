@@ -2164,7 +2164,8 @@ html, body {
  body.ios-device .section-bg-parallax {
     background-attachment: scroll !important;
     /* background-size: cover !important; */
-    background-repeat: repeat-y !important;
+    /* background-repeat: repeat-y !important; */
+    background-repeat: no-repeat !important;
     background-size: 100vw 100vh !important;
     background-position: center center !important;
     /* -webkit-background-size: 100vw 100vh !important; */
@@ -2178,10 +2179,14 @@ html, body {
 /* На мобильных iOS — ещё более точная подгонка */
 @media (max-width: 768px) {
     body.ios-device .section-bg-parallax {
-        background-size: 100% 100% !important;
-        -webkit-background-size: 100% 100% !important;
-        background-repeat: no-repeat !important;
-        background-position: center center !important;
+        /* background-size: 100% 100% !important; */
+        background-size: 100vw 100vh !important;
+        /* -webkit-background-size: 100% 100% !important; */
+        -webkit-background-size: 100vw 100vh !important;
+        /* background-repeat: no-repeat !important; */
+        background-repeat: repeat-y !important;
+        /* background-position: center center !important; */
+        background-position: center top !important;
     }
 }
 
