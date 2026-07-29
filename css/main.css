@@ -2234,30 +2234,59 @@ body.ios-device .game-fullscreen-mode #gameScore {
 /* ============================================
 🔥 БЛОК "ДЕЛИТЕСЬ МОМЕНТАМИ" (QR + WhatsApp)
 ============================================ */
+
+/* Сама секция — прозрачная, продолжается от предыдущего блока */
 .share-moments {
-    padding: 70px 30px;
-    background: linear-gradient(180deg, var(--bg) 0%, var(--cream) 100%);
+    background: transparent !important;
+    padding: 63px 30px 70px !important;
     text-align: center;
+    position: relative;
+    margin-top: -50px !important;
+}
+
+/* 🔥 Стеклянная плашка для заголовка и подзаголовка */
+.share-header-wrapper {
+    background: rgba(255, 255, 255, 0.25) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    border-radius: 20px !important;
+    padding: 30px 35px !important;
+    max-width: 700px !important;
+    margin: 0 auto 40px !important;
+    box-shadow: 0 10px 40px rgba(93, 64, 55, 0.12) !important;
+    position: relative;
+    z-index: 2;
+}
+
+.share-moments .section-title {
+    margin-bottom: 15px !important;
 }
 
 .share-subtitle {
-    max-width: 600px;
-    margin: 0 auto 40px;
     font-size: 16px;
     line-height: 1.6;
     color: var(--text);
     opacity: 0.9;
+    margin: 0 !important;
 }
 
+/* Сетка из двух карточек */
 .share-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 30px;
     max-width: 900px;
     margin: 0 auto;
+    position: relative;
+    z-index: 1;
 }
 
+/* 🔥 Карточка — flex-колонка, чтобы текст прижимался к низу */
 .share-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 35px 30px;
     background: linear-gradient(135deg, rgba(36, 44, 2, 0.3), rgba(227, 184, 184, 0.35)) !important;
     backdrop-filter: blur(10px);
@@ -2266,6 +2295,8 @@ body.ios-device .game-fullscreen-mode #gameScore {
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(93, 64, 55, 0.15);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    box-sizing: border-box;
 }
 
 .share-card:hover {
@@ -2279,70 +2310,106 @@ body.ios-device .game-fullscreen-mode #gameScore {
     color: var(--primary);
     margin-bottom: 20px;
     font-weight: 600;
+    text-align: center;
 }
 
-/* QR-код */
+/* 🔥 QR-код как кликабельная кнопка */
 .qr-wrapper {
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
 }
 
-.qr-image {
-    width: 180px;
-    height: 180px;
+.qr-link {
+    display: inline-block;
     border-radius: 12px;
-    background: white;
-    padding: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 15px rgba(93, 64, 55, 0.1);
 }
 
-.share-card-text {
-    font-size: 14px;
-    line-height: 1.6;
-    color: var(--text);
-    opacity: 0.9;
-    margin: 0;
+.qr-link:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(93, 64, 55, 0.25);
 }
 
-/* WhatsApp кнопка */
+.qr-link:active {
+    transform: scale(0.97);
+}
+
+.qr-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 12px;
+    background: transparent !important;
+    padding: 0;
+    object-fit: contain;
+    display: block;
+}
+
+/* 🔥 Контейнер кнопки WhatsApp — занимает всё свободное место */
 .whatsapp-wrapper {
     display: flex;
     justify-content: center;
-    margin-bottom: 20px;
-    min-height: 180px;
     align-items: center;
+    flex: 1;
+    width: 100%;
+    margin: 10px 0;
 }
 
+/* 🔥 Зелёная кнопка WhatsApp */
 .whatsapp-btn {
     display: inline-flex;
     align-items: center;
-    gap: 12px;
-    padding: 18px 35px;
-    background: linear-gradient(135deg, #25D366, #128C7E);
-    color: white !important;
+    justify-content: center;
+    gap: 10px;
+    padding: 16px 32px;
+    background: linear-gradient(135deg, #25D366, #128C7E) !important;
+    color: #ffffff !important;
     text-decoration: none;
     border-radius: 30px;
     font-family: var(--heading);
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
     box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
     transition: all 0.3s ease;
+    border: none;
 }
 
 .whatsapp-btn:hover {
     transform: translateY(-3px);
     box-shadow: 0 10px 30px rgba(37, 211, 102, 0.5);
+    background: linear-gradient(135deg, #20bd5a, #0e7a6e) !important;
 }
 
-.whatsapp-icon {
-    font-size: 24px;
+/* 🔥 Текст прижат к низу карточки */
+.share-card-text {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--text);
+    opacity: 0.9;
+    margin: 0;
+    text-align: center;
+    margin-top: auto;
+    padding-top: 15px;
+}
+
+.share-card-text strong {
+    color: var(--primary);
+    font-weight: 700;
 }
 
 /* 📱 Мобильная версия */
 @media (max-width: 768px) {
     .share-moments {
-        padding: 50px 20px;
+        padding: 0 20px 50px !important;
+        margin-top: -30px !important;
+    }
+    
+    .share-header-wrapper {
+        padding: 22px 20px !important;
+        margin: 0 auto 30px !important;
     }
     
     .share-grid {
@@ -2359,17 +2426,28 @@ body.ios-device .game-fullscreen-mode #gameScore {
     }
     
     .qr-image {
-        width: 150px;
-        height: 150px;
+        width: 170px;
+        height: 170px;
     }
     
     .whatsapp-wrapper {
-        min-height: auto;
+        margin: 5px 0;
     }
     
     .whatsapp-btn {
-        padding: 15px 28px;
-        font-size: 16px;
+        padding: 14px 28px;
+        font-size: 15px;
+    }
+    
+    .share-card-text {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .qr-image {
+        width: 150px;
+        height: 150px;
     }
 }
 
