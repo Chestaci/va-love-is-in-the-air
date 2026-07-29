@@ -2409,3 +2409,137 @@ body.ios-device .game-fullscreen-mode #gameScore {
         padding: 9px 18px;
     }
 }
+
+/* Контейнер пластинки: фиксируем справа внизу экрана */
+.vinyl-wrapper {
+  position: fixed;
+  bottom: 40px;
+  right: 25px;
+  z-index: 9999; /* Поверх всех элементов сайта */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: sans-serif;
+  
+  /* Защита от багов Safari на iPhone при прокрутке */
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+
+/* Сама пластинка: уменьшаем размер, чтобы на телефонах она не перекрывала текст */
+.vinyl-record {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background-color: #111;
+  position: relative;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* Фикс для плавного кручения на iOS */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+ /* Дорожки на виниле + выразительный световой блик */
+.vinyl-grooves {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  border-radius: 50%;
+  
+  /* Комбинация четких концентрических колец и конического блика для видимости вращения */
+  background: 
+    /* 1. Световой блик (две яркие конических полосы напротив друг друга) */
+    conic-gradient(
+      from 0deg,
+      transparent 10%,
+      rgba(255, 255, 255, 0.15) 15%,
+      transparent 20%,
+      transparent 60%,
+      rgba(255, 255, 255, 0.15) 65%,
+      transparent 70%
+    ),
+    /* 2. Концентрические звуковые дорожки */
+    radial-gradient(circle, 
+      transparent 35%, 
+      rgba(255,255,255,0.08) 36%, 
+      rgba(0,0,0,0.9) 38%, 
+      rgba(255,255,255,0.06) 44%, 
+      rgba(0,0,0,0.95) 48%, 
+      rgba(255,255,255,0.07) 52%, 
+      rgba(0,0,0,0.95) 60%, 
+      rgba(255,255,255,0.05) 66%, 
+      transparent 70%
+    );
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* Центральный кружок */
+.vinyl-center {
+  width: 28px;
+  height: 28px;
+  background-color: #e63946; 
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  border: 2px solid #111;
+}
+
+.vinyl-heart { 
+  font-size: 10px; 
+}
+
+/* Текст подсказки: скрываем на мобильных, чтобы не занимал место */
+.vinyl-status {
+  position: absolute;
+  top: 88px;
+  left: 55%;
+  transform: translateX(-60%);
+  white-space: nowrap;
+  font-size: 11px; 
+  color: #444; 
+  /* background: rgba(255, 255, 255, 0.85); */
+  background: transparent;
+  user-select: none;
+  text-align: center;
+}
+
+/* Планшеты и мобильные устройства: прячем текст под пластинкой */
+@media (max-width: 768px) {
+  .vinyl-status {
+    display: none; /* На телефонах гость интуитивно нажмет на саму пластинку */
+  }
+  .vinyl-wrapper {
+    bottom: 20px;
+    right: 15px; /* Немного прижимаем к краю на смартфонах */
+  }
+}
+
+/* Класс анимации вращения */
+.vinyl-record.playing {
+  animation: wobbly-spin 3s linear infinite;
+}
+
+ /* Новая анимация: более выраженное аналоговое "биение" (восьмерка) */
+@keyframes wobbly-spin {
+  0% { 
+    transform: rotate(0deg) scale(1) translate(0, 0); 
+  }
+  25% { 
+    transform: rotate(90deg) scale(0.97) translate(1px, -1px) skewX(0.8deg); 
+  }
+  50% { 
+    transform: rotate(180deg) scale(1.02) translate(-1px, 1px); 
+  }
+  75% { 
+    transform: rotate(270deg) scale(0.97) translate(1px, 1px) skewY(0.8deg); 
+  }
+  100% { 
+    transform: rotate(360deg) scale(1) translate(0, 0); 
+  }
+}

@@ -337,3 +337,28 @@ function initCountdown() {
     console.log('✅ Таймер обратного отсчёта успешно запущен!');
 }
 initCountdown();
+
+document.addEventListener('DOMContentLoaded', () => {
+  const vinyl = document.getElementById('vinyl');
+  const audio = document.getElementById('wedding-audio');
+  const statusText = document.querySelector('.vinyl-status');
+  
+  if (vinyl && audio) {
+    vinyl.addEventListener('click', () => {
+      if (audio.paused) {
+        // Если музыка стояла на паузе — запускаем трек и кручение
+        audio.play().then(() => {
+          vinyl.classList.add('playing');
+          statusText.innerText = "Звучит Элвис Пресли!\n      💃🕺";
+        }).catch(error => {
+          console.log("Браузер заблокировал автозвук, нужен прямой клик:", error);
+        });
+      } else {
+        // Если музыка играла — останавливаем трек и кручение
+        audio.pause();
+        vinyl.classList.remove('playing');
+        statusText.innerText = "Музыка на паузе\n⏸️";
+      }
+    });
+  }
+});
