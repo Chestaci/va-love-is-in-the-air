@@ -1,6 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('gameCanvas');
-    const ctx = canvas.getContext('2d', { alpha: false }); // 🔥 Оптимизация: отключаем прозрачность
+    // 🔥 ОПТИМИЗАЦИЯ: отключаем прозрачность + убираем сглаживание
+    const ctx = canvas.getContext('2d', { alpha: false, desynchronized: true });
+    ctx.imageSmoothingEnabled = false;
+    
     const scoreDisplay = document.getElementById('gameScore');
     const startBtn = document.getElementById('gameStart');
     const winDiv = document.getElementById('winMessage');
@@ -14,11 +17,24 @@ document.addEventListener('DOMContentLoaded', () => {
         canvas.parentElement.insertBefore(goalDisplay, canvas);
     }
     
+    // 🔥 ДЕТЕКТОР iOS ДЛЯ ОПТИМИЗАЦИИ
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+                  (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    
+    // 🔥 ОПТИМИЗАЦИЯ: на iOS уменьшаем канвас и ограничиваем FPS
+    const TARGET_FPS = isIOS ? 30 : 60; // 🔥 30 FPS на iOS достаточно
+    const FRAME_INTERVAL = 1000 / TARGET_FPS;
+    const CANVAS_WIDTH = isIOS ? 400 : 600;  // 🔥 Меньше размер = быстрее
+    const CANVAS_HEIGHT = isIOS ? 267 : 400;
+    
     // 🎨 НАСТРОЙКИ
     const GAME_BG_IMG = 'images/game/game-bg.jpg';
     const GAME_BG_COLOR = '#ffeef2';
     const WIN_SCORE = 11;
     const OBSTACLE_EMOJIS = ['🍾', '🥂', '🎁', '🎂', '📷', '👠'];
+    
+    // 🔥 Масштаб для iOS (всё рисуется в "виртуальных" 600x400, но отображается в 400x267)
+    const SCALE = isIOS ? (400 / 600) : 1;
     
     const GROOM_SIZE = { width: 112, height: 145 };
     const GROOM_TRANSFORMED_SIZE = { width: 62, height: 150 };
@@ -65,8 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 osc.frequency.exponentialRampToValueAtTime(640,now+0.1); 
                 gain.gain.setValueAtTime(0.25,now); 
                 gain.gain.exponentialRampToValueAtTime(0.01,now+0.12); 
-                osc.start(now); 
-                osc.stop(now+0.12); 
+                osc.start(now); osc.stop(now+0.12); 
                 break;
             case 'collect': 
                 osc.type='sine'; 
@@ -74,8 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 osc.frequency.exponentialRampToValueAtTime(1320,now+0.12); 
                 gain.gain.setValueAtTime(0.2,now); 
                 gain.gain.exponentialRampToValueAtTime(0.01,now+0.18); 
-                osc.start(now); 
-                osc.stop(now+0.18); 
+                osc.start(now); osc.stop(now+0.18); 
                 break;
             case 'gameover': 
                 osc.type='triangle'; 
@@ -83,32 +97,28 @@ document.addEventListener('DOMContentLoaded', () => {
                 osc.frequency.exponentialRampToValueAtTime(120,now+0.4); 
                 gain.gain.setValueAtTime(0.25,now); 
                 gain.gain.exponentialRampToValueAtTime(0.01,now+0.4); 
-                osc.start(now); 
-                osc.stop(now+0.4); 
+                osc.start(now); osc.stop(now+0.4); 
                 break;
             case 'victory': 
                 [523.25,659.25,783.99].forEach((f,i)=>{
                     const o=audioCtx.createOscillator();
                     const g=audioCtx.createGain();
-                    o.connect(g);
-                    g.connect(audioCtx.destination);
-                    o.type='sine';
-                    o.frequency.value=f;
+                    o.connect(g); g.connect(audioCtx.destination);
+                    o.type='sine'; o.frequency.value=f;
                     g.gain.setValueAtTime(0.15,now+i*0.12);
                     g.gain.exponentialRampToValueAtTime(0.01,now+i*0.12+0.5);
-                    o.start(now+i*0.12);
-                    o.stop(now+i*0.12+0.5);
+                    o.start(now+i*0.12); o.stop(now+i*0.12+0.5);
                 }); 
                 return;
         }
     }
     
     // 📐 Канвас
-    canvas.width = 600; 
-    canvas.height = 400;
-    const GROUND_Y = canvas.height - GROUND_Y_OFFSET;
+    canvas.width = CANVAS_WIDTH; 
+    canvas.height = CANVAS_HEIGHT;
+    const GROUND_Y = CANVAS_HEIGHT - (GROUND_Y_OFFSET * SCALE);
     
-    // 🔥 ОПТИМИЗАЦИЯ: Создаём кэшированные картинки эмодзи один раз
+    // 🔥 КЭШИРОВАНИЕ ЭМОДЗИ (один раз при старте)
     const emojiCache = {};
     
     function createEmojiImage(emoji, size) {
@@ -125,41 +135,79 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Кэшируем все эмодзи при инициализации
     OBSTACLE_EMOJIS.forEach(emoji => {
-        emojiCache[emoji] = createEmojiImage(emoji, 35);
+        emojiCache[emoji] = createEmojiImage(emoji, Math.round(35 * SCALE));
     });
-    emojiCache['💍'] = createEmojiImage('💍', 45);
-    emojiCache['💜'] = createEmojiImage('💜', 38);
+    emojiCache['💍'] = createEmojiImage('💍', Math.round(45 * SCALE));
+    emojiCache['💜'] = createEmojiImage('💜', Math.round(38 * SCALE));
+    
+    // 🔥 КЭШ ЗАСТАВКИ (текст + фон рисуем один раз)
+    let idleCache = null;
+    
+    function buildIdleCache() {
+        if (idleCache) return idleCache;
+        
+        idleCache = document.createElement('canvas');
+        idleCache.width = CANVAS_WIDTH;
+        idleCache.height = CANVAS_HEIGHT;
+        const offCtx = idleCache.getContext('2d');
+        
+        // Фон
+        offCtx.fillStyle = GAME_BG_COLOR;
+        offCtx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+        if (gameBgImage?.complete && gameBgImage.naturalWidth > 0) {
+            offCtx.drawImage(gameBgImage, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+        }
+        
+        // Затемнение
+        offCtx.fillStyle = 'rgba(245, 240, 232, 0.7)';
+        offCtx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+        
+        // Заголовок
+        offCtx.fillStyle = '#422b5c';
+        offCtx.font = `bold ${Math.round(28 * SCALE)}px "Amatic SC", cursive`;
+        offCtx.textAlign = 'center';
+        offCtx.fillText('💍 Love Leap: Groom Run', CANVAS_WIDTH/2, 45 * SCALE);
+        
+        // Описание
+        offCtx.font = `${Math.round(15 * SCALE)}px "Comfortaa", serif`;
+        offCtx.fillStyle = '#55357a';
+        offCtx.fillText('Жених спешит к невесте, а путь преграждают', CANVAS_WIDTH/2, 70 * SCALE);
+        offCtx.fillText('летящие торты, бокалы и другие «сюрпризы».', CANVAS_WIDTH/2, 90 * SCALE);
+        offCtx.fillText('Прыгай, собирай 11 сердечек и встречай невесту!', CANVAS_WIDTH/2, 110 * SCALE);
+        
+        return idleCache;
+    }
     
     // 👤 Игрок
     let player = { 
-        x: PLAYER_START_X, 
-        y: GROUND_Y - GROOM_SIZE.height, 
-        width: GROOM_SIZE.width, 
-        height: GROOM_SIZE.height, 
+        x: PLAYER_START_X * SCALE, 
+        y: GROUND_Y - GROOM_SIZE.height * SCALE, 
+        width: GROOM_SIZE.width * SCALE, 
+        height: GROOM_SIZE.height * SCALE, 
         dy: 0, 
-        gravity: GRAVITY, 
-        jumpPower: JUMP_POWER, 
+        gravity: GRAVITY * SCALE, 
+        jumpPower: JUMP_POWER * SCALE, 
         grounded: true 
     };
     
-    let obstacles = [], hearts = [], score = 0, gameSpeed = 3;
+    let obstacles = [], hearts = [], score = 0, gameSpeed = 3 * SCALE;
     let gameRunning = false, animFrameId, lastObstacleTime = 0;
-    const OBSTACLE_COOLDOWN = 1500, MIN_DIST = canvas.width * 0.4;
+    const OBSTACLE_COOLDOWN = 1500, MIN_DIST = CANVAS_WIDTH * 0.4;
     
     // 👰 Невеста
     let brideActive = false;
     let brideStepTimer = 0; 
     let bride = { 
-        x: canvas.width, 
-        y: GROUND_Y - BRIDE_SIZE.height + 4,
-        width: BRIDE_SIZE.width, 
-        height: BRIDE_SIZE.height 
+        x: CANVAS_WIDTH, 
+        y: GROUND_Y - BRIDE_SIZE.height * SCALE + 4 * SCALE,
+        width: BRIDE_SIZE.width * SCALE, 
+        height: BRIDE_SIZE.height * SCALE 
     };
     
     // 💍 Кольцо
     let ringActive = false;
     let groomTransformed = false;
-    let ring = { x: 0, y: 0, width: 45, height: 45 };
+    let ring = { x: 0, y: 0, width: 45 * SCALE, height: 45 * SCALE };
     
     // 🖼️ Картинки
     const GROOM_IMG_SRC = 'images/game/groom.png';
@@ -174,19 +222,19 @@ document.addEventListener('DOMContentLoaded', () => {
     if (HEART_IMG_SRC) { heartImg = new Image(); heartImg.src = HEART_IMG_SRC; }
     if (NEW_GROOM_IMG_SRC) { groomNewImg = new Image(); groomNewImg.src = NEW_GROOM_IMG_SRC; }
     
-    // 🔥 ОПТИМИЗАЦИЯ: Кэшируем фон в offscreen canvas
+    // 🔥 КЭШ ФОНА
     let bgCache = null;
     
     function cacheBackground() {
         if (!gameBgImage?.complete || gameBgImage.naturalWidth === 0) return;
         
         bgCache = document.createElement('canvas');
-        bgCache.width = canvas.width;
-        bgCache.height = canvas.height;
+        bgCache.width = CANVAS_WIDTH;
+        bgCache.height = CANVAS_HEIGHT;
         const bgCtx = bgCache.getContext('2d');
         bgCtx.fillStyle = GAME_BG_COLOR;
-        bgCtx.fillRect(0, 0, canvas.width, canvas.height);
-        bgCtx.drawImage(gameBgImage, 0, 0, canvas.width, canvas.height);
+        bgCtx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+        bgCtx.drawImage(gameBgImage, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
     }
     
     // 🎨 Фон
@@ -195,84 +243,64 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.drawImage(bgCache, 0, 0);
         } else {
             ctx.fillStyle = GAME_BG_COLOR;
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
             if (gameBgImage?.complete && gameBgImage.naturalWidth > 0) {
-                ctx.drawImage(gameBgImage, 0, 0, canvas.width, canvas.height);
-                cacheBackground(); // Кэшируем после первой отрисовки
+                ctx.drawImage(gameBgImage, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+                cacheBackground();
             }
         }
     }
     
-    // 🌸 Заставка
-    let idleAnimId = null;
+    // 🌸 Заставка (используем кэш + рисуем только сердечки)
     let lastIdleUpdate = 0;
     
     function drawIdleScreen(timestamp) {
-        // 🔥 ОПТИМИЗАЦИЯ: Обновляем заставку не каждый кадр, а раз в 50мс
-        if (timestamp - lastIdleUpdate < 50) {
-            idleAnimId = requestAnimationFrame(drawIdleScreen);
+        // 🔥 FPS limiter
+        if (timestamp - lastIdleUpdate < FRAME_INTERVAL) {
+            if (!gameRunning) requestAnimationFrame(drawIdleScreen);
             return;
         }
         lastIdleUpdate = timestamp;
         
-        drawBackground();
-        ctx.fillStyle = 'rgba(245, 240, 232, 0.7)';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        // Рисуем кэшированную заставку (текст + фон)
+        const cached = buildIdleCache();
+        ctx.drawImage(cached, 0, 0);
         
-        ctx.fillStyle = '#422b5c';
-        ctx.font = 'bold 28px "Amatic SC", cursive';
-        ctx.textAlign = 'center';
-        ctx.fillText('💍 Love Leap: Groom Run', canvas.width/2, 45);
-        
-        ctx.font = '15px "Comfortaa", serif';
-        ctx.fillStyle = '#55357a';
-        ctx.fillText('Жених спешит к невесте, а путь преграждают', canvas.width/2, 70);
-        ctx.fillText('летящие торты, бокалы и другие «сюрпризы».', canvas.width/2, 90);
-        ctx.fillText('Прыгай, собирай 11 сердечек и встречай невесту!', canvas.width/2, 110);
-        
-        const t = Date.now() / 1000;
+        // 🔥 Рисуем ТОЛЬКО сердечки (они двигаются)
+        const t = timestamp / 1000;
+        const heartSize = Math.round(26 * SCALE);
         for(let i = 0; i < 6; i++) {
-            let x = 70 + i * 95;
-            let y = 175 + Math.sin(t * 0.7 + i * 1.3) * 18;
-            ctx.drawImage(emojiCache['💜'], x - 13, y - 13, 26, 26);
+            let x = Math.round((70 + i * 95) * SCALE);
+            let y = Math.round((175 + Math.sin(t * 0.7 + i * 1.3) * 18) * SCALE);
+            ctx.drawImage(emojiCache['💜'], x - heartSize/2, y - heartSize/2, heartSize, heartSize);
         }
         
-        if (!gameRunning) idleAnimId = requestAnimationFrame(drawIdleScreen);
+        if (!gameRunning) requestAnimationFrame(drawIdleScreen);
     }
     
     // 👤 Жених
     function drawPlayer() {
         if (groomTransformed && groomNewImg?.complete) {
-            const yOffset = GROOM_SIZE.height - GROOM_TRANSFORMED_SIZE.height;
+            const yOffset = (GROOM_SIZE.height - GROOM_TRANSFORMED_SIZE.height) * SCALE;
             ctx.drawImage(groomNewImg,
-                player.x + GROOM_TRANSFORMED_X_SHIFT,
+                player.x + GROOM_TRANSFORMED_X_SHIFT * SCALE,
                 player.y + yOffset,
-                GROOM_TRANSFORMED_SIZE.width,
-                GROOM_TRANSFORMED_SIZE.height);
+                GROOM_TRANSFORMED_SIZE.width * SCALE,
+                GROOM_TRANSFORMED_SIZE.height * SCALE);
         } else if (groomImg?.complete) {
-            ctx.drawImage(groomImg, player.x, player.y, GROOM_SIZE.width, GROOM_SIZE.height);
+            ctx.drawImage(groomImg, player.x, player.y, player.width, player.height);
         } else {
             ctx.fillStyle='#4a4a4a';
-            ctx.fillRect(player.x, player.y, GROOM_SIZE.width, GROOM_SIZE.height);
-            ctx.fillStyle='#a5676e'; 
-            ctx.fillRect(player.x+20, player.y+20, 80, 30);
-            ctx.fillStyle='white'; 
-            ctx.fillRect(player.x+80, player.y+10, 20, 20);
-            ctx.fillStyle='black'; 
-            ctx.fillRect(player.x+88, player.y+14, 10, 10);
+            ctx.fillRect(player.x, player.y, player.width, player.height);
         }
     }
     
     function drawBride() {
         if (brideImg?.complete) {
-            ctx.drawImage(brideImg, bride.x, bride.y, BRIDE_SIZE.width, BRIDE_SIZE.height);
+            ctx.drawImage(brideImg, bride.x, bride.y, bride.width, bride.height);
         } else {
             ctx.fillStyle='#fff'; 
-            ctx.fillRect(bride.x, bride.y, BRIDE_SIZE.width, BRIDE_SIZE.height);
-            ctx.fillStyle='#e91e63'; 
-            ctx.fillRect(bride.x+10, bride.y+10, 60, 60);
-            ctx.fillStyle='#fff'; 
-            ctx.fillRect(bride.x+20, bride.y+20, 40, 40);
+            ctx.fillRect(bride.x, bride.y, bride.width, bride.height);
         }
     }
     
@@ -280,42 +308,40 @@ document.addEventListener('DOMContentLoaded', () => {
         if (heartImg?.complete) {
             ctx.drawImage(heartImg, x, y, size, size);
         } else { 
-            // 🔥 Используем кэшированную картинку вместо bezier-кривых
             ctx.drawImage(emojiCache['💜'], x, y, size, size);
         }
     }
     
     function drawObstacle(obs) {
-        // 🔥 ОПТИМИЗАЦИЯ: Используем кэшированную картинку вместо fillText
+        // 🔥 Используем кэш эмодзи
         ctx.drawImage(emojiCache[obs.emoji], obs.x, obs.y, obs.width, obs.height);
     }
     
     function drawRing() {
-        if (ringActive) {
-            const bob = Math.sin(Date.now() / 250) * 5;
-            ctx.drawImage(emojiCache['💍'], ring.x, ring.y + bob, ring.width, ring.height);
-        }
+        if (!ringActive) return;
+        const bob = Math.sin(Date.now() / 250) * 5 * SCALE;
+        ctx.drawImage(emojiCache['💍'], ring.x, ring.y + bob, ring.width, ring.height);
     }
     
     function collision(a, b) {
-        const pad = 8;
+        const pad = 8 * SCALE;
         return a.x+pad < b.x+(b.width||b.size)-pad && a.x+a.width-pad > b.x+pad &&
                a.y+pad < b.y+(b.height||b.size)-pad && a.y+a.height-pad > b.y+pad;
     }
     
     function canSpawnObstacle(now) {
         if (now - lastObstacleTime < OBSTACLE_COOLDOWN) return false;
-        if (obstacles.length > 0 && obstacles[obstacles.length-1].x > canvas.width - MIN_DIST) return false;
+        if (obstacles.length > 0 && obstacles[obstacles.length-1].x > CANVAS_WIDTH - MIN_DIST) return false;
         return obstacles.length < 1;
     }
     
     function spawnObstacle(now) {
         if (!canSpawnObstacle(now)) return;
         obstacles.push({ 
-            x: canvas.width, 
-            y: GROUND_Y - 35, 
-            width: 35, 
-            height: 35,
+            x: CANVAS_WIDTH, 
+            y: GROUND_Y - 35 * SCALE, 
+            width: 35 * SCALE, 
+            height: 35 * SCALE,
             emoji: OBSTACLE_EMOJIS[Math.floor(Math.random() * OBSTACLE_EMOJIS.length)],
             speedMod: 1 + Math.random() * 0.2 
         });
@@ -325,9 +351,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function spawnHeart() {
         if (Math.random() < 0.018) {
             hearts.push({ 
-                x: canvas.width, 
-                y: GROUND_Y - 85 - Math.random()*45, 
-                size: 38 
+                x: CANVAS_WIDTH, 
+                y: GROUND_Y - 85 * SCALE - Math.random() * 45 * SCALE, 
+                size: 38 * SCALE 
             });
         }
     }
@@ -369,32 +395,30 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
         
-        // 💍 Кольцо
         if (score >= WIN_SCORE && !ringActive && !groomTransformed) {
             ringActive = true; 
             obstacles = []; 
             hearts = []; 
             gameSpeed = 0;
-            ring.x = canvas.width + 50; 
-            ring.y = player.y + 35;
+            ring.x = CANVAS_WIDTH + 50 * SCALE; 
+            ring.y = player.y + 35 * SCALE;
         }
         
         if (ringActive) {
-            ring.x -= 2.2;
+            ring.x -= 2.2 * SCALE;
             if (collision(player, ring)) {
                 ringActive = false; 
                 groomTransformed = true; 
                 playSound('collect');
                 setTimeout(activateBride, 800);
-            } else if (ring.x < -60) { 
-                ring.x = canvas.width + 50; 
+            } else if (ring.x < -60 * SCALE) { 
+                ring.x = CANVAS_WIDTH + 50 * SCALE; 
             }
         }
         
-        // 👰 Невеста
         if (brideActive) {
             if (now - brideStepTimer > BRIDE_STEP_DELAY) { 
-                bride.x -= BRIDE_STEP_LENGTH; 
+                bride.x -= BRIDE_STEP_LENGTH * SCALE; 
                 brideStepTimer = now; 
             }
             if (collision(player, bride)) { 
@@ -402,7 +426,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 victory(); 
                 return; 
             }
-            if (bride.x + bride.width < -50) brideActive = false;
+            if (bride.x + bride.width < -50 * SCALE) brideActive = false;
         }
         
         if (!ringActive && !groomTransformed && !brideActive) { 
@@ -410,16 +434,16 @@ document.addEventListener('DOMContentLoaded', () => {
             spawnHeart(); 
         }
         
-        gameSpeed = Math.min(7, 3 + Math.floor(score/10)*0.5);
+        gameSpeed = Math.min(7 * SCALE, 3 * SCALE + Math.floor(score/10) * 0.5 * SCALE);
     }
     
     function activateBride() { 
         brideActive = true; 
-        bride.x = canvas.width + 10; 
+        bride.x = CANVAS_WIDTH + 10 * SCALE; 
         brideStepTimer = 0;
         obstacles = []; 
         hearts = []; 
-        gameSpeed = 0.005; 
+        gameSpeed = 0.005 * SCALE; 
     }
     
     function victory() {
@@ -462,11 +486,11 @@ document.addEventListener('DOMContentLoaded', () => {
         gameRunning = false; 
         cancelAnimationFrame(animFrameId);
         ctx.fillStyle = 'rgba(0,0,0,0.4)'; 
-        ctx.fillRect(0,0,canvas.width,canvas.height);
+        ctx.fillRect(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
         ctx.fillStyle = 'white'; 
-        ctx.font = 'bold 22px "Playfair Display", serif'; 
+        ctx.font = `bold ${Math.round(22 * SCALE)}px "Playfair Display", serif`; 
         ctx.textAlign = 'center';
-        ctx.fillText('Попробуйте ещё раз! 💜', canvas.width/2, canvas.height/2);
+        ctx.fillText('Попробуйте ещё раз! 💜', CANVAS_WIDTH/2, CANVAS_HEIGHT/2);
         startBtn.textContent = 'Играть заново'; 
         startBtn.style.display = 'inline-block';
         goalDisplay.style.display = 'none';
@@ -481,8 +505,19 @@ document.addEventListener('DOMContentLoaded', () => {
         drawPlayer();
     }
     
+    // 🔥 FPS limiter для игрового цикла
+    let lastFrameTime = 0;
+    
     function gameLoop(ts) { 
         if (!gameRunning) return; 
+        
+        // 🔥 Ограничиваем FPS
+        if (ts - lastFrameTime < FRAME_INTERVAL) {
+            animFrameId = requestAnimationFrame(gameLoop);
+            return;
+        }
+        lastFrameTime = ts;
+        
         update(ts); 
         draw(); 
         animFrameId = requestAnimationFrame(gameLoop); 
@@ -500,11 +535,12 @@ document.addEventListener('DOMContentLoaded', () => {
         obstacles=[]; 
         hearts=[]; 
         score=0; 
-        gameSpeed=3; 
+        gameSpeed = 3 * SCALE; 
         brideActive=false; 
         ringActive=false; 
         groomTransformed=false;
-        player.y = GROUND_Y - GROOM_SIZE.height; 
+        player.x = PLAYER_START_X * SCALE;
+        player.y = GROUND_Y - GROOM_SIZE.height * SCALE; 
         player.dy=0; 
         player.grounded=true;
         lastObstacleTime=0; 
@@ -533,6 +569,7 @@ document.addEventListener('DOMContentLoaded', () => {
             gameRunning=true;
             startBtn.style.display = 'none';
             goalDisplay.style.display = 'none';
+            lastFrameTime = 0;
             animFrameId=requestAnimationFrame(gameLoop); 
             goalDisplay.style.display='block'; 
             initAudio(); 
@@ -549,10 +586,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const container = document.querySelector('.game-container');
         if (!container) return;
         
-        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+        const isIOSDevice = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
                       (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
         
-        if (isIOS) {
+        if (isIOSDevice) {
             container.classList.add('game-fullscreen-mode');
             document.body.style.overflow = 'hidden';
             document.body.style.position = 'fixed';
@@ -598,10 +635,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const container = document.querySelector('.game-container');
         if (!container) return;
         
-        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+        const isIOSDevice = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
                       (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
         
-        if (isIOS) {
+        if (isIOSDevice) {
             container.classList.remove('game-fullscreen-mode');
             document.body.style.overflow = '';
             document.body.style.position = '';
@@ -645,6 +682,7 @@ document.addEventListener('DOMContentLoaded', () => {
         gameRunning=true; 
         startBtn.style.display='none'; 
         goalDisplay.style.display = 'none';
+        lastFrameTime = 0;
         animFrameId=requestAnimationFrame(gameLoop);
     });
     
@@ -663,5 +701,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // 🎬 Инициализация
     goalDisplay.style.display = 'none'; 
     scoreDisplay.textContent = `💜 0 / ${WIN_SCORE}`;
-    drawIdleScreen(0);
+    
+    // 🔥 Ждём загрузки фонового изображения перед запуском заставки
+    if (gameBgImage) {
+        gameBgImage.onload = () => {
+            buildIdleCache();
+            requestAnimationFrame(drawIdleScreen);
+        };
+        if (gameBgImage.complete) {
+            buildIdleCache();
+            requestAnimationFrame(drawIdleScreen);
+        }
+    } else {
+        requestAnimationFrame(drawIdleScreen);
+    }
+    
+    console.log(`🎮 Игра запущена. iOS: ${isIOS}, FPS: ${TARGET_FPS}, Canvas: ${CANVAS_WIDTH}x${CANVAS_HEIGHT}`);
 });

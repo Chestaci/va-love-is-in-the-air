@@ -2651,3 +2651,14 @@ body.ios-device .game-fullscreen-mode #gameScore {
         margin-top: 5px;
     }
 }
+
+/* ============================================
+🔥 ОПТИМИЗАЦИЯ КАНВАСА ДЛЯ iOS
+============================================ */
+body.ios-device #gameCanvas {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    will-change: transform;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
