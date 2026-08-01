@@ -153,3 +153,50 @@
         display: block !important;
     }
 }
+
+
+/* ============================================
+🔥 ПОДПИСЬ "CRAFTED WITH LOVE BY A&V"
+============================================ */
+.footer-signature-v3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 10px;          /* ← Минимальный отступ сверху */
+    padding-top: 9px;
+    margin-bottom: -10px;         /* ← Минимальный внутренний отступ */
+    font-family: var(--body);
+    font-size: 12px;
+    color: var(--text);
+    opacity: 0.75;
+    letter-spacing: 0.8px;
+}
+
+.signature-ornament {
+    font-size: 9px;
+    color: var(--primary);
+    opacity: 0.5;
+}
+
+.signature-main {
+    font-style: italic;
+}
+
+.signature-main strong {
+    font-family: var(--heading);
+    font-weight: 600;
+    font-style: normal;
+    color: var(--primary);
+    letter-spacing: 1.5px;
+    margin-left: 3px;
+}
+
+/* 📱 Мобильная версия */
+@media (max-width: 768px) {
+    .footer-signature-v3 {
+        font-size: 9px;
+        gap: 5px;
+        margin-top: 5px;
+    }
+}

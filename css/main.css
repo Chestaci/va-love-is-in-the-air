@@ -628,7 +628,7 @@ img { max-width: 100%; height: auto; display: block; }
 }
 .feature-card {
     padding: 28px 24px;
-    background: linear-gradient(135deg, rgba(36, 44, 2, 0.3), rgba(227, 184, 184, 0.35)) !important;
+    background: linear-gradient(135deg, rgba(36, 44, 2, 0.42), rgba(227, 184, 184, 0.6)) !important;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -2140,7 +2140,7 @@ html, body {
 /* Нечётные (1, 3, 5) — слева от текста */
 .story-item:nth-child(1) .story-image { transform: translateY(-140px) translateX(175px); }
 .story-item:nth-child(3) .story-image { transform: translateY(-160px) translateX(175px); }
-.story-item:nth-child(5) .story-image { transform: translateY(-190px) translateX(175px); }
+.story-item:nth-child(5) .story-image { transform: translateY(-137px) translateX(175px); }
 
 /* Чётные (2, 4, 6) — справа от текста (зеркально) */
 .story-item:nth-child(2) .story-image { transform: translateY(-100px) translateX(-175px); }
@@ -2620,4 +2620,50 @@ body.ios-device .game-fullscreen-mode #gameScore {
   100% { 
     transform: rotate(360deg) scale(1) translate(0, 0); 
   }
+}
+
+/* ============================================
+🔥 ПОДПИСЬ "CRAFTED WITH LOVE BY A&V"
+============================================ */
+.footer-signature-v3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 10px;          /* ← Минимальный отступ сверху */
+    padding-top: 9px;
+    margin-bottom: -10px;         /* ← Минимальный внутренний отступ */
+    font-family: var(--body);
+    font-size: 12px;
+    color: var(--text);
+    opacity: 0.75;
+    letter-spacing: 0.8px;
+}
+
+.signature-ornament {
+    font-size: 9px;
+    color: var(--primary);
+    opacity: 0.5;
+}
+
+.signature-main {
+    font-style: italic;
+}
+
+.signature-main strong {
+    font-family: var(--heading);
+    font-weight: 600;
+    font-style: normal;
+    color: var(--primary);
+    letter-spacing: 1.5px;
+    margin-left: 3px;
+}
+
+/* 📱 Мобильная версия */
+@media (max-width: 768px) {
+    .footer-signature-v3 {
+        font-size: 9px;
+        gap: 5px;
+        margin-top: 5px;
+    }
 }
