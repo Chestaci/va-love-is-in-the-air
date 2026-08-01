@@ -6,10 +6,7 @@
     --text: #5D4037;
     --primary: #422b5c;
     --secondary: #B57EDC;
-    --cream: #FDF8F5;
-    --olive: #6B7542;
-    --pink: #E3B8B8;
-    --green: #2D6A5A;
+
 --heading: 'Amatic SC', cursive;
 --body: 'Comfortaa', cursive;
     --glass-bg: rgba(255, 255, 255, 0.1);
@@ -113,7 +110,6 @@ img { max-width: 100%; height: auto; display: block; }
     transition: opacity 0.8s ease;
 }
 .hero.bg-faded { opacity: 0.25; }
-.wisteria-divider { display: none !important; }
 
 .perast-bg { background-image: url('../images/perast-bg.jpg'); opacity: 0.42; }
 .bg-story { background-image: url('../images/bg-story.jpg'); opacity: 0.42;}
@@ -1041,12 +1037,6 @@ img { max-width: 100%; height: auto; display: block; }
     flex-shrink: 0; 
 }
 
-/* ============================================
-   СЕКЦИЯ ПЕСНИ
-   ============================================ */
-.song-request {
-    background: linear-gradient(135deg, rgba(245,240,232,0.95), rgba(249,245,240,0.95));
-}
 
 /* ============================================
    CTA: МИНУТКА НОСТАЛЬГИИ
@@ -1328,12 +1318,6 @@ img { max-width: 100%; height: auto; display: block; }
     opacity: 0.9; 
     margin: 3px 0 !important; 
     line-height: 1.4 !important; 
-}
-.footer-love { 
-    font-family: var(--heading); 
-    font-family: 'Comfortaa', cursive;
-    font-size: 5px !important; 
-    margin: 10px 0 !important; 
 }
 
 /* ============================================
